@@ -57,11 +57,18 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Profile(models.Model):
     """ class user data (foreignkey model User) """
 
+    FAMILY_STATUS_CHOICES = (
+        ('1', _('single')),
+        ('2', _('married')),
+        ('3', _('widowed')),
+        ('4', _('divorced'))
+    )
+
     first_name = models.CharField(_('first name'), max_length=20)
     second_name = models.CharField(_('second name'), max_length=20)
     birth = models.DateField(_('birth date'))
     city = models.CharField(_('city'), max_length=20)
-    family_status = models.CharField(_('family status'), max_length=20)
+    family_status = models.CharField(_('family status'), max_length=20, choices=FAMILY_STATUS_CHOICES)
     phone = PhoneNumberField(_('phone number'), unique=True)
 
     class Meta:
