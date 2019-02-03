@@ -6,7 +6,9 @@ from src.core.utils.choices import AccountTypeChoices
 class AccountHr(models.Model):
     """ Class model for hr """
 
-    type_account = models.CharField(_('Type user'), choices=AccountTypeChoices.CHOICES, max_length=63)
+    type_account = models.CharField(
+        _('Type user'), choices=AccountTypeChoices.CHOICES, max_length=63
+    )
     id_user = models.ForeignKey('users.User', on_delete=models.CASCADE)
 
     class Meta:

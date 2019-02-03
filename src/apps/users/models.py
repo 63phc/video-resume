@@ -1,12 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import UserManager, AbstractUser
+from django.contrib.auth.models import UserManager
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.utils import timezone
-from django.core.mail import send_mail
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils.translation import gettext_lazy as _
-from phonenumber_field.modelfields import PhoneNumberField
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -18,7 +16,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         _('username'),
         max_length=150,
         unique=True,
-        help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+        help_text=_(
+            'Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'
+        ),
         validators=[username_validator],
         error_messages={
             'unique': _("A user with that username already exists."),
@@ -49,10 +49,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
 
-    def email_user(self, subject, message, from_email=None, **kwargs):
-        """Send an email to this user."""
-        send_mail(subject, message, from_email, [self.email], **kwargs)
-
 
 class Profile(models.Model):
     """ class user data (foreignkey model User) """
@@ -68,8 +64,10 @@ class Profile(models.Model):
     second_name = models.CharField(_('second name'), max_length=20)
     birth = models.DateField(_('birth date'))
     city = models.CharField(_('city'), max_length=20)
-    family_status = models.CharField(_('family status'), max_length=20, choices=FAMILY_STATUS_CHOICES)
-    phone = PhoneNumberField(_('phone number'), unique=True)
+    family_status = models.CharField(
+        _('family status'), max_length=20, choices=FAMILY_STATUS_CHOICES
+    )
+    phone = models.CharField(_('phone number'), unique=True, max_length=15)
 
     class Meta:
         verbose_name = _('profile')
