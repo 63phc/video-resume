@@ -85,7 +85,7 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(project_dir, 'src/static/'),)
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static/")
+STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), "static/")
 
 WEBPACK_LOADER = {
     'DEFAULT': {
