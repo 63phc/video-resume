@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     'src.apps.users',
     'src.apps.account_worker',
     'src.apps.account_hr',
+    'webpack_loader',
 ]
 
 MIDDLEWARE = [
@@ -35,7 +36,7 @@ ROOT_URLCONF = 'src.core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['src/templates/', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,4 +78,28 @@ USE_L10N = True
 
 USE_TZ = True
 
+project_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+MEDIA_URL = '/media/'
+
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(project_dir, 'src/static/'),)
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static/")
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'build/', # must end with slash
+        'STATS_FILE': os.path.join(BASE_DIR, './static/webpack.stats.json'),
+        'POLL_INTERVAL': 0.1,
+        # 'TIMEOUT': None,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}
+
+# if not DEBUG:
+#     WEBPACK_LOADER.update({
+#         'BUNDLE_DIR_NAME': 'build/',
+#         'STATS_FILE': os.path.join(BASE_DIR, './static/webpack.stats.json')
+#     })
