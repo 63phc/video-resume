@@ -52,9 +52,9 @@ class Resume(models.Model):
     other_skills = models.CharField(_('Other skills'), max_length=200)
     hobbies = models.CharField(_('Hobbies'), max_length=200)
     about = models.CharField(_('About'), max_length=400)
-    educations = models.ManyToManyField(Education)
-    skills = models.ManyToManyField(Skill)
-    jobs = models.ManyToManyField(Job)
+    education = models.ManyToManyField(Education, related_name='educations', verbose_name=_('Education'))
+    skill = models.ManyToManyField(Skill, related_name='skills', verbose_name=_('Skills'))
+    job = models.ManyToManyField(Job, related_name='jobs', verbose_name=_('Jobs'))
 
     class Meta:
         verbose_name = _('resume')
@@ -64,12 +64,12 @@ class Resume(models.Model):
         return str(self.pk)
 
     def get_educations(self):
-        return ", ".join([str(row.name_institution) for row in self.educations.all()])
+        return ", ".join([str(row.name_institution) for row in self.education.all()])
 
     def get_skills(self):
-        return ", ".join([str(row.name) for row in self.skills.all()])
+        return ", ".join([str(row.name) for row in self.skill.all()])
 
     def get_jobs(self):
-        return ", ".join([str(row.name_company) for row in self.jobs.all()])
+        return ", ".join([str(row.name_company) for row in self.job.all()])
 
 

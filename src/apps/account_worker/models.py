@@ -11,7 +11,7 @@ class AccountWorker(models.Model):
         _('Type user'), choices=AccountTypeChoices.CHOICES, max_length=63
     )
     id_user = models.ForeignKey('users.User', on_delete=models.CASCADE)
-    resumes = models.ManyToManyField(Resume)
+    resume = models.ManyToManyField(Resume, related_name='resumes', verbose_name=_('Resume'))
 
     class Meta:
         verbose_name = _('Account worker')
@@ -22,6 +22,6 @@ class AccountWorker(models.Model):
 
     def number_of_resumes(self):
         count = 0
-        for row in self.resumes.all():
+        for row in self.resume.all():
             count += 1
         return str(count)
