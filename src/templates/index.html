@@ -1,10 +1,31 @@
+<!DOCTYPE html>
 {% load render_bundle from webpack_loader %}
-<!doctype html>
 <html lang="en">
-<head>
+  <head>
+    <title>Video-resume service index page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   </head>
-<body>
-    hello
-</body>
+
+
+  <body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+      <!--Navbar-->
+      {% include 'components/navbar.html' %}
+
+      <!--Content-->
+      {% include 'main_content.html' %}
+
+      <!--Footer-->
+      {% include 'components/footer1.html' %}
+    </div>
+  </body>
 {% render_bundle 'main' 'js' %}
 </html>
+
