@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     'src.apps.users',
     'src.apps.account_worker',
     'src.apps.account_hr',
+    'src.apps.resume',
     'webpack_loader',
 ]
 
