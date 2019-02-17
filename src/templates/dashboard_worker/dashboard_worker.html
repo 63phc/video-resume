@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block head %}
+{% endblock %}
+{% block content %}
+  <div class="py-5" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="nav nav-pills">
+            <li class="nav-item"> <a href="{% url 'dashboard_worker:dashboard_worker_main' pk=object.pk %}" class="active nav-link">{% trans 'Main' %}</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="#">{% trans 'Responses' %}</a> </li>
+            <li class="nav-item"> <a href="{% url 'dashboard_worker:dashboard_worker_resume' pk=object.pk %}" class="nav-link">{% trans 'Resume' %}</a> </li>
+            <li class="nav-item"><a class="nav-link" href="#">{% trans 'Favourites' %}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-4" style="">
+          <div class="card-body mt-1">
+            <div class="col-md-12" style="">
+              <div class="card">
+                <div class="card-header mt-0">{% trans 'Last resume' %}</div>
+                <div class="card-body">
+                  <blockquote class="blockquote mb-0">
+                    <h4 class="">{{ object.resume.last.title }}</h4>
+                    <p>{{ object.resume.last.about }}</p>
+                  </blockquote><a href="{% url 'dashboard_worker:dashboard_worker_resume_update' pk=object.resume.last.pk %}" class="btn btn-primary">{% trans 'Update' %}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7" style="">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card-header mt-3 border">{% trans 'Found jobs suitable for your resume' %}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+              <div class="card-header border">
+                <ul class="nav nav-tabs card-header-tabs">
+                  {% for resume in object.resume.all %}
+                    {% if forloop.first %}
+                      <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" data-target="#tab{{resume.pk}}">{{ resume.title }}</a>
+                      </li>
+                    {% else %}
+                      <li class="nav-item">
+                        <a class="nav-link" href="" data-toggle="tab" data-target="#tab{{resume.pk}}">{{ resume.title }}</a>
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+                <div class="card-body">
+                    <div class="tab-content mt-2">
+                      {% for resume in object.resume.all %}
+                        {% if forloop.first %}
+                          <div class="tab-pane fade show active" id="tab{{resume.pk}}" role="tabpanel">
+                            <ul class="list-group list-group-flush">
+                              <p>В разработке</p>
+                                <!--<li class="list-group-item">Dapibus ac facilisis in</li>-->
+                                <!--<li class="list-group-item">Cras justo odio</li>-->
+                                <!--<li class="list-group-item">Morbi leo risus</li>-->
+                                <!--<li class="list-group-item">Porta ac consectetur ac</li>-->
+                                <!--<li class="list-group-item">Vestibulum at eros</li>-->
+                            </ul>
+                          </div>
+                        {% else %}
+                          <div class="tab-pane fade" id="tab{{resume.pk}}" role="tabpanel">
+                              <ul class="list-group list-group-flush">
+                                <p>В разработке</p>
+                                  <!--<li class="list-group-item">Dapibus ac facilisis in</li>-->
+                                  <!--<li class="list-group-item">Cras justo odio</li>-->
+                                  <!--<li class="list-group-item">Morbi leo risus</li>-->
+                                  <!--<li class="list-group-item">Porta ac consectetur ac</li>-->
+                              </ul>
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

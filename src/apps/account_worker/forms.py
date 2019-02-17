@@ -119,4 +119,4 @@ class JobForm(forms.ModelForm):
             'name_company': forms.Textarea(
                 attrs={'class': 'form-control', 'rows': '5'}
             )
-        }
+}
