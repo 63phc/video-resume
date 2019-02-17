@@ -51,5 +51,5 @@ class ProfileView(FormView):
         if len(AccountHr.objects.filter(id_user=user)) == 1:
             dashboard_url = reverse_lazy('dashboard_hr')
         elif len(AccountWorker.objects.filter(id_user=user)) == 1:
-            dashboard_url = reverse_lazy('dashboard_worker')
+            dashboard_url = reverse_lazy('dashboard_worker:dashboard_worker_main', kwargs={'pk': user.pk})
         return dashboard_url
