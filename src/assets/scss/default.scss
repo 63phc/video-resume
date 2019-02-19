@@ -21,7 +21,7 @@
 a,
 a:focus,
 a:hover {
-  color: #fff;
+  color: #555;
 }
 
 /* Custom default button */
@@ -43,13 +43,13 @@ html,
 body {
   background-color: white;
   height: 100%;
-  background-color: #333;
+  //background-color: #333;
 }
 
 body {
   display: -ms-flexbox;
   display: flex;
-  color: #fff;
+  color: #000;
   text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
 }
@@ -88,8 +88,8 @@ body {
 }
 
 .nav-masthead .active {
-  color: #fff;
-  border-bottom-color: #fff;
+  color: #000;
+  border-bottom-color: #000;
 }
 
 @media (min-width: 48em) {
