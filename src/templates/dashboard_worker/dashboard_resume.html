@@ -15,11 +15,18 @@
           </ul>
         </div>
       </div>
+      <a href="">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-12 col-10 border py-3 px-3 my-3 mx-auto mt-4">
+              <h2>{% trans 'Add new resume' %}</h2>
+            </div>
+        </div>
+      </a>
       {% for object in object_list %}
         <div class="row justify-content-center">
           <div class="col-lg-10 col-md-12 col-10 border py-3 px-3 my-3 mx-auto">
             <h1>{{ object.title }}</h1>
-            <p class="mb-3">{{ object.about }}</p> <a class="btn btn-primary" href="{% url 'dashboard_worker:dashboard_worker_resume_update' pk=object.pk %}">{% trans 'Update' %}</a>
+            <p class="mb-3">{{ object.about }}</p> <a class="btn btn-primary" href="{% url 'dashboard_worker:dashboard_worker_resume_update' pk=object.pk w_pk=pk %}">{% trans 'Update' %}</a>
           </div>
         </div>
       {% endfor %}
