@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>{{ object.title }}</div><br><br>
-
-<div>{{ object.description }}</div>
+<main role="main" class="inner cover">
+    Вакансия: {{ object.title }}:<br><br>
+    Описание вакансии:<br>
+    {{ object.description }}
+</main>
 {% endblock %}
