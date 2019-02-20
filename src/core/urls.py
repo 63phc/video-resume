@@ -26,6 +26,7 @@ urlpatterns = [
          name='dashboard_hr'
     ),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('vacancies/', include('src.apps.vacancy.urls'), name='vacancies'),
 
 ]
 
