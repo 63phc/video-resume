@@ -2,7 +2,7 @@ from django import forms
 from src.apps.resume.models import Resume, Education, Skill, Job
 
 
-class ResumeUpdateForm(forms.ModelForm):
+class ResumeCreateUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Resume
@@ -25,6 +25,18 @@ class ResumeUpdateForm(forms.ModelForm):
             'job': forms.CheckboxSelectMultiple,
         }
 
+    def __init__(self, *args, **kwargs):
+        super(ResumeCreateUpdateForm, self).__init__(*args, **kwargs)
+        if self.instance.pk:
+            resume = Resume.objects.get(pk=self.instance.pk)
+            self.fields['education'].queryset = resume.education.all()
+            self.fields['skill'].queryset = resume.skill.all()
+            self.fields['job'].queryset = resume.job.all()
+        else:
+            self.fields['education'].queryset = Resume.objects.none()
+            self.fields['skill'].queryset = Resume.objects.none()
+            self.fields['job'].queryset = Resume.objects.none()
+
 
 class EducationCreateUpdateForm(forms.ModelForm):
     class Meta:
@@ -36,10 +48,10 @@ class EducationCreateUpdateForm(forms.ModelForm):
             'form_study'
         )
         widgets = {
-            'period_edu': forms.TextInput(attrs={'class': 'form-control'}),
-            'name_institution': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}),
-            'faculty': forms.TextInput(attrs={'class': 'form-control'}),
-            'form_study': forms.TextInput(attrs={'class': 'form-control'}),
+            'period_edu': forms.TextInput(attrs={'class': 'form-control', 'required': 'required'}),
+            'name_institution': forms.Textarea(attrs={'class': 'form-control', 'rows': '5', 'required': 'required'}),
+            'faculty': forms.TextInput(attrs={'class': 'form-control', 'required': 'required'}),
+            'form_study': forms.TextInput(attrs={'class': 'form-control', 'required': 'required'}),
         }
 
 
@@ -50,7 +62,7 @@ class SkillCreateUpdateForm(forms.ModelForm):
             'name',
         )
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'})
+            'name': forms.TextInput(attrs={'class': 'form-control', 'required': 'required'})
         }
 
 
