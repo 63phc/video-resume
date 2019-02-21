@@ -15,7 +15,6 @@ User = get_user_model()
 
 class AccountWorkerView(DetailView):
     model = AccountWorker
-    template_name = 'dashboard_worker/dashboard_worker.html'
 
     def get_template_names(self):
         user = User.objects.filter(username=self.request.user)
