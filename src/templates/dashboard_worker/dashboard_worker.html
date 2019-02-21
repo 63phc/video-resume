@@ -22,10 +22,16 @@
               <div class="card">
                 <div class="card-header mt-0">{% trans 'Last resume' %}</div>
                 <div class="card-body">
-                  <blockquote class="blockquote mb-0">
-                    <h4 class="">{{ object.resume.last.title }}</h4>
-                    <p>{{ object.resume.last.about }}</p>
-                  </blockquote><a href="{% url 'dashboard_worker:dashboard_worker_resume_update' pk=object.resume.last.pk w_pk=object.pk %}" class="btn btn-primary">{% trans 'Update' %}</a>
+                  {% if object.resume.last %}
+                    <blockquote class="blockquote mb-0">
+                      <h4 class="">{{ object.resume.last.title }}</h4>
+                      <p>{{ object.resume.last.about }}</p>
+                    </blockquote><a href="{% url 'dashboard_worker:dashboard_worker_resume_update' pk=object.resume.last.pk w_pk=object.pk %}" class="btn btn-primary">{% trans 'Update' %}</a>
+                  {% else %}
+                    <blockquote class="blockquote mb-0">
+                        <p>{% trans 'Resume was not created' %}</p>
+                    </blockquote>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -40,50 +46,64 @@
           <div class="row">
             <div class="col-md-12">
                 <div class="card">
-              <div class="card-header border">
-                <ul class="nav nav-tabs card-header-tabs">
-                  {% for resume in object.resume.all %}
-                    {% if forloop.first %}
-                      <li class="nav-item">
-                        <a class="nav-link active" href="" data-toggle="tab" data-target="#tab{{resume.pk}}">{{ resume.title }}</a>
-                      </li>
-                    {% else %}
-                      <li class="nav-item">
-                        <a class="nav-link" href="" data-toggle="tab" data-target="#tab{{resume.pk}}">{{ resume.title }}</a>
-                      </li>
-                    {% endif %}
-                  {% endfor %}
-                </ul>
-              </div>
-                <div class="card-body">
-                    <div class="tab-content mt-2">
-                      {% for resume in object.resume.all %}
-                        {% if forloop.first %}
-                          <div class="tab-pane fade show active" id="tab{{resume.pk}}" role="tabpanel">
-                            <ul class="list-group list-group-flush">
-                              <p>В разработке</p>
-                                <!--<li class="list-group-item">Dapibus ac facilisis in</li>-->
-                                <!--<li class="list-group-item">Cras justo odio</li>-->
-                                <!--<li class="list-group-item">Morbi leo risus</li>-->
-                                <!--<li class="list-group-item">Porta ac consectetur ac</li>-->
-                                <!--<li class="list-group-item">Vestibulum at eros</li>-->
-                            </ul>
-                          </div>
-                        {% else %}
-                          <div class="tab-pane fade" id="tab{{resume.pk}}" role="tabpanel">
-                              <ul class="list-group list-group-flush">
-                                <p>В разработке</p>
-                                  <!--<li class="list-group-item">Dapibus ac facilisis in</li>-->
-                                  <!--<li class="list-group-item">Cras justo odio</li>-->
-                                  <!--<li class="list-group-item">Morbi leo risus</li>-->
-                                  <!--<li class="list-group-item">Porta ac consectetur ac</li>-->
-                              </ul>
-                          </div>
-                        {% endif %}
-                      {% endfor %}
+                  {% if object.resume.last %}
+                    <div class="card-header border">
+                      <ul class="nav nav-tabs card-header-tabs">
+                        {% for resume in object.resume.all %}
+                          {% if forloop.first %}
+                            <li class="nav-item">
+                              <a class="nav-link active" href="" data-toggle="tab" data-target="#tab{{resume.pk}}">{{ resume.title }}</a>
+                            </li>
+                          {% else %}
+                            <li class="nav-item">
+                              <a class="nav-link" href="" data-toggle="tab" data-target="#tab{{resume.pk}}">{{ resume.title }}</a>
+                            </li>
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
                     </div>
-                </div>
-            </div>
+                    <div class="card-body">
+                        <div class="tab-content mt-2">
+                          {% for resume in object.resume.all %}
+                            {% if forloop.first %}
+                              <div class="tab-pane fade show active" id="tab{{resume.pk}}" role="tabpanel">
+                                <ul class="list-group list-group-flush">
+                                  <p>В разработке</p>
+                                    <!--<li class="list-group-item">Dapibus ac facilisis in</li>-->
+                                    <!--<li class="list-group-item">Cras justo odio</li>-->
+                                    <!--<li class="list-group-item">Morbi leo risus</li>-->
+                                    <!--<li class="list-group-item">Porta ac consectetur ac</li>-->
+                                    <!--<li class="list-group-item">Vestibulum at eros</li>-->
+                                </ul>
+                              </div>
+                            {% else %}
+                              <div class="tab-pane fade" id="tab{{resume.pk}}" role="tabpanel">
+                                  <ul class="list-group list-group-flush">
+                                    <p>В разработке</p>
+                                      <!--<li class="list-group-item">Dapibus ac facilisis in</li>-->
+                                      <!--<li class="list-group-item">Cras justo odio</li>-->
+                                      <!--<li class="list-group-item">Morbi leo risus</li>-->
+                                      <!--<li class="list-group-item">Porta ac consectetur ac</li>-->
+                                  </ul>
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                    </div>
+                  {% else %}
+                    <div class="card-header border">
+                      <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                              <h4>{% trans 'Resume was not created' %}</h4>
+                      </ul>
+                    </div>
+                    <div class="card-body">
+                      <div class="tab-content mt-2">
+                        <a href="{% url 'dashboard_worker:dashboard_worker_resume_create' w_pk=pk %}" class="btn btn-primary">{% trans 'Add resume' %}</a>
+                      </div>
+                    </div>
+                  {% endif %}
+              </div>
             </div>
           </div>
         </div>
