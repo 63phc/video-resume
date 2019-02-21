@@ -26,6 +26,7 @@ urlpatterns = [
          name='dashboard_hr'
     ),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('pages/', include('django.contrib.flatpages.urls')),
 
 ]
 
