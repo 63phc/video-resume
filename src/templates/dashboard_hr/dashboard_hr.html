@@ -1,10 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>HR</title>
-</head>
-<body>
-    <h1>HR dashboard</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load i18n %}
+{% block head %}
+{% endblock %}
+{% block content %}
+  <div class="py-5" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="nav nav-pills">
+            <li class="nav-item"> <a href="{% url 'dashboard_worker:dashboard_worker_main' pk=object.pk %}" class="active nav-link">{% trans 'Main' %}</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="#">{% trans 'Responses' %}</a> </li>
+            <li class="nav-item"> <a href="{% url 'dashboard_worker:dashboard_worker_resume' pk=object.pk %}" class="nav-link">{% trans 'Resume' %}</a> </li>
+            <li class="nav-item"><a class="nav-link" href="#">{% trans 'Favourites' %}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-4" style="">
+          <div class="card-body mt-1">
+            <div class="col-md-12" style="">
+              <div class="card">
+                <div class="card-header mt-0">{% trans 'Last resume' %}</div>
+                <div class="card-body">
+                  {% if object.resume.last %}
+                    <blockquote class="blockquote mb-0">
+                      <h4 class="">{{ object.resume.last.title }}</h4>
+                      <p>{{ object.resume.last.about }}</p>
+                    </blockquote><a href="{% url 'dashboard_worker:dashboard_worker_resume_update' pk=object.resume.last.pk w_pk=object.pk %}" class="btn btn-primary">{% trans 'Update' %}</a>
+                  {% else %}
+                    <blockquote class="blockquote mb-0">
+                        <p>{% trans 'Resume was not created' %}</p>
+                    </blockquote>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7" style="">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card-header mt-3 border">{% trans 'Found jobs suitable for your resume' %}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                  {% if object.resume.last %}
+                    <div class="card-header border">
+                      <ul class="nav nav-tabs card-header-tabs">
+                        {% for resume in object.resume.all %}
+                          {% if forloop.first %}
+                            <li class="nav-item">
+                              <a class="nav-link active" href="" data-toggle="tab" data-target="#tab{{resume.pk}}">{{ resume.title }}</a>
+                            </li>
+                          {% else %}
+                            <li class="nav-item">
+                              <a class="nav-link" href="" data-toggle="tab" data-target="#tab{{resume.pk}}">{{ resume.title }}</a>
+                            </li>
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content mt-2">
+                          {% for resume in object.resume.all %}
+                            {% if forloop.first %}
+                              <div class="tab-pane fade show active" id="tab{{resume.pk}}" role="tabpanel">
+                                <ul class="list-group list-group-flush">
+                                  <p>В разработке</p>
+                                    <!--<li class="list-group-item">Dapibus ac facilisis in</li>-->
+                                    <!--<li class="list-group-item">Cras justo odio</li>-->
+                                    <!--<li class="list-group-item">Morbi leo risus</li>-->
+                                    <!--<li class="list-group-item">Porta ac consectetur ac</li>-->
+                                    <!--<li class="list-group-item">Vestibulum at eros</li>-->
+                                </ul>
+                              </div>
+                            {% else %}
+                              <div class="tab-pane fade" id="tab{{resume.pk}}" role="tabpanel">
+                                  <ul class="list-group list-group-flush">
+                                    <p>В разработке</p>
+                                      <!--<li class="list-group-item">Dapibus ac facilisis in</li>-->
+                                      <!--<li class="list-group-item">Cras justo odio</li>-->
+                                      <!--<li class="list-group-item">Morbi leo risus</li>-->
+                                      <!--<li class="list-group-item">Porta ac consectetur ac</li>-->
+                                  </ul>
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                    </div>
+                  {% else %}
+                    <div class="card-header border">
+                      <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                              <h4>{% trans 'Resume was not created' %}</h4>
+                      </ul>
+                    </div>
+                    <div class="card-body">
+                      <div class="tab-content mt-2">
+                        <a href="{% url 'dashboard_worker:dashboard_worker_resume_create' w_pk=pk %}" class="btn btn-primary">{% trans 'Add resume' %}</a>
+                      </div>
+                    </div>
+                  {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+{% endblock %}
