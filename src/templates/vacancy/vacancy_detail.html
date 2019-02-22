@@ -1,9 +1,10 @@
+{% load i18n %}
 {% extends 'base.html' %}
 
 {% block content %}
 <main role="main" class="inner cover">
-    Вакансия: {{ object.title }}:<br><br>
-    Описание вакансии:<br>
+    {% trans 'Vacancy' %} {{ object.title }}:<br><br>
+    {% trans 'Description' %}:<br>
     {{ object.description }}
 </main>
 {% endblock %}

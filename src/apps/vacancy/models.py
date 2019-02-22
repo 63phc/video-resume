@@ -6,6 +6,13 @@ from src.apps.account_hr.models import AccountHr
 
 class Tag(models.Model):
     name = models.CharField(verbose_name=_('Name'), max_length=70)
+    slug = models.SlugField(verbose_name=_('Slug'), max_length=256,
+                            unique=True)
+    is_activated = models.BooleanField(verbose_name=_('Activated'))
+    created_at = models.DateTimeField(verbose_name=_('Created at'),
+                                      auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name=_('Updated_at'),
+                                      auto_now=True)
 
     class Meta:
         verbose_name = _('Tag')
@@ -22,6 +29,13 @@ class Vacancy(models.Model):
                                   verbose_name=_('HRs'))
     tags = models.ManyToManyField(Tag, related_name='vacancies',
                                   verbose_name=_('Tags'))
+    slug = models.SlugField(verbose_name=_('Slug'), max_length=256,
+                            unique=True)
+    is_activated = models.BooleanField(verbose_name=_('Activated'))
+    created_at = models.DateTimeField(verbose_name=_('Created at'),
+                                      auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name=_('Updated_at'),
+                                      auto_now=True)
 
     class Meta:
         verbose_name = _('Vacancy')

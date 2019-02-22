@@ -1,7 +1,6 @@
 from django.views.generic import DetailView
-from django.shortcuts import render
 
-from src.apps.vacancy.models import Vacancy
+from .models import Vacancy
 
 
 class VacancyDetail(DetailView):

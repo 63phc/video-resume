@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from src.apps.vacancy.models import Vacancy, Tag
+from .models import Vacancy, Tag
 
 
 @admin.register(Vacancy)
