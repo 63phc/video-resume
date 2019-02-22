@@ -26,8 +26,8 @@ urlpatterns = [
          name='dashboard_hr'
     ),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('pages/', include('django.contrib.flatpages.urls')),
     path('vacancies/', include('src.apps.vacancy.urls'), name='vacancies'),
-
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
