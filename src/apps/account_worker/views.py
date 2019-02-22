@@ -6,7 +6,12 @@ from django.urls import reverse_lazy
 from django.http import Http404
 from .models import AccountWorker
 from src.apps.resume.models import Resume, Education, Skill, Job
-from .forms import ResumeCreateUpdateForm, EducationCreateUpdateForm, SkillCreateUpdateForm, JobCreateUpdateForm
+from .forms import (
+    ResumeCreateUpdateForm,
+    EducationCreateUpdateForm,
+    SkillCreateUpdateForm,
+    JobCreateUpdateForm
+)
 from django.http import JsonResponse
 from django.http import HttpResponseRedirect
 from .forms import ResumeForm
@@ -73,7 +78,10 @@ class ResumeCreateView(CreateView):
         return response
 
     def get_success_url(self, **kwargs):
-        return reverse_lazy('dashboard_worker:dashboard_worker_resume', kwargs={'pk': self.kwargs['w_pk']})
+        return reverse_lazy(
+            'dashboard_worker:dashboard_worker_resume',
+            kwargs={'pk': self.kwargs['w_pk']}
+        )
 
 
 class ResumeUpdateView(UpdateView):
@@ -90,7 +98,10 @@ class ResumeUpdateView(UpdateView):
         return context
 
     def get_success_url(self, **kwargs):
-        return reverse_lazy('dashboard_worker:dashboard_worker_resume', kwargs={'pk': self.kwargs['w_pk']})
+        return reverse_lazy(
+            'dashboard_worker:dashboard_worker_resume',
+            kwargs={'pk': self.kwargs['w_pk']}
+        )
 
 
 class ResumeDeleteView(DeleteView):
@@ -147,7 +158,10 @@ class EducationCreateView(CreateView):
                 form = EducationCreateUpdateForm(request.POST)
                 if form.is_valid():
                     form.save()
-                    response_dict = {'pk': form.instance.pk, 'name_institution': form.instance.name_institution}
+                    response_dict = {
+                        'pk': form.instance.pk,
+                        'name_institution': form.instance.name_institution
+                    }
                     return JsonResponse(response_dict)
         return super(EducationCreateView, self).post(request, **kwargs)
 
@@ -247,7 +261,10 @@ class SkillCreateView(CreateView):
                 form = SkillCreateUpdateForm(request.POST)
                 if form.is_valid():
                     form.save()
-                    response_dict = {'pk': form.instance.pk, 'name': form.instance.name}
+                    response_dict = {
+                        'pk': form.instance.pk,
+                        'name': form.instance.name
+                    }
                     return JsonResponse(response_dict)
         return super(SkillCreateView, self).post(request, **kwargs)
 
@@ -289,7 +306,10 @@ class JobCreateView(CreateView):
                 form = JobCreateUpdateForm(request.POST)
                 if form.is_valid():
                     form.save()
-                    response_dict = {'pk': form.instance.pk, 'name_company': form.instance.name_company}
+                    response_dict = {
+                        'pk': form.instance.pk,
+                        'name_company': form.instance.name_company
+                    }
                     return JsonResponse(response_dict)
         return super(JobCreateView, self).post(request, **kwargs)
 
@@ -351,6 +371,8 @@ class JobDeleteView(DeleteView):
     def get_success_url(self, **kwargs):
         return reverse_lazy(
             'dashboard_worker:dashboard_worker_resume_update',
-            kwargs={'pk': self.kwargs['res_pk'], 'w_pk': self.kwargs['w_pk']}
+            kwargs={
+                'pk': self.kwargs['res_pk'],
+                'w_pk': self.kwargs['w_pk']
+            }
         )
-

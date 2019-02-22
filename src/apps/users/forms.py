@@ -1,8 +1,8 @@
-from django.contrib.auth import get_user_model, authenticate, password_validation
-from django.utils.translation import gettext, gettext_lazy as _
+from django.contrib.auth import get_user_model, password_validation
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from django.forms import Select, DateInput, TextInput, SelectDateWidget
+from django.forms import Select, TextInput, SelectDateWidget
 from django.core.validators import EmailValidator
 from src.apps.users.models import Profile
 
@@ -73,4 +73,3 @@ class ProfileForm(forms.ModelForm):
             'family_status': Select(attrs={'class': 'form-control'}),
             'phone': TextInput(attrs={'class': 'form-control'}),
         }
-

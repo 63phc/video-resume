@@ -16,9 +16,15 @@ class ResumeForm(forms.ModelForm):
         )
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'other_skills': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}),
-            'hobbies': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}),
-            'about': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}),
+            'other_skills': forms.Textarea(
+                attrs={'class': 'form-control', 'rows': '5'}
+            ),
+            'hobbies': forms.Textarea(
+                attrs={'class': 'form-control', 'rows': '5'}
+            ),
+            'about': forms.Textarea(
+                attrs={'class': 'form-control', 'rows': '5'}
+            ),
             'education': forms.CheckboxSelectMultiple,
             'skill': forms.CheckboxSelectMultiple,
             'job': forms.CheckboxSelectMultiple,
@@ -51,9 +57,15 @@ class ResumeCreateUpdateForm(forms.ModelForm):
         )
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'other_skills': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}),
-            'hobbies': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}),
-            'about': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}),
+            'other_skills': forms.Textarea(
+                attrs={'class': 'form-control', 'rows': '5'}
+            ),
+            'hobbies': forms.Textarea(
+                attrs={'class': 'form-control', 'rows': '5'}
+            ),
+            'about': forms.Textarea(
+                attrs={'class': 'form-control', 'rows': '5'}
+            ),
             'education': forms.CheckboxSelectMultiple,
             'skill': forms.CheckboxSelectMultiple,
             'job': forms.CheckboxSelectMultiple,
@@ -70,10 +82,22 @@ class EducationCreateUpdateForm(forms.ModelForm):
             'form_study'
         )
         widgets = {
-            'period_edu': forms.TextInput(attrs={'class': 'form-control', 'required': 'required'}),
-            'name_institution': forms.Textarea(attrs={'class': 'form-control', 'rows': '5', 'required': 'required'}),
-            'faculty': forms.TextInput(attrs={'class': 'form-control', 'required': 'required'}),
-            'form_study': forms.TextInput(attrs={'class': 'form-control', 'required': 'required'}),
+            'period_edu': forms.TextInput(
+                attrs={'class': 'form-control', 'required': 'required'}
+            ),
+            'name_institution': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': '5',
+                    'required': 'required'
+                }
+            ),
+            'faculty': forms.TextInput(
+                attrs={'class': 'form-control', 'required': 'required'}
+            ),
+            'form_study': forms.TextInput(
+                attrs={'class': 'form-control', 'required': 'required'}
+            ),
         }
 
 
@@ -84,7 +108,9 @@ class SkillCreateUpdateForm(forms.ModelForm):
             'name',
         )
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'required': 'required'})
+            'name': forms.TextInput(
+                attrs={'class': 'form-control', 'required': 'required'}
+            )
         }
 
 
@@ -97,7 +123,13 @@ class JobCreateUpdateForm(forms.ModelForm):
             'name_company'
         )
         widgets = {
-            'period_work': forms.TextInput(attrs={'class': 'form-control'}),
-            'position': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}),
-            'name_company': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'})
+            'period_work': forms.TextInput(
+                attrs={'class': 'form-control'}
+            ),
+            'position': forms.Textarea(
+                attrs={'class': 'form-control', 'rows': '5'}
+            ),
+            'name_company': forms.Textarea(
+                attrs={'class': 'form-control', 'rows': '5'}
+            )
         }

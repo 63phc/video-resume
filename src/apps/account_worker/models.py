@@ -11,7 +11,11 @@ class AccountWorker(models.Model):
         _('Type user'), choices=AccountTypeChoices.CHOICES, max_length=63
     )
     id_user = models.ForeignKey('users.User', on_delete=models.CASCADE)
-    resume = models.ManyToManyField(Resume, related_name='resumes', verbose_name=_('Resume'), blank=True)
+    resume = models.ManyToManyField(
+        Resume,
+        related_name='resumes',
+        verbose_name=_('Resume'), blank=True
+    )
 
     class Meta:
         verbose_name = _('Account worker')

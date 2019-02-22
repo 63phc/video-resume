@@ -14,11 +14,43 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Education',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('period_edu', models.CharField(max_length=50, verbose_name='Period education')),
-                ('name_institution', models.CharField(max_length=100, verbose_name='Name of institution')),
-                ('faculty', models.CharField(max_length=100, verbose_name='Faculty')),
-                ('form_study', models.CharField(max_length=30, verbose_name='Form of study')),
+                (
+                    'id',
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID'
+                    )
+                ),
+                (
+                    'period_edu',
+                    models.CharField(
+                        max_length=50,
+                        verbose_name='Period education'
+                    )
+                ),
+                (
+                    'name_institution',
+                    models.CharField(
+                        max_length=100,
+                        verbose_name='Name of institution'
+                    )
+                ),
+                (
+                    'faculty',
+                    models.CharField(
+                        max_length=100,
+                        verbose_name='Faculty'
+                    )
+                ),
+                (
+                    'form_study',
+                    models.CharField(
+                        max_length=30,
+                        verbose_name='Form of study'
+                    )
+                ),
             ],
             options={
                 'verbose_name': 'education',
@@ -28,10 +60,36 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Job',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('period_work', models.CharField(max_length=50, verbose_name='Period of work')),
-                ('position', models.CharField(max_length=100, verbose_name='Position')),
-                ('name_company', models.CharField(max_length=100, verbose_name='Company name')),
+                (
+                    'id',
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID'
+                    )
+                ),
+                (
+                    'period_work',
+                    models.CharField(
+                        max_length=50,
+                        verbose_name='Period of work'
+                    )
+                ),
+                (
+                    'position',
+                    models.CharField(
+                        max_length=100,
+                        verbose_name='Position'
+                    )
+                ),
+                (
+                    'name_company',
+                    models.CharField(
+                        max_length=100,
+                        verbose_name='Company name'
+                    )
+                ),
             ],
             options={
                 'verbose_name': 'job',
@@ -41,13 +99,59 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Resume',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100, verbose_name='Title')),
-                ('other_skills', models.CharField(max_length=200, verbose_name='Other skills')),
-                ('hobbies', models.CharField(max_length=200, verbose_name='Hobbies')),
-                ('about', models.CharField(max_length=400, verbose_name='About')),
-                ('education', models.ManyToManyField(related_name='educations', to='resume.Education', verbose_name='Education')),
-                ('job', models.ManyToManyField(related_name='jobs', to='resume.Job', verbose_name='Jobs')),
+                (
+                    'id',
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID'
+                    )
+                ),
+                (
+                    'title',
+                    models.CharField(
+                        max_length=100,
+                        verbose_name='Title'
+                    )
+                ),
+                (
+                    'other_skills',
+                    models.CharField(
+                        max_length=200,
+                        verbose_name='Other skills'
+                    )
+                ),
+                (
+                    'hobbies',
+                    models.CharField(
+                        max_length=200,
+                        verbose_name='Hobbies'
+                    )
+                ),
+                (
+                    'about',
+                    models.CharField(
+                        max_length=400,
+                        verbose_name='About'
+                    )
+                ),
+                (
+                    'education',
+                    models.ManyToManyField(
+                        related_name='educations',
+                        to='resume.Education',
+                        verbose_name='Education'
+                    )
+                ),
+                (
+                    'job',
+                    models.ManyToManyField(
+                        related_name='jobs',
+                        to='resume.Job',
+                        verbose_name='Jobs'
+                    )
+                ),
             ],
             options={
                 'verbose_name': 'resume',
@@ -57,8 +161,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Skill',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=30, verbose_name='Name')),
+                (
+                    'id',
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID'
+                    )
+                ),
+                (
+                    'name',
+                    models.CharField(
+                        max_length=30,
+                        verbose_name='Name'
+                    )
+                ),
             ],
             options={
                 'verbose_name': 'skill',
@@ -68,6 +186,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='resume',
             name='skill',
-            field=models.ManyToManyField(related_name='skills', to='resume.Skill', verbose_name='Skills'),
+            field=models.ManyToManyField(
+                related_name='skills',
+                to='resume.Skill',
+                verbose_name='Skills'
+            ),
         ),
     ]
