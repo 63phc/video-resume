@@ -9,6 +9,9 @@ class Question(models.Model):
     answer = models.TextField(_('Answer'), blank=True, null=True)
     account_hr = models.ManyToManyField(AccountHr, related_name='questions',
                                     verbose_name=_('Questions'), blank=True)
+    slug = models.SlugField(_('Slug'), max_length=256, unique=True)
+
+
     class Meta:
         verbose_name = _('Question')
         verbose_name_plural = _('Questions')
