@@ -8,7 +8,8 @@ class Tag(models.Model):
     name = models.CharField(verbose_name=_('Name'), max_length=70)
     slug = models.SlugField(verbose_name=_('Slug'), max_length=256,
                             unique=True)
-    is_activated = models.BooleanField(verbose_name=_('Activated'))
+    is_activated = models.BooleanField(verbose_name=_('Activated'),
+                                       default=False)
     created_at = models.DateTimeField(verbose_name=_('Created at'),
                                       auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name=_('Updated_at'),
@@ -31,7 +32,8 @@ class Vacancy(models.Model):
                                   verbose_name=_('Tags'))
     slug = models.SlugField(verbose_name=_('Slug'), max_length=256,
                             unique=True)
-    is_activated = models.BooleanField(verbose_name=_('Activated'))
+    is_activated = models.BooleanField(verbose_name=_('Activated'),
+                                       default=False)
     created_at = models.DateTimeField(verbose_name=_('Created at'),
                                       auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name=_('Updated_at'),
