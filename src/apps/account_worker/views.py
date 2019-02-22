@@ -1,7 +1,6 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
-from django.views import View
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 from django.http import Http404
@@ -9,6 +8,8 @@ from .models import AccountWorker
 from src.apps.resume.models import Resume, Education, Skill, Job
 from .forms import ResumeCreateUpdateForm, EducationCreateUpdateForm, SkillCreateUpdateForm, JobCreateUpdateForm
 from django.http import JsonResponse
+from django.http import HttpResponseRedirect
+from .forms import ResumeForm
 
 User = get_user_model()
 
@@ -51,6 +52,17 @@ class ResumeCreateView(CreateView):
         context = super(ResumeCreateView, self).get_context_data(**kwargs)
         context['w_pk'] = self.kwargs['w_pk']
         return context
+
+    def form_invalid(self, form, **kwargs):
+        pre_form = ResumeForm(self.request.POST)
+        if pre_form.is_valid():
+            obj = pre_form.save()
+            account = AccountWorker.objects.get(pk=self.kwargs['w_pk'])
+            account.resume.add(obj)
+            account.save()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return super(ResumeCreateView, self).form_invalid(form, **kwargs)
 
     def form_valid(self, form, **kwargs):
         response = super(ResumeCreateView, self).form_valid(form)
@@ -267,6 +279,20 @@ class JobCreateView(CreateView):
     model = Job
     template_name = 'dashboard_worker/dashboard_job_create.html'
 
+    def post(self, request, *args, **kwargs):
+        if self.request.is_ajax():
+            if request.POST['tag'] == 'create':
+                form = JobCreateUpdateForm()
+                response_dict = {'response': str(form)}
+                return JsonResponse(response_dict)
+            elif request.POST['tag'] == 'add':
+                form = JobCreateUpdateForm(request.POST)
+                if form.is_valid():
+                    form.save()
+                    response_dict = {'pk': form.instance.pk, 'name_company': form.instance.name_company}
+                    return JsonResponse(response_dict)
+        return super(JobCreateView, self).post(request, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super(JobCreateView, self).get_context_data(**kwargs)
         context['res_pk'] = self.kwargs['res_pk']
@@ -328,7 +354,3 @@ class JobDeleteView(DeleteView):
             kwargs={'pk': self.kwargs['res_pk'], 'w_pk': self.kwargs['w_pk']}
         )
 
-
-# class EducationAjaxCreate(View):
-#
-#     def post(self):

@@ -114,22 +114,18 @@
 <script>
     $(document).ready(function(){
       var host = $(location).attr('host');
-      <!--EDUCATION-->
       var educations_pk = $("[name = education]");
       var button_edu_update = $(".edu-update");
       var button_edu_add = $(".edu-add");
       var button_edu_delete = $(".edu-delete");
-      <!--SKILL-->
       var skills_pk = $("[name = skill]");
       var button_skill_update = $(".skill-update");
       var button_skill_add = $(".skill-add");
       var button_skill_delete = $(".skill-delete");
-      <!--JOB-->
       var jobs_pk = $("[name = job]");
       var button_job_update = $(".job-update");
       var button_job_add = $(".job-add");
       var button_job_delete = $(".job-delete");
-      <!--EDUCATION-->
       $.each(educations_pk,function(index, element) {
         var edu_pk = element.value;
         $(button_edu_update[index]).addClass("edu-update" + edu_pk).click(() => {
@@ -145,7 +141,6 @@
           document.location.href = 'http://' + host + '/dashboard/worker/education/delete/' + edu_pk + '/' + "{{ pk }}" + '/' + "{{ w_pk }}"
         })
       })
-      <!--SKILL-->
       $.each(skills_pk,function(index, element) {
         var sk_pk = element.value;
         $(button_skill_update[index]).addClass("skill-update" + sk_pk).click(() => {
@@ -161,7 +156,6 @@
           document.location.href = 'http://' + host + '/dashboard/worker/skill/delete/' + sk_pk + '/' + "{{ pk }}" + '/' + "{{ w_pk }}"
         })
       })
-      <!--JOB-->
       $.each(jobs_pk,function(index, element) {
         var jo_pk = element.value;
         $(button_job_update[index]).addClass("job-update" + jo_pk).click(() => {
@@ -177,9 +171,6 @@
           document.location.href = 'http://' + host + '/dashboard/worker/job/delete/' + jo_pk + '/' + "{{ pk }}" + '/' + "{{ w_pk }}"
         })
       })
-
-
-
     })
 </script>
 {% endblock %}

@@ -2,8 +2,7 @@ from django import forms
 from src.apps.resume.models import Resume, Education, Skill, Job
 
 
-class ResumeCreateUpdateForm(forms.ModelForm):
-
+class ResumeForm(forms.ModelForm):
     class Meta:
         model = Resume
         fields = (
@@ -25,7 +24,9 @@ class ResumeCreateUpdateForm(forms.ModelForm):
             'job': forms.CheckboxSelectMultiple,
         }
 
-    def __init__(self, *args, **kwargs):
+
+class ResumeCreateUpdateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):  # подумать что с этим делать
         super(ResumeCreateUpdateForm, self).__init__(*args, **kwargs)
         if self.instance.pk:
             resume = Resume.objects.get(pk=self.instance.pk)
@@ -36,6 +37,27 @@ class ResumeCreateUpdateForm(forms.ModelForm):
             self.fields['education'].queryset = Resume.objects.none()
             self.fields['skill'].queryset = Resume.objects.none()
             self.fields['job'].queryset = Resume.objects.none()
+
+    class Meta:
+        model = Resume
+        fields = (
+            'title',
+            'other_skills',
+            'hobbies',
+            'about',
+            'education',
+            'skill',
+            'job'
+        )
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'other_skills': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}),
+            'hobbies': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}),
+            'about': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}),
+            'education': forms.CheckboxSelectMultiple,
+            'skill': forms.CheckboxSelectMultiple,
+            'job': forms.CheckboxSelectMultiple,
+        }
 
 
 class EducationCreateUpdateForm(forms.ModelForm):

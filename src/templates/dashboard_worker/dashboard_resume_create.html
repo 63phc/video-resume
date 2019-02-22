@@ -47,20 +47,12 @@
                     <button type="button" class="btn btn-primary edu-add">{% trans 'Add education' %}</button>
                     <div class="edu-form mt-2">
                     </div>
-                    <div class="form-row ml-3 edu-list">
+                    <div class="form-group ml-3 edu-list">
                     </div>
                   </div>
                   {% for edu in form.education %}
                     <div class="form-row ml-3">
                       <li>{{ edu }}</li>
-                    </div>
-                    <div class="form-row ml-1">
-                      <div class="form-group">
-                        <button type="button" class="btn btn-primary edu-update">{% trans 'Update' %}</button>
-                      </div>
-                      <div class="form-group ml-2">
-                        <button type="button" class="btn btn-primary edu-delete">{% trans 'Delete' %}</button>
-                      </div>
                     </div>
                   {% endfor %}
                   {{ form.education.errors }}
@@ -71,20 +63,12 @@
                     <button type="button" class="btn btn-primary skill-add">{% trans 'Add skill' %}</button>
                     <div class="skill-form mt-2">
                     </div>
-                    <div class="form-row ml-3 skill-list">
+                    <div class="form-group ml-3 skill-list">
                     </div>
                   </div>
                   {% for one_skill in form.skill %}
                     <div class="form-row ml-3">
                       <li>{{ one_skill }}</li>
-                    </div>
-                    <div class="form-row ml-1">
-                      <div class="form-group">
-                        <button type="button" class="btn btn-primary skill-update">{% trans 'Update' %}</button>
-                      </div>
-                      <div class="form-group ml-2">
-                        <button type="button" class="btn btn-primary skill-delete">{% trans 'Delete' %}</button>
-                      </div>
                     </div>
                   {% endfor %}
                   {{ form.skill.errors }}
@@ -93,18 +77,14 @@
                   <label for="id_job">{% trans 'Jobs:' %}</label>
                   <div class="form-group">
                     <button type="button" class="btn btn-primary job-add">{% trans 'Add job' %}</button>
+                    <div class="job-form mt-2">
+                    </div>
+                    <div class="form-group ml-3 job-list">
+                    </div>
                   </div>
                   {% for one_job in form.job %}
                     <div class="form-row ml-3">
                       <li>{{ one_job }}</li>
-                    </div>
-                    <div class="form-row ml-1">
-                      <div class="form-group">
-                        <button type="button" class="btn btn-primary job-update">{% trans 'Update' %}</button>
-                      </div>
-                      <div class="form-group ml-2">
-                        <button type="button" class="btn btn-primary job-delete">{% trans 'Delete' %}</button>
-                      </div>
                     </div>
                   {% endfor %}
                   {{ form.job.errors }}
@@ -122,33 +102,17 @@
 <script>
     $(document).ready(function(){
       var host = $(location).attr('host');
-      <!--EDUCATION-->
-      var educations_pk = $("[name = education]");
-      var button_edu_update = $(".edu-update");
       var button_edu_add = $(".edu-add");
-      var button_edu_delete = $(".edu-delete");
-      <!--SKILL-->
-      var skills_pk = $("[name = skill]");
-      var button_skill_update = $(".skill-update");
       var button_skill_add = $(".skill-add");
-      var button_skill_delete = $(".skill-delete");
-      <!--JOB-->
-      var jobs_pk = $("[name = job]");
-      var button_job_update = $(".job-update");
       var button_job_add = $(".job-add");
-      var button_job_delete = $(".job-delete");
-      <!--EDUCATION-->
-      <!--$.each(educations_pk,function(index, element) {-->
-        <!--var edu_pk = element.value;-->
-        <!--$(button_edu_update[index]).addClass("edu-update" + edu_pk).click(() => {-->
-          <!--document.location.href = 'http://' + host + '/dashboard/worker/education/update/' + edu_pk + '/' + "{{ pk }}" + '/' + "{{ w_pk }}"-->
-        <!--})-->
-      <!--})-->
+      function* generateSequence(start, end) {
+        for (let i = start; i <= end; i++) yield i;
+      }
       $(button_edu_add).click(() => {
         if ($(".edu-form").children().length == 0) {
           var csrf_token = $('[name="csrfmiddlewaretoken"]').val();
           var url = 'http://' + host + '/dashboard/worker/education/create/' + "0" + '/' + "{{ w_pk }}"
-          var data = {'response': 'very good', 'tag': 'create'};
+          var data = {'tag': 'create'};
           $.ajax({
               url: url,
               method: 'POST',
@@ -156,28 +120,6 @@
               data: data,
               success: function(data) {
                 $(".edu-form").append('<hr><form class="edu-create-form">' + data['response'] + '<button type="submit" class="btn btn-primary edu-create-add mt-2">{% trans 'Add this education' %}</button><hr>');
-                $(".edu-form").submit((e) => {
-                  e.preventDefault();
-                  var data = {};
-                  data['period_edu'] = $('#id_period_edu').val();
-                  data['name_institution'] = $('#id_name_institution').val();
-                  data['faculty'] = $('#id_faculty').val();
-                  data['form_study'] = $('#id_form_study').val();
-                  data['tag'] = 'add'
-                  $.ajax({
-                    url: url,
-                    method: 'POST',
-                    headers: {"X-CSRFToken": csrf_token},
-                    data: data,
-                    success: function(data) {
-                      $(".edu-form").empty()
-                      $(".edu-list").append('<label for="id_education_0"><input type="checkbox" name="education" value="' + data['pk'] + '" id="id_education_0" checked="">' + data['name_institution'] + '</label>')
-                    },
-                    error: function() {
-                      console.log("А response is not received");
-                    }
-                  })
-                })
               },
               error: function() {
                   console.log("А response is not received");
@@ -187,24 +129,37 @@
           $(".edu-form").empty()
         }
        })
-      <!--$.each(educations_pk,function(index, element) {-->
-      <!--var edu_pk = element.value;-->
-        <!--$(button_edu_delete[index]).addClass("edu-delete" + edu_pk).click(() => {-->
-          <!--document.location.href = 'http://' + host + '/dashboard/worker/education/delete/' + edu_pk + '/' + "{{ pk }}" + '/' + "{{ w_pk }}"-->
-        <!--})-->
-      <!--})-->
-      <!--&lt;!&ndash;SKILL&ndash;&gt;-->
-      <!--$.each(skills_pk,function(index, element) {-->
-        <!--var sk_pk = element.value;-->
-        <!--$(button_skill_update[index]).addClass("skill-update" + sk_pk).click(() => {-->
-          <!--document.location.href = 'http://' + host + '/dashboard/worker/skill/update/' + sk_pk + '/' + "{{ pk }}" + '/' + "{{ w_pk }}"-->
-        <!--})-->
-      <!--})-->
+     var gen_id_edu = generateSequence(0, 50)
+     $(".edu-form").submit((e) => {
+        e.preventDefault();
+        var id = gen_id_edu.next()['value']
+        var csrf_token = $('[name="csrfmiddlewaretoken"]').val();
+        var url = 'http://' + host + '/dashboard/worker/education/create/' + "0" + '/' + "{{ w_pk }}"
+        var data = {};
+        data['period_edu'] = $('#id_period_edu').val();
+        data['name_institution'] = $('#id_name_institution').val();
+        data['faculty'] = $('#id_faculty').val();
+        data['form_study'] = $('#id_form_study').val();
+        data['tag'] = 'add'
+        $.ajax({
+          url: url,
+          method: 'POST',
+          headers: {"X-CSRFToken": csrf_token},
+          data: data,
+          success: function(data) {
+            $(".edu-form").empty()
+            $(".edu-list").append('<div class="form-check"><label class="form-check-label" for="id_education_' + id + '"><input type="checkbox" class="form-check-input" name="education" value="' + data['pk'] + '" id="id_education_' + id + '" checked="">' + data['name_institution'] + '</label></div>')
+          },
+          error: function() {
+            console.log("А response is not received");
+          }
+        })
+      })
       $(button_skill_add).click(() => {
         if ($(".skill-form").children().length == 0) {
           var csrf_token = $('[name="csrfmiddlewaretoken"]').val();
           var url = 'http://' + host + '/dashboard/worker/skill/create/' + "0" + '/' + "{{ w_pk }}"
-          var data = {'response': 'very good', 'tag': 'create'};
+          var data = {'tag': 'create'};
           $.ajax({
               url: url,
               method: 'POST',
@@ -212,25 +167,6 @@
               data: data,
               success: function(data) {
                 $(".skill-form").append('<hr><form class="skill-create-form">' + data['response'] + '<button type="submit" class="btn btn-primary skill-create-add mt-2">{% trans 'Add this skill' %}</button><hr>');
-                $(".skill-form").submit((e) => {
-                  e.preventDefault();
-                  var data = {};
-                  data['name'] = $('#id_name').val();
-                  data['tag'] = 'add'
-                  $.ajax({
-                    url: url,
-                    method: 'POST',
-                    headers: {"X-CSRFToken": csrf_token},
-                    data: data,
-                    success: function(data) {
-                      $(".skill-form").empty()
-                      $(".skill-list").append('<label for="id_skill_0"><input type="checkbox" name="skill" value="' + data['pk'] + '" id="id_skill_0" checked="">' + data['name'] + '</label>')
-                    },
-                    error: function() {
-                      console.log("А response is not received");
-                    }
-                  })
-                })
               },
               error: function() {
                   console.log("А response is not received");
@@ -240,34 +176,75 @@
           $(".skill-form").empty()
         }
        })
-      <!--$(button_skill_add).click(() => {-->
-         <!--document.location.href = 'http://' + host + '/dashboard/worker/skill/create/' + "{{ pk }}" + '/' + "{{ w_pk }}"-->
-       <!--})-->
-      <!--$.each(skills_pk,function(index, element) {-->
-      <!--var sk_pk = element.value;-->
-        <!--$(button_skill_delete[index]).addClass("skill-delete" + sk_pk).click(() => {-->
-          <!--document.location.href = 'http://' + host + '/dashboard/worker/skill/delete/' + sk_pk + '/' + "{{ pk }}" + '/' + "{{ w_pk }}"-->
-        <!--})-->
-      <!--})-->
-      <!--&lt;!&ndash;JOB&ndash;&gt;-->
-      <!--$.each(jobs_pk,function(index, element) {-->
-        <!--var jo_pk = element.value;-->
-        <!--$(button_job_update[index]).addClass("job-update" + jo_pk).click(() => {-->
-          <!--document.location.href = 'http://' + host + '/dashboard/worker/job/update/' + jo_pk + '/' + "{{ pk }}" + '/' + "{{ w_pk }}"-->
-        <!--})-->
-      <!--})-->
-      <!--$(button_job_add).click(() => {-->
-         <!--document.location.href = 'http://' + host + '/dashboard/worker/job/create/' + "{{ pk }}" + '/' + "{{ w_pk }}"-->
-       <!--})-->
-      <!--$.each(jobs_pk,function(index, element) {-->
-      <!--var jo_pk = element.value;-->
-        <!--$(button_job_delete[index]).addClass("job-delete" + jo_pk).click(() => {-->
-          <!--document.location.href = 'http://' + host + '/dashboard/worker/job/delete/' + jo_pk + '/' + "{{ pk }}" + '/' + "{{ w_pk }}"-->
-        <!--})-->
-      <!--})-->
-
-
-
+       var gen_id_skill = generateSequence(0, 50)
+       $(".skill-form").submit((e) => {
+        e.preventDefault();
+        var id = gen_id_skill.next()['value']
+        var csrf_token = $('[name="csrfmiddlewaretoken"]').val();
+        var url = 'http://' + host + '/dashboard/worker/skill/create/' + "0" + '/' + "{{ w_pk }}"
+        var data = {};
+        data['name'] = $('#id_name').val();
+        data['tag'] = 'add'
+        $.ajax({
+          url: url,
+          method: 'POST',
+          headers: {"X-CSRFToken": csrf_token},
+          data: data,
+          success: function(data) {
+            $(".skill-form").empty()
+            $(".skill-list").append('<div class="form-check"><label class="form-check-label" for="id_skill_' + id + '"><input type="checkbox" class="form-check-input" name="skill" value="' + data['pk'] + '" id="id_skill_' + id + '" checked="">' + data['name'] + '</label></div>')
+          },
+          error: function() {
+            console.log("А response is not received");
+          }
+        })
+      })
+      $(button_job_add).click(() => {
+        if ($(".job-form").children().length == 0) {
+          var csrf_token = $('[name="csrfmiddlewaretoken"]').val();
+          var url = 'http://' + host + '/dashboard/worker/job/create/' + "0" + '/' + "{{ w_pk }}"
+          var data = {'tag': 'create'};
+          $.ajax({
+              url: url,
+              method: 'POST',
+              headers: {"X-CSRFToken": csrf_token},
+              data: data,
+              success: function(data) {
+                $(".job-form").append('<hr><form class="job-create-form">' + data['response'] + '<button type="submit" class="btn btn-primary job-create-add mt-2">{% trans 'Add this job' %}</button><hr>');
+              },
+              error: function() {
+                  console.log("А response is not received");
+              }
+          });
+        } else {
+          $(".job-form").empty()
+        }
+       })
+       var gen_id_job = generateSequence(0, 50)
+       $(".job-form").submit((e) => {
+        e.preventDefault();
+        var id = gen_id_job.next()['value']
+        var csrf_token = $('[name="csrfmiddlewaretoken"]').val();
+        var url = 'http://' + host + '/dashboard/worker/job/create/' + "0" + '/' + "{{ w_pk }}"
+        var data = {};
+        data['period_work'] = $('#id_period_work').val();
+        data['position'] = $('#id_position').val();
+        data['name_company'] = $('#id_name_company').val();
+        data['tag'] = 'add'
+        $.ajax({
+          url: url,
+          method: 'POST',
+          headers: {"X-CSRFToken": csrf_token},
+          data: data,
+          success: function(data) {
+            $(".job-form").empty()
+            $(".job-list").append('<div class="form-check"><label class="form-check-label" for="id_job_' + id + '"><input type="checkbox" class="form-check-input" name="job" value="' + data['pk'] + '" id="id_job_' + id + '" checked="">' + data['name_company'] + '</label></div>')
+          },
+          error: function() {
+            console.log("А response is not received");
+          }
+        })
+      })
     })
 </script>
 {% endblock %}
