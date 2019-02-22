@@ -8,7 +8,7 @@
         <div class="card">
           <div class="card-body">
             <form method="post" action=".">
-                <p><strong>Чтобы войти, необходимо заполнить следующие поля:</strong></p>
+                <p><strong>To login, you need to fill up these fields below:</strong></p>
                 {% csrf_token %}
                 {% for field in form %}
                         {% if field.errors %}
@@ -32,7 +32,7 @@
                     {% endfor %}
               <input type="submit" value="Войти">
               <div>
-                <p>Ещё нет аккаунта? <a href="{% url 'sign_in' %}">Зарегистрируйтесь</a></p>
+                <p>Still don't have the account?<a href="{% url 'sign_in' %}">Registrate yourself!</a></p>
               </div>
             </form>
           </div>
