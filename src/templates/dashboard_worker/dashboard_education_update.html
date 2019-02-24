@@ -9,7 +9,7 @@
         <div class="col-md-12">
           <ul class="nav nav-pills">
             <li class="nav-item"> <a href="{% url 'dashboard_worker:dashboard_worker_resume' pk=w_pk %}" class="nav-link">{% trans 'My resume' %}</a> </li>
-            <li class="nav-item"> <a class="nav-link active" href="{% url 'dashboard_worker:dashboard_worker_resume_update' pk=res_pk w_pk=w_pk %}">{{ title }}</a> </li>
+            <li class="nav-item"> <a class="nav-link active" href="{% url 'dashboard_worker:dashboard_worker_resume_update' pk=resume_pk w_pk=w_pk %}">{{ title }}</a> </li>
           </ul>
         </div>
       </div>

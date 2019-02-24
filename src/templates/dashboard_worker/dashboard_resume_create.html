@@ -101,18 +101,18 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function(){
-      var host = $(location).attr('host');
-      var button_edu_add = $(".edu-add");
-      var button_skill_add = $(".skill-add");
-      var button_job_add = $(".job-add");
+      const host = $(location).attr('host');
+      const button_edu_add = $(".edu-add");
+      const button_skill_add = $(".skill-add");
+      const button_job_add = $(".job-add");
       function* generateSequence(start, end) {
         for (let i = start; i <= end; i++) yield i;
       }
       $(button_edu_add).click(() => {
         if ($(".edu-form").children().length == 0) {
-          var csrf_token = $('[name="csrfmiddlewaretoken"]').val();
-          var url = 'http://' + host + '/dashboard/worker/education/create/' + "0" + '/' + "{{ w_pk }}"
-          var data = {'tag': 'create'};
+          let csrf_token = $('[name="csrfmiddlewaretoken"]').val();
+          let url = 'http://' + host + '/dashboard/worker/education/create/' + "0" + '/' + "{{ w_pk }}"
+          let data = {'tag': 'create'};
           $.ajax({
               url: url,
               method: 'POST',
@@ -132,10 +132,10 @@
      var gen_id_edu = generateSequence(0, 50)
      $(".edu-form").submit((e) => {
         e.preventDefault();
-        var id = gen_id_edu.next()['value']
-        var csrf_token = $('[name="csrfmiddlewaretoken"]').val();
-        var url = 'http://' + host + '/dashboard/worker/education/create/' + "0" + '/' + "{{ w_pk }}"
-        var data = {};
+        let id = gen_id_edu.next()['value']
+        let csrf_token = $('[name="csrfmiddlewaretoken"]').val();
+        let url = 'http://' + host + '/dashboard/worker/education/create/' + "0" + '/' + "{{ w_pk }}"
+        let data = {};
         data['period_edu'] = $('#id_period_edu').val();
         data['name_institution'] = $('#id_name_institution').val();
         data['faculty'] = $('#id_faculty').val();
@@ -157,9 +157,9 @@
       })
       $(button_skill_add).click(() => {
         if ($(".skill-form").children().length == 0) {
-          var csrf_token = $('[name="csrfmiddlewaretoken"]').val();
-          var url = 'http://' + host + '/dashboard/worker/skill/create/' + "0" + '/' + "{{ w_pk }}"
-          var data = {'tag': 'create'};
+          let csrf_token = $('[name="csrfmiddlewaretoken"]').val();
+          let url = 'http://' + host + '/dashboard/worker/skill/create/' + "0" + '/' + "{{ w_pk }}"
+          let data = {'tag': 'create'};
           $.ajax({
               url: url,
               method: 'POST',
@@ -176,13 +176,13 @@
           $(".skill-form").empty()
         }
        })
-       var gen_id_skill = generateSequence(0, 50)
+       let gen_id_skill = generateSequence(0, 50)
        $(".skill-form").submit((e) => {
         e.preventDefault();
-        var id = gen_id_skill.next()['value']
-        var csrf_token = $('[name="csrfmiddlewaretoken"]').val();
-        var url = 'http://' + host + '/dashboard/worker/skill/create/' + "0" + '/' + "{{ w_pk }}"
-        var data = {};
+        let id = gen_id_skill.next()['value']
+        let csrf_token = $('[name="csrfmiddlewaretoken"]').val();
+        let url = 'http://' + host + '/dashboard/worker/skill/create/' + "0" + '/' + "{{ w_pk }}"
+        let data = {};
         data['name'] = $('#id_name').val();
         data['tag'] = 'add'
         $.ajax({
@@ -201,9 +201,9 @@
       })
       $(button_job_add).click(() => {
         if ($(".job-form").children().length == 0) {
-          var csrf_token = $('[name="csrfmiddlewaretoken"]').val();
-          var url = 'http://' + host + '/dashboard/worker/job/create/' + "0" + '/' + "{{ w_pk }}"
-          var data = {'tag': 'create'};
+          let csrf_token = $('[name="csrfmiddlewaretoken"]').val();
+          let url = 'http://' + host + '/dashboard/worker/job/create/' + "0" + '/' + "{{ w_pk }}"
+          let data = {'tag': 'create'};
           $.ajax({
               url: url,
               method: 'POST',
@@ -220,13 +220,13 @@
           $(".job-form").empty()
         }
        })
-       var gen_id_job = generateSequence(0, 50)
+       let gen_id_job = generateSequence(0, 50)
        $(".job-form").submit((e) => {
         e.preventDefault();
-        var id = gen_id_job.next()['value']
-        var csrf_token = $('[name="csrfmiddlewaretoken"]').val();
-        var url = 'http://' + host + '/dashboard/worker/job/create/' + "0" + '/' + "{{ w_pk }}"
-        var data = {};
+        let id = gen_id_job.next()['value']
+        let csrf_token = $('[name="csrfmiddlewaretoken"]').val();
+        let url = 'http://' + host + '/dashboard/worker/job/create/' + "0" + '/' + "{{ w_pk }}"
+        let data = {};
         data['period_work'] = $('#id_period_work').val();
         data['position'] = $('#id_position').val();
         data['name_company'] = $('#id_name_company').val();

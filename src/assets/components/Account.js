@@ -2,9 +2,9 @@ import $ from 'jquery';
 
 const Account = ((accountID = $('#account_type')) => {
     $(document).ready(function(){
-        var pathname = $(location).attr('pathname');
-        var for_account = pathname.split('/').reverse()
-        var account = $("#account_type").val(for_account[1]);
+        let pathname = $(location).attr('pathname');
+        let for_account = pathname.split('/').reverse()
+        let account = $("#account_type").val(for_account[1]);
     })
 })();
 

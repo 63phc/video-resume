@@ -1,4 +1,5 @@
 from django import forms
+
 from src.apps.resume.models import Resume, Education, Skill, Job
 
 
@@ -31,9 +32,9 @@ class ResumeForm(forms.ModelForm):
         }
 
 
-class ResumeCreateUpdateForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):  # подумать что с этим делать
-        super(ResumeCreateUpdateForm, self).__init__(*args, **kwargs)
+class ResumeMainForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ResumeMainForm, self).__init__(*args, **kwargs)
         if self.instance.pk:
             resume = Resume.objects.get(pk=self.instance.pk)
             self.fields['education'].queryset = resume.education.all()
@@ -72,7 +73,7 @@ class ResumeCreateUpdateForm(forms.ModelForm):
         }
 
 
-class EducationCreateUpdateForm(forms.ModelForm):
+class EducationForm(forms.ModelForm):
     class Meta:
         model = Education
         fields = (
@@ -101,7 +102,7 @@ class EducationCreateUpdateForm(forms.ModelForm):
         }
 
 
-class SkillCreateUpdateForm(forms.ModelForm):
+class SkillForm(forms.ModelForm):
     class Meta:
         model = Skill
         fields = (
@@ -114,7 +115,7 @@ class SkillCreateUpdateForm(forms.ModelForm):
         }
 
 
-class JobCreateUpdateForm(forms.ModelForm):
+class JobForm(forms.ModelForm):
     class Meta:
         model = Job
         fields = (

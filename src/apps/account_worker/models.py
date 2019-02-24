@@ -14,7 +14,8 @@ class AccountWorker(models.Model):
     resume = models.ManyToManyField(
         Resume,
         related_name='resumes',
-        verbose_name=_('Resume'), blank=True
+        verbose_name=_('Resume'),
+        blank=True
     )
 
     class Meta:
@@ -23,9 +24,3 @@ class AccountWorker(models.Model):
 
     def __str__(self):
         return f'{self.id_user.username} - {self.type_account}'
-
-    def number_of_resumes(self):
-        count = 0
-        for row in self.resume.all():
-            count += 1
-        return str(count)

@@ -38,7 +38,7 @@ class ProfileView(FormView):
 
     def get_template_names(self):
         user = User.objects.filter(username=self.request.user)
-        if len(user) != 1:
+        if not user:
             raise Http404
         return ['registration/registration_profile.html']
 
@@ -48,9 +48,9 @@ class ProfileView(FormView):
 
     def get_success_url(self):
         user = User.objects.get(username=self.request.user)
-        if len(AccountHr.objects.filter(id_user=user)) == 1:
+        if AccountHr.objects.filter(id_user=user).exists():
             dashboard_url = reverse_lazy('dashboard_hr')
-        elif len(AccountWorker.objects.filter(id_user=user)) == 1:
+        elif AccountWorker.objects.filter(id_user=user).exists():
             worker = AccountWorker.objects.get(id_user=user)
             dashboard_url = reverse_lazy(
                 'dashboard_worker:dashboard_worker_main',

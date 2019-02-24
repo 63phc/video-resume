@@ -79,13 +79,16 @@ class Resume(models.Model):
     def __str__(self):
         return str(self.pk)
 
-    def get_educations(self):
+    @property
+    def educations(self):
         return ", ".join(
-            [str(row.name_institution) for row in self.education.all()]
+            [row.name_institution for row in self.education.all()]
         )
 
-    def get_skills(self):
-        return ", ".join([str(row.name) for row in self.skill.all()])
+    @property
+    def skills(self):
+        return ", ".join([row.name for row in self.skill.all()])
 
-    def get_jobs(self):
-        return ", ".join([str(row.name_company) for row in self.job.all()])
+    @property
+    def jobs(self):
+        return ", ".join([row.name_company for row in self.job.all()])

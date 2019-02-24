@@ -5,13 +5,13 @@ from .models import Education, Skill, Job, Resume
 @admin.register(Resume)
 class ResumeAdmin(admin.ModelAdmin):
     list_display = [
-        'pk',  # TODO: pk for test, delete
+        'pk',
         'other_skills',
         'hobbies',
         'about',
-        'get_educations',
-        'get_skills',
-        'get_jobs'
+        'educations',
+        'skills',
+        'jobs'
     ]
 
 
