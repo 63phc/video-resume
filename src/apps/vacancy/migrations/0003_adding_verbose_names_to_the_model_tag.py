@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vacancy', '0002_auto_20190220_1029'),
+        ('vacancy', '0002_adding_verbose_names_to_the_model'),
     ]
 
     operations = [
