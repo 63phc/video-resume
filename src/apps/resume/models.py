@@ -51,10 +51,11 @@ class Job(models.Model):
 class Resume(models.Model):
     """ class resume for worker(MTM) """
 
-    title = models.CharField(_('Title'), max_length=100)
-    other_skills = models.CharField(_('Other skills'), max_length=200)
-    hobbies = models.CharField(_('Hobbies'), max_length=200)
-    about = models.CharField(_('About'), max_length=400)
+    title = models.CharField(_('Title'), max_length=100, default='')
+    other_skills = models.CharField(
+        _('Other skills'), max_length=200, default='')
+    hobbies = models.CharField(_('Hobbies'), max_length=200, default='')
+    about = models.CharField(_('About'), max_length=400, default='')
     education = models.ManyToManyField(
         Education,
         related_name='educations',

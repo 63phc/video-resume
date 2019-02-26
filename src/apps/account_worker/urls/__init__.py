@@ -7,4 +7,3 @@ from .resume import urlpatterns as resume
 app_name = 'dashboard_worker'
 
 urlpatterns = resume + skill + job + education
-

@@ -59,7 +59,7 @@ class ProfileForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'second_name': forms.TextInput(attrs={'class': 'form-control'}),
             'birth': forms.SelectDateWidget(
-                years=range(1950, 2031),
+                years=range(1940, 2100),
                 attrs={'class': 'form-control'},
             ),
             'city': forms.TextInput(attrs={'class': 'form-control'}),

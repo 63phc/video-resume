@@ -41,10 +41,9 @@ class ProfileView(FormView):
     form_class = ProfileForm
 
     def get_template_names(self):
-        user = User.objects.filter(username=self.request.user)
-        if not user:
-            raise Http404
-        return ['registration/registration_profile.html']
+        user = get_object_or_404(User, username=self.request.user)
+        return [
+            'registration/registration_profile.html']
 
     def form_valid(self, form):
         form.save()

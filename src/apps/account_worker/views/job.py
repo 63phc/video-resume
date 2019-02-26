@@ -28,10 +28,13 @@ class JobAjaxMixin:
         return super(JobAjaxMixin, self).post(request, **kwargs)
 
 
-class JobCreateView(ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, JobAjaxMixin, CreateView):
+class JobCreateView(
+    ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin,
+    JobAjaxMixin, CreateView
+):
     form_class = JobForm
     model = Job
-    template_name = 'dashboard_worker/dashboard_job_create.html'
+    template_name = 'dashboard_worker/job/create.html'
 
     def form_valid(self, form, **kwargs):
         response = super(JobCreateView, self).form_valid(form)
@@ -42,12 +45,17 @@ class JobCreateView(ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, J
         return response
 
 
-class JobUpdateView(ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, UpdateView):
+class JobUpdateView(
+    ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin,
+    UpdateView
+):
     form_class = JobForm
     model = Job
-    template_name = 'dashboard_worker/dashboard_job_update.html'
+    template_name = 'dashboard_worker/job/update.html'
 
 
-class JobDeleteView(ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, DeleteView):
+class JobDeleteView(
+    ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, DeleteView
+):
     model = Job
-    template_name = 'dashboard_worker/dashboard_job_delete.html'
+    template_name = 'dashboard_worker/job/delete.html'

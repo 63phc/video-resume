@@ -30,7 +30,7 @@ class AccountWorkerView(DetailView):
     def get_template_names(self):
         user = get_object_or_404(User, username=self.request.user)
         return [
-            'dashboard_worker/dashboard_worker.html']
+            'dashboard_worker/index.html']
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(AccountWorkerView, self).get_context_data(**kwargs)
@@ -40,7 +40,7 @@ class AccountWorkerView(DetailView):
 
 class ResumeListView(ListView):
     model = AccountWorker
-    template_name = 'dashboard_worker/dashboard_resume.html'
+    template_name = 'dashboard_worker/resume/list.html'
 
     def get_queryset(self, **kwargs):
         query = get_object_or_404(AccountWorker, pk=self.kwargs.get('pk'))
@@ -55,7 +55,7 @@ class ResumeListView(ListView):
 class ResumeCreateView(ResumeSuccessUrlMixin, CreateView):
     model = Resume
     form_class = ResumeMainForm
-    template_name = 'dashboard_worker/dashboard_resume_create.html'
+    template_name = 'dashboard_worker/resume/create.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ResumeCreateView, self).get_context_data(**kwargs)
@@ -86,12 +86,16 @@ class ResumeCreateView(ResumeSuccessUrlMixin, CreateView):
         return response
 
 
-class ResumeUpdateView(ResumeEduSkillJobContextMixin, ResumeSuccessUrlMixin, UpdateView):
+class ResumeUpdateView(
+    ResumeEduSkillJobContextMixin, ResumeSuccessUrlMixin, UpdateView
+):
     form_class = ResumeMainForm
     model = Resume
-    template_name = 'dashboard_worker/dashboard_resume_update.html'
+    template_name = 'dashboard_worker/resume/update.html'
 
 
-class ResumeDeleteView(ResumeEduSkillJobContextMixin, ResumeSuccessUrlMixin, DeleteView):
+class ResumeDeleteView(
+    ResumeEduSkillJobContextMixin, ResumeSuccessUrlMixin, DeleteView
+):
     model = Resume
-    template_name = 'dashboard_worker/dashboard_resume_delete.html'
+    template_name = 'dashboard_worker/resume/delete.html'

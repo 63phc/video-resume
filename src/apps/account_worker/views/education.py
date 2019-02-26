@@ -28,16 +28,21 @@ class EducationAjaxMixin:
         return super(EducationAjaxMixin, self).post(request, **kwargs)
 
 
-class EducationUpdateView(ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, UpdateView):
+class EducationUpdateView(
+    ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, UpdateView
+):
     form_class = EducationForm
     model = Education
-    template_name = 'dashboard_worker/dashboard_education_update.html'
+    template_name = 'dashboard_worker/education/update.html'
 
 
-class EducationCreateView(ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, EducationAjaxMixin, CreateView):
+class EducationCreateView(
+    EducationAjaxMixin, ResumeEduSkillJobContextMixin,
+    EduSkillJobSuccessUrlMixin, CreateView
+):
     form_class = EducationForm
     model = Education
-    template_name = 'dashboard_worker/dashboard_education_create.html'
+    template_name = 'dashboard_worker/education/create.html'
 
     def form_valid(self, form, **kwargs):
         response = super(EducationCreateView, self).form_valid(form)
@@ -48,6 +53,8 @@ class EducationCreateView(ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMi
         return response
 
 
-class EducationDeleteView(ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, DeleteView):
+class EducationDeleteView(
+    ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, DeleteView
+):
     model = Education
-    template_name = 'dashboard_worker/dashboard_education_delete.html'
+    template_name = 'dashboard_worker/education/delete.html'

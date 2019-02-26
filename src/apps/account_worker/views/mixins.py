@@ -18,7 +18,8 @@ class EduSkillJobSuccessUrlMixin:
 
 class ResumeEduSkillJobContextMixin(ContextMixin):
     def get_context_data(self, **kwargs):
-        context = super(ResumeEduSkillJobContextMixin, self).get_context_data(**kwargs)
+        context = super(
+            ResumeEduSkillJobContextMixin, self).get_context_data(**kwargs)
         if self.kwargs.get('resume_pk'):
             context['resume_pk'] = self.kwargs.get('resume_pk')
             resume = get_object_or_404(Resume, pk=self.kwargs.get('resume_pk'))

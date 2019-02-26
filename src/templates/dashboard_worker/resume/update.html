@@ -44,13 +44,13 @@
                   {{ form.about.errors }}
                 </div>
                 <div class="form-group">
-                  <label for="id_education">{% trans 'Education:' %}</label>
+                  <label>{% trans 'Education:' %}</label>
                   <div class="form-group">
                     <button type="button" class="btn btn-primary edu-add-update">{% trans 'Add education' %}</button>
                   </div>
-                  {% for edu in form.education %}
+                  {% for item in form.education %}
                     <div class="form-row ml-3">
-                      <li>{{ edu }}</li>
+                      <li>{{ item }}</li>
                     </div>
                     <div class="form-row ml-1">
                       <div class="form-group">
@@ -64,13 +64,13 @@
                   {{ form.education.errors }}
                 </div>
                 <div class="form-group">
-                  <label for="id_skill">{% trans 'Skills:' %}</label>
+                  <label>{% trans 'Skills:' %}</label>
                   <div class="form-group">
                     <button type="button" class="btn btn-primary skill-add-update">{% trans 'Add skill' %}</button>
                   </div>
-                  {% for one_skill in form.skill %}
+                  {% for item in form.skill %}
                     <div class="form-row ml-3">
-                      <li>{{ one_skill }}</li>
+                      <li>{{ item }}</li>
                     </div>
                     <div class="form-row ml-1">
                       <div class="form-group">
@@ -84,13 +84,13 @@
                   {{ form.skill.errors }}
                 </div>
                 <div class="form-group">
-                  <label for="id_job">{% trans 'Jobs:' %}</label>
+                  <label>{% trans 'Jobs:' %}</label>
                   <div class="form-group">
                     <button type="button" class="btn btn-primary job-add-update">{% trans 'Add job' %}</button>
                   </div>
-                  {% for one_job in form.job %}
+                  {% for item in form.job %}
                     <div class="form-row ml-3">
-                      <li>{{ one_job }}</li>
+                      <li>{{ item }}</li>
                     </div>
                     <div class="form-row ml-1">
                       <div class="form-group">
