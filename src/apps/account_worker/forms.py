@@ -7,12 +7,8 @@ class ResumeForm(forms.ModelForm):
     class Meta:
         model = Resume
         fields = (
-            'title',
-            'other_skills',
-            'hobbies',
-            'about',
-            'education',
-            'skill',
+            'title', 'other_skills', 'hobbies',
+            'about', 'education', 'skill',
             'job'
         )
         widgets = {
@@ -48,12 +44,8 @@ class ResumeMainForm(forms.ModelForm):
     class Meta:
         model = Resume
         fields = (
-            'title',
-            'other_skills',
-            'hobbies',
-            'about',
-            'education',
-            'skill',
+            'title', 'other_skills', 'hobbies',
+            'about', 'education', 'skill',
             'job'
         )
         widgets = {
@@ -77,9 +69,7 @@ class EducationForm(forms.ModelForm):
     class Meta:
         model = Education
         fields = (
-            'period_edu',
-            'name_institution',
-            'faculty',
+            'period_edu', 'name_institution', 'faculty',
             'form_study'
         )
         widgets = {
@@ -105,9 +95,7 @@ class EducationForm(forms.ModelForm):
 class SkillForm(forms.ModelForm):
     class Meta:
         model = Skill
-        fields = (
-            'name',
-        )
+        fields = ('name',)
         widgets = {
             'name': forms.TextInput(
                 attrs={'class': 'form-control', 'required': 'required'}
@@ -119,9 +107,7 @@ class JobForm(forms.ModelForm):
     class Meta:
         model = Job
         fields = (
-            'period_work',
-            'position',
-            'name_company'
+            'period_work', 'position', 'name_company'
         )
         widgets = {
             'period_work': forms.TextInput(

@@ -1,11 +1,15 @@
 from django.views.generic.edit import FormView
-from .forms import RegistrationForm, ProfileForm
 from django.urls import reverse_lazy
+from django.contrib.auth import get_user_model, login
+from django.http import Http404, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+
+from src.core.utils.choices import AccountTypeChoices
+
 from src.apps.account_hr.models import AccountHr
 from src.apps.account_worker.models import AccountWorker
-from django.contrib.auth import get_user_model, login
-from src.core.utils.choices import AccountTypeChoices
-from django.http import Http404, HttpResponseRedirect
+
+from .forms import RegistrationForm, ProfileForm
 
 User = get_user_model()
 
@@ -20,7 +24,7 @@ class RegistrationView(FormView):
         if form.cleaned_data['account'] == 'user':
             account = AccountWorker.objects.create(
                 type_account=AccountTypeChoices.BASIC,
-                id_user=new_user
+                worker=new_user
             )
         elif form.cleaned_data['account'] == 'hr':
             account = AccountHr.objects.create(
@@ -47,13 +51,15 @@ class ProfileView(FormView):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        user = User.objects.get(username=self.request.user)
+        user = get_object_or_404(User, username=self.request.user)
         if AccountHr.objects.filter(id_user=user).exists():
             dashboard_url = reverse_lazy('dashboard_hr')
-        elif AccountWorker.objects.filter(id_user=user).exists():
-            worker = AccountWorker.objects.get(id_user=user)
+        elif AccountWorker.objects.filter(worker=user).exists():
+            worker = AccountWorker.objects.get(worker=user)
             dashboard_url = reverse_lazy(
                 'dashboard_worker:dashboard_worker_main',
                 kwargs={'pk': worker.pk}
             )
+        else:
+            raise Http404
         return dashboard_url

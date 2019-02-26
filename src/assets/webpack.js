@@ -5,6 +5,7 @@ var BundleTracker = require('webpack-bundle-tracker');
 module.exports = {
    entry : {
        main: [
+           'jquery',
            path.join(__dirname, 'index.js')
        ]
    },

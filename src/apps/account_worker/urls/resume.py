@@ -16,12 +16,12 @@ urlpatterns = [
         name='dashboard_worker_resume'
     ),
     path(
-        'resume/create/<w_pk>',
+        'resume/create/<worker_pk>',
         ResumeCreateView.as_view(),
         name='dashboard_worker_resume_create'
     ),
-    path('resume/update/<pk>/<w_pk>', ResumeUpdateView.as_view(),
+    path('resume/update/<pk>/<worker_pk>', ResumeUpdateView.as_view(),
          name='dashboard_worker_resume_update'),
-    path('resume/delete/<pk>/<w_pk>', ResumeDeleteView.as_view(),
+    path('resume/delete/<pk>/<worker_pk>', ResumeDeleteView.as_view(),
          name='dashboard_worker_resume_delete')
 ]

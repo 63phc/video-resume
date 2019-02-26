@@ -6,7 +6,5 @@ from .resume import urlpatterns as resume
 
 app_name = 'dashboard_worker'
 
-urlpatterns = resume
-urlpatterns += skill
-urlpatterns += job
-urlpatterns += education
+urlpatterns = resume + skill + job + education
+

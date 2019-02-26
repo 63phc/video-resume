@@ -1,10 +1,12 @@
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
-from django.urls import reverse_lazy
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 from src.apps.resume.models import Resume, Skill
 
 from ..forms import SkillForm
+
+from .mixins import EduSkillJobSuccessUrlMixin, ResumeEduSkillJobContextMixin
 
 
 class SkillAjaxMixin:
@@ -19,75 +21,33 @@ class SkillAjaxMixin:
                 if form.is_valid():
                     form.save()
                     response_dict = {
-                        'pk': form.instance.pk,
+                        'id': form.instance.pk,
                         'name': form.instance.name
                     }
                     return JsonResponse(response_dict)
         return super(SkillAjaxMixin, self).post(request, **kwargs)
 
 
-class SkillUpdateView(UpdateView):
+class SkillUpdateView(ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, UpdateView):
     form_class = SkillForm
     model = Skill
     template_name = 'dashboard_worker/dashboard_skill_update.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(SkillUpdateView, self).get_context_data(**kwargs)
-        context['resume_pk'] = self.kwargs.get('resume_pk')
-        title = Resume.objects.get(pk=self.kwargs.get('resume_pk'))
-        context['title'] = title.title
-        context['w_pk'] = self.kwargs.get('w_pk')
-        return context
 
-    def get_success_url(self, **kwargs):
-        return reverse_lazy(
-            'dashboard_worker:dashboard_worker_resume_update',
-            kwargs={'pk': self.kwargs.get('resume_pk'), 'w_pk': self.kwargs.get('w_pk')}
-        )
-
-
-class SkillDeleteView(DeleteView):
+class SkillDeleteView(ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, DeleteView):
     model = Skill
     template_name = 'dashboard_worker/dashboard_skill_delete.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(SkillDeleteView, self).get_context_data(**kwargs)
-        context['resume_pk'] = self.kwargs.get('resume_pk')
-        title = Resume.objects.get(pk=self.kwargs.get('resume_pk'))
-        context['title'] = title.title
-        context['w_pk'] = self.kwargs.get('w_pk')
-        return context
 
-    def get_success_url(self, **kwargs):
-        return reverse_lazy(
-            'dashboard_worker:dashboard_worker_resume_update',
-            kwargs={'pk': self.kwargs.get('resume_pk'), 'w_pk': self.kwargs.get('w_pk')}
-        )
-
-
-class SkillCreateView(SkillAjaxMixin, CreateView):
+class SkillCreateView(ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, SkillAjaxMixin, CreateView):
     form_class = SkillForm
     model = Skill
     template_name = 'dashboard_worker/dashboard_skill_create.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(SkillCreateView, self).get_context_data(**kwargs)
-        context['resume_pk'] = self.kwargs.get('resume_pk')
-        title = Resume.objects.get(pk=self.kwargs.get('resume_pk'))
-        context['title'] = title.title
-        context['w_pk'] = self.kwargs.get('w_pk')
-        return context
-
     def form_valid(self, form, **kwargs):
         response = super(SkillCreateView, self).form_valid(form)
         obj = form.save(commit=False)
-        resume = Resume.objects.get(pk=self.kwargs.get('resume_pk'))
+        resume = get_object_or_404(Resume, pk=self.kwargs.get('resume_pk'))
         resume.skill.add(obj)
         resume.save()
         return response
-
-    def get_success_url(self, **kwargs):
-        return reverse_lazy(
-            'dashboard_worker:dashboard_worker_resume_update',
-            kwargs={'pk': self.kwargs.get('resume_pk'), 'w_pk': self.kwargs.get('w_pk')}
-        )

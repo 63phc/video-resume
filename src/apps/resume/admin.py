@@ -5,7 +5,7 @@ from .models import Education, Skill, Job, Resume
 @admin.register(Resume)
 class ResumeAdmin(admin.ModelAdmin):
     list_display = [
-        'pk',
+        'title',
         'other_skills',
         'hobbies',
         'about',

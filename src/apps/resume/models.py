@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.template.defaultfilters import slugify
 
 
 class Education(models.Model):
@@ -7,9 +8,7 @@ class Education(models.Model):
 
     period_edu = models.CharField(_('Period education'), max_length=50)
     name_institution = models.CharField(
-        _('Name of institution'),
-        max_length=100
-    )
+        _('Name of institution'), max_length=100)
     faculty = models.CharField(_('Faculty'), max_length=100)
     form_study = models.CharField(_('Form of study'), max_length=30)
 
@@ -59,25 +58,34 @@ class Resume(models.Model):
     education = models.ManyToManyField(
         Education,
         related_name='educations',
-        verbose_name=_('Education')
+        verbose_name=_('Education'),
     )
     skill = models.ManyToManyField(
         Skill,
         related_name='skills',
-        verbose_name=_('Skills')
+        verbose_name=_('Skills'),
     )
     job = models.ManyToManyField(
         Job,
         related_name='jobs',
-        verbose_name=_('Jobs')
+        verbose_name=_('Jobs'),
     )
+    slug = models.SlugField(max_length=100)
+    created_at = models.DateTimeField(
+        verbose_name=_('Created at'), auto_now_add=True)
+    updated_at = models.DateTimeField(
+        verbose_name=_('Updated_at'), auto_now=True)
 
     class Meta:
         verbose_name = _('resume')
         verbose_name_plural = _('resumes')
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Resume, self).save(*args, **kwargs)
+
     def __str__(self):
-        return str(self.pk)
+        return self.title
 
     @property
     def educations(self):

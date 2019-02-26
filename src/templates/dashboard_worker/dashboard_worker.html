@@ -26,7 +26,7 @@
                     <blockquote class="blockquote mb-0">
                       <h4 class="">{{ object.resume.last.title }}</h4>
                       <p>{{ object.resume.last.about }}</p>
-                    </blockquote><a href="{% url 'dashboard_worker:dashboard_worker_resume_update' pk=object.resume.last.pk w_pk=object.pk %}" class="btn btn-primary">{% trans 'Update' %}</a>
+                    </blockquote><a href="{% url 'dashboard_worker:dashboard_worker_resume_update' pk=object.resume.last.pk worker_pk=object.pk %}" class="btn btn-primary">{% trans 'Update' %}</a>
                   {% else %}
                     <blockquote class="blockquote mb-0">
                         <p>{% trans 'Resume was not created' %}</p>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="card-body">
                       <div class="tab-content mt-2">
-                        <a href="{% url 'dashboard_worker:dashboard_worker_resume_create' w_pk=pk %}" class="btn btn-primary">{% trans 'Add resume' %}</a>
+                        <a href="{% url 'dashboard_worker:dashboard_worker_resume_create' worker_pk=pk %}" class="btn btn-primary">{% trans 'Add resume' %}</a>
                       </div>
                     </div>
                   {% endif %}
