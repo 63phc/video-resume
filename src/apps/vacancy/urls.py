@@ -1,6 +1,6 @@
 from django.urls import path
 
-from src.apps.vacancy.views import VacancyDetail
+from .views import VacancyDetail
 
 app_name = 'vacancy'
 

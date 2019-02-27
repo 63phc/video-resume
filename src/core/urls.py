@@ -18,15 +18,11 @@ urlpatterns = [
     path('accounts/register/profile/', ProfileView.as_view(),
          name='registration-profile'),
     path('dashboard/worker/', TemplateView.as_view(
-        template_name='dashboard_worker/dashboard_worker.html'
-    ),
-         name='dashboard_worker'
-    ),
+        template_name='dashboard_worker/dashboard_worker.html'),
+         name='dashboard_worker'),
     path('dashboard/hr/', TemplateView.as_view(
-        template_name='dashboard_hr/dashboard_hr.html'
-    ),
-         name='dashboard_hr'
-    ),
+        template_name='dashboard_hr/dashboard_hr.html'),
+         name='dashboard_hr'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),
     path('vacancies/', include('src.apps.vacancy.urls'), name='vacancies'),

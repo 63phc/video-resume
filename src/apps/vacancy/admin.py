@@ -8,6 +8,7 @@ class VacancyAdmin(admin.ModelAdmin):
     list_display = [
         'title', 'description'
     ]
+    prepopulated_fields = {'slug': ('title',)}
 
 
 @admin.register(Tag)
@@ -15,3 +16,4 @@ class TagAdmin(admin.ModelAdmin):
     list_display = [
         'name'
     ]
+    prepopulated_fields = {'slug': ('name',)}
