@@ -2,7 +2,7 @@ from unidecode import unidecode
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 
 
 class Education(models.Model):
@@ -84,7 +84,7 @@ class Resume(models.Model):
         verbose_name_plural = _('resumes')
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(unidecode(self.title)) + str(self.id)
+        self.slug = slugify(unidecode(self.title))
         super(Resume, self).save(*args, **kwargs)
 
     def __str__(self):
