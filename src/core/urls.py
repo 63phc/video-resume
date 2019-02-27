@@ -10,7 +10,6 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html')),
-    path('role_choice/', TemplateView.as_view(template_name='registration/role_choice.html'), name='sign_in'),
     path('accounts/register/user/', RegistrationView.as_view(),
          name='registration-user'),
     path('accounts/register/hr/', RegistrationView.as_view(),
