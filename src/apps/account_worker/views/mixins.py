@@ -36,7 +36,6 @@ class EduSkillJobAjaxMixin:
     def form_invalid(self, form):
         if self.request.is_ajax():
             if self.request.POST['tag'] == 'create':
-                print('invalid')
                 form = self.form_class()
                 response_dict = {'response': str(form)}
                 return JsonResponse(response_dict)

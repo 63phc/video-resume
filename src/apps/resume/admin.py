@@ -10,7 +10,7 @@ class ResumeAdmin(admin.ModelAdmin):
         'jobs', 'slug', 'created_at',
         'updated_at'
     ]
-    prepopulated_fields = {"slug": ("title",)}
+    prepopulated_fields = {'slug': ('title',)}
 
 
 @admin.register(Job)
