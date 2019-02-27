@@ -71,7 +71,7 @@ class Resume(models.Model):
         related_name='jobs',
         verbose_name=_('Jobs'),
     )
-    slug = models.SlugField(max_length=100)
+    slug = models.SlugField(_('Slug'), max_length=100)
     created_at = models.DateTimeField(
         verbose_name=_('Created at'), auto_now_add=True)
     updated_at = models.DateTimeField(
@@ -82,7 +82,8 @@ class Resume(models.Model):
         verbose_name_plural = _('resumes')
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        if not self.title:
+            self.slug = slugify(self.title, allow_unicode=True)
         super(Resume, self).save(*args, **kwargs)
 
     def __str__(self):

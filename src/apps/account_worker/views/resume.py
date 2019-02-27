@@ -8,9 +8,7 @@ from django.shortcuts import get_object_or_404
 
 from src.apps.account_worker.models import AccountWorker
 from src.apps.resume.models import Resume
-
 from src.apps.account_worker.forms import ResumeMainForm, ResumeForm
-
 from .mixins import ResumeEduSkillJobContextMixin
 
 User = get_user_model()

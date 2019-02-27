@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic.base import ContextMixin
 from django.shortcuts import get_object_or_404
+from django.http import JsonResponse, Http404
 
 from src.apps.resume.models import Resume
 
@@ -29,3 +30,52 @@ class ResumeEduSkillJobContextMixin(ContextMixin):
         context['title'] = resume.title
         context['worker_pk'] = self.kwargs.get('worker_pk')
         return context
+
+
+class EduSkillJobAjaxMixin:
+    def form_invalid(self, form):
+        if self.request.is_ajax():
+            if self.request.POST['tag'] == 'create':
+                print('invalid')
+                form = self.form_class()
+                response_dict = {'response': str(form)}
+                return JsonResponse(response_dict)
+            raise Http404
+        else:
+            return super(EduSkillJobAjaxMixin, self).form_invalid(form)
+
+    def form_valid(self, form):
+        if self.request.is_ajax():
+            if self.request.POST['tag'] == 'add':
+                form = self.form_class(self.request.POST)
+                if form.is_valid():
+                    form.save()
+                    if self.form_class.__name__ == 'EducationForm':
+                        response_dict = {
+                            'id': form.instance.pk,
+                            'name_institution': form.instance.name_institution
+                        }
+                    elif self.form_class.__name__ == 'SkillForm':
+                        response_dict = {
+                            'id': form.instance.pk,
+                            'name': form.instance.name
+                        }
+                    elif self.form_class.__name__ == 'JobForm':
+                        response_dict = {
+                            'id': form.instance.pk,
+                            'name_company': form.instance.name_company
+                        }
+                    return JsonResponse(response_dict)
+            else:
+                raise Http404
+        obj = form.save(commit=False)
+        resume = get_object_or_404(Resume, pk=self.kwargs.get('resume_pk'))
+        obj.save()
+        if self.form_class.__name__ == 'EducationForm':
+            resume.education.add(obj)
+        elif self.form_class.__name__ == 'SkillForm':
+            resume.skill.add(obj)
+        elif self.form_class.__name__ == 'JobForm':
+            resume.job.add(obj)
+        resume.save()
+        return super(EduSkillJobAjaxMixin, self).form_valid(form)

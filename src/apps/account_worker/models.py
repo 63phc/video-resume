@@ -2,7 +2,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from src.core.utils.choices import AccountTypeChoices
-
 from src.apps.resume.models import Resume
 
 
