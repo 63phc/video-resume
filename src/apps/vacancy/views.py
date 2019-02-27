@@ -4,5 +4,5 @@ from .models import Vacancy
 
 
 class VacancyDetail(DetailView):
-    template_name = 'vacancy/vacancy_detail.html'
+    template_name = 'vacancy/detail.html'
     model = Vacancy
