@@ -1,68 +1,70 @@
-import $ from 'jquery';
-
-const UpdateResume = ((updateID = $('#update_resume')) => {
-    $(document).ready(function(){
+const UpdateResume = ((updateID = document.getElementById('#update_resume')) => {
+    window.onload = function(){
       const host = $(location).attr('host');
-      const educations_pk = $("[name = education]");
-      const button_edu_update = $(".edu-update");
-      const button_edu_add = $(".edu-add-update");
-      const button_edu_delete = $(".edu-delete");
-      const skills_pk = $("[name = skill]");
-      const button_skill_update = $(".skill-update");
-      const button_skill_add = $(".skill-add-update");
-      const button_skill_delete = $(".skill-delete");
-      const jobs_pk = $("[name = job]");
-      const button_job_update = $(".job-update");
-      const button_job_add = $(".job-add-update");
-      const button_job_delete = $(".job-delete");
-      const worker_pk = $("#worker_pk").val();
-      const resume_pk = $("#resume_pk").val();
-      $.each(educations_pk,function(index, element) {
-        let edu_pk = element.value;
-        $(button_edu_update[index]).addClass("edu-update" + edu_pk).click(() => {
-          document.location.href = 'http://' + host + '/dashboard/worker/education/update/' + edu_pk + '/' + resume_pk + '/' + worker_pk
+      const educations = document.querySelectorAll('[name = education]');
+      const button_edu_update = document.querySelectorAll('.edu-update');
+      const button_edu_add = document.querySelector('.edu-add-update');
+      const button_edu_delete = document.querySelectorAll('.edu-delete');
+      const skills = document.querySelectorAll('[name = skill]');
+      const button_skill_update = document.querySelectorAll('.skill-update');
+      const button_skill_add = document.querySelector('.skill-add-update');
+      const button_skill_delete = document.querySelectorAll('.skill-delete');
+      const jobs = document.querySelectorAll('[name = job]');
+      const button_job_update = document.querySelectorAll('.job-update');
+      const button_job_add = document.querySelector('.job-add-update');
+      const button_job_delete = document.querySelectorAll('.job-delete');
+      const worker_pk = document.querySelector('#worker_pk').value;
+      const resume_pk = document.querySelector('#resume_pk').value;
+      function urlEduUpdate(pk) {
+        return 'http://' + host + '/dashboard/worker/education/update/' + pk + '/' + resume_pk + '/' + worker_pk
+      };
+      function urlEduDelete(pk) {
+        return 'http://' + host + '/dashboard/worker/education/delete/' + pk + '/' + resume_pk + '/' + worker_pk
+      };
+      function urlSkillUpdate(pk) {
+        return 'http://' + host + '/dashboard/worker/skill/update/' + pk + '/' + resume_pk + '/' + worker_pk
+      };
+      function urlSkillDelete(pk) {
+        return 'http://' + host + '/dashboard/worker/skill/delete/' + pk + '/' + resume_pk + '/' + worker_pk
+      };
+      function urlJobUpdate(pk) {
+        return 'http://' + host + '/dashboard/worker/job/update/' + pk + '/' + resume_pk + '/' + worker_pk
+      };
+      function urlJobDelete(pk) {
+        return 'http://' + host + '/dashboard/worker/job/delete/' + pk + '/' + resume_pk + '/' + worker_pk
+      };
+      function sendRequest(array, button_list, elem_class, url_func) {
+        array.forEach((element, index) => {
+            let pk = element.value;
+            let elem = button_list.item(index)
+            elem.classList.add(elem_class + pk)
+            elem.onclick = () => {
+              document.location.href = url_func(pk)
+            };
         })
-      })
-      $(button_edu_add).click(() => {
-         document.location.href = 'http://' + host + '/dashboard/worker/education/create/' + resume_pk + '/' + worker_pk
-       })
-      $.each(educations_pk,function(index, element) {
-        let edu_pk = element.value;
-        $(button_edu_delete[index]).addClass("edu-delete" + edu_pk).click(() => {
-          document.location.href = 'http://' + host + '/dashboard/worker/education/delete/' + edu_pk + '/' + resume_pk + '/' + worker_pk
-        })
-      })
-      $.each(skills_pk,function(index, element) {
-        let sk_pk = element.value;
-        $(button_skill_update[index]).addClass("skill-update" + sk_pk).click(() => {
-          document.location.href = 'http://' + host + '/dashboard/worker/skill/update/' + sk_pk + '/' + resume_pk + '/' + worker_pk
-        })
-      })
-      $(button_skill_add).click(() => {
-         document.location.href = 'http://' + host + '/dashboard/worker/skill/create/' + resume_pk + '/' + worker_pk
-       })
-      $.each(skills_pk,function(index, element) {
-        let sk_pk = element.value;
-        $(button_skill_delete[index]).addClass("skill-delete" + sk_pk).click(() => {
-          document.location.href = 'http://' + host + '/dashboard/worker/skill/delete/' + sk_pk + '/' + resume_pk + '/' + worker_pk
-        })
-      })
-      $.each(jobs_pk,function(index, element) {
-        let jo_pk = element.value;
-        $(button_job_update[index]).addClass("job-update" + jo_pk).click(() => {
-          document.location.href = 'http://' + host + '/dashboard/worker/job/update/' + jo_pk + '/' + resume_pk + '/' + worker_pk
-        })
-      })
-      $(button_job_add).click(() => {
-         document.location.href = 'http://' + host + '/dashboard/worker/job/create/' + resume_pk + '/' + worker_pk
-       })
-      $.each(jobs_pk,function(index, element) {
-        let jo_pk = element.value;
-        $(button_job_delete[index]).addClass("job-delete" + jo_pk).click(() => {
-          document.location.href = 'http://' + host + '/dashboard/worker/job/delete/' + jo_pk + '/' + resume_pk + '/' + worker_pk
-        })
-      })
-    })
+      };
+      sendRequest(educations, button_edu_update, 'edu-update', urlEduUpdate)
+      if (button_edu_add) {
+          button_edu_add.onclick = () => {
+             document.location.href = 'http://' + host + '/dashboard/worker/education/create/' + resume_pk + '/' + worker_pk
+           };
+      };
+      sendRequest(educations, button_edu_delete, 'edu-delete', urlEduDelete)
+      sendRequest(skills, button_skill_update, 'skill-update', urlSkillUpdate)
+      if (button_skill_add) {
+          button_skill_add.onclick = () => {
+             document.location.href = 'http://' + host + '/dashboard/worker/skill/create/' + resume_pk + '/' + worker_pk
+           };
+      };
+      sendRequest(skills, button_skill_delete, 'skill-delete', urlSkillDelete)
+      sendRequest(jobs, button_job_update, 'job-update', urlJobUpdate)
+      if (button_job_add) {
+          button_job_add.onclick = () => {
+             document.location.href = 'http://' + host + '/dashboard/worker/job/create/' + resume_pk + '/' + worker_pk
+           };
+      };
+      sendRequest(jobs, button_job_delete, 'job-delete', urlJobDelete)
+    }
 })();
 
 export default UpdateResume;

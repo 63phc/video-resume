@@ -5,7 +5,6 @@ var BundleTracker = require('webpack-bundle-tracker');
 module.exports = {
    entry : {
        main: [
-           'jquery',
            path.join(__dirname, 'index.js')
        ]
    },
@@ -47,7 +46,11 @@ module.exports = {
           NODE_ENV: JSON.stringify('development'),
           BASE_URL: JSON.stringify('http://0.0.0.0:8000/'),
         }
-      })
+        }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        })
     ]
 };
 
