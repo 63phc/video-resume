@@ -83,7 +83,7 @@ class Resume(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.title:
-            self.slug = slugify(self.title, allow_unicode=True)
+            self.slug = slugify(self.title, allow_unicode=True) + str(self.id)
         super(Resume, self).save(*args, **kwargs)
 
     def __str__(self):
