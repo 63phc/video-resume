@@ -7,11 +7,10 @@ function setActiveClass(class_name) {
 }
 
 const ActiveLink = (() => {
-    for (const item of menuLinks) {
-        if (location.pathname.indexOf(item) == FOUNDED) {
-            setActiveClass(item)
-        }
-    }
+    const current_menu = menuLinks.filter(function(link) {
+        return location.pathname.indexOf(link) == FOUNDED
+    })[0];
+    setActiveClass(current_menu)
 })();
 
 export default ActiveLink;
