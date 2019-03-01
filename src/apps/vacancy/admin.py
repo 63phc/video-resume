@@ -6,7 +6,7 @@ from .models import Vacancy, Tag
 @admin.register(Vacancy)
 class VacancyAdmin(admin.ModelAdmin):
     list_display = [
-        'title', 'description'
+        'title', 'description', 'slug',
     ]
     prepopulated_fields = {'slug': ('title',)}
 

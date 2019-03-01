@@ -1,12 +1,5 @@
 from django.test import TestCase, Client
 
-from django.apps.registry import Apps
-from django.db import models
-from django.test import TestCase
-from django.urls import reverse_lazy
-
-from src.apps.account_hr.models import AccountHr
-from src.core.utils.choices import AccountTypeChoices
 from .models import Vacancy, Tag
 
 
@@ -25,6 +18,3 @@ class VacancyDetailViewTestCase(TestCase):
         response = client.get('/vacancies/vacancy_detail/1/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.description)
-
-
-
