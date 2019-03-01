@@ -3,6 +3,8 @@ from unidecode import unidecode
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 
 
 class Education(models.Model):
@@ -103,3 +105,13 @@ class Resume(models.Model):
     @property
     def jobs(self):
         return ", ".join([row.name_company for row in self.job.all()])
+
+
+@receiver(pre_delete, sender=Resume)
+def pre_delete_story(sender, instance, **kwargs):
+    for edu in instance.education.all():
+        edu.delete()
+    for skill in instance.skill.all():
+        skill.delete()
+    for job in instance.job.all():
+        job.delete()
