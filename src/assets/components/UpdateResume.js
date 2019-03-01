@@ -1,6 +1,6 @@
 const UpdateResume = ((updateID = document.getElementById('#update_resume')) => {
     window.onload = function(){
-      const host = $(location).attr('host');
+      const host = location.host;
       const educations = document.querySelectorAll('[name = education]');
       const button_edu_update = document.querySelectorAll('.edu-update');
       const button_edu_add = document.querySelector('.edu-add-update');

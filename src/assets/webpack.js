@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var axios = require('axios');
 var BundleTracker = require('webpack-bundle-tracker');
 
 module.exports = {
