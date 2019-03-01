@@ -1,13 +1,13 @@
-{% load static staticfiles %}
+{% load i18n static staticfiles %}
 
 <header class="masthead mb-auto">
   <div class="inner">
-    <h3 class="masthead-brand">Video Resume</h3>
+    <h3 class="masthead-brand">{% trans 'Video Resume' %}</h3>
     <nav class="nav nav-masthead justify-content-center">
-      <a class="nav-link role_choice" href="{% url 'sign_in' %}">Sign in</a>
-      <a class="nav-link accounts" href="#">Login</a>
-      <a class="nav-link features" href="#">Features</a>
-      <a class="nav-link contacts" href="#">Contact</a>
+      <a class="nav-link role_choice" href="{% url 'sign_in' %}">{% trans 'Sign in' %}</a>
+      <a class="nav-link accounts" href="#">{% trans 'Login' %}</a>
+      <a class="nav-link features" href="#">{% trans 'Features' %}</a>
+      <a class="nav-link contacts" href="#">{% trans 'Contact' %}</a>
     </nav>
   </div>
 </header>

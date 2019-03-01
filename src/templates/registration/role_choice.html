@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
     <main role="main" class="inner cover">
-        <h1 class="cover-heading">Choose your role</h1><br><br>
-        <p class="lead">Are you</p>
+        <h1 class="cover-heading">{% trans 'Choose your role' %}</h1><br><br>
+        <p class="lead">{% trans 'Are you' %}</p>
         <p class="lead">
-          <a href="{% url 'registration-user' %}" class="btn btn-lg btn-secondary">a programmer?</a>
-          <a href="{% url 'registration-hr' %}" class="btn btn-lg btn-secondary">a human recourses manager?</a>
+          <a href="{% url 'registration-user' %}" class="btn btn-lg btn-secondary">{% trans 'a programmer?' %}</a>
+          <a href="{% url 'registration-hr' %}" class="btn btn-lg btn-secondary">{% trans 'a human recourses manager?' %}</a>
         </p>
     </main>
 {% endblock %}

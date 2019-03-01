@@ -1,7 +1,7 @@
-{% load static staticfiles %}
+{% load i18n static staticfiles %}
 
 <footer class="mastfoot mt-auto">
     <div class="inner">
-      <p>{% now "Y" %}. All rights reserved. Designed by <a href="#">Sargus Software</a></p>
+      <p>{% now "Y" %}. {% trans 'All rights reserved. Designed by ' %}<a href="#">Sargus Software</a></p>
     </div>
 </footer>
