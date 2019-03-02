@@ -1,4 +1,5 @@
 from django.test import TestCase, Client
+from django.utils.text import slugify
 
 from .models import Vacancy, Tag
 
@@ -18,3 +19,20 @@ class VacancyDetailViewTestCase(TestCase):
         response = client.get('/vacancies/vacancy_detail/1/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.description)
+
+
+class VacancyModelTestCase(TestCase):
+    def setUp(self):
+        self.vacation_name = 'New Python Vacation'
+        self.tag_title = 'Python3'
+        self.tag = Tag.objects.create(title=self.tag_title)
+        self.vacation = Vacancy.objects.create(title=self.vacation_name,
+            description='Vacation description')
+
+    def test_tag_slug(self):
+        slug = slugify(self.tag_title)
+        self.assertEqual(slug, self.tag.slug)
+
+    def test_vacancy_slug(self):
+        slug = slugify(self.vacation_name)
+        self.assertEqual(slug, self.vacation.slug)
