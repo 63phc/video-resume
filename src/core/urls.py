@@ -14,14 +14,12 @@ urlpatterns = [
          name='dashboard_worker'),
     path('role_choice/', TemplateView.as_view(
         template_name='registration/role_choice.html'), name='sign_in'),
-         name='dashboard_worker'
-    ),
     path('dashboard/hr/', TemplateView.as_view(
         template_name='dashboard_hr/dashboard_hr.html'
     ),
          name='dashboard_hr'
     ),
-    path('accounts/', include('src.apps.users.urls'))
+    path('accounts/', include('src.apps.users.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),
 ]
 
