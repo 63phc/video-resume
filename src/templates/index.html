@@ -1,10 +1,5 @@
-{% load render_bundle from webpack_loader %}
-<!doctype html>
-<html lang="en">
-<head>
-  </head>
-<body>
-    hello
-</body>
-{% render_bundle 'main' 'js' %}
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+      {% include 'main_content.html' %}
+{% endblock %}
