@@ -19,7 +19,7 @@ urlpatterns = [
     ),
          name='dashboard_hr'
     ),
-    path('accounts/', include('src.apps.users.urls'))
+    path('accounts/', include('src.apps.users.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),
 ]
 
