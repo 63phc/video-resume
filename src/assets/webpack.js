@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var axios = require('axios');
 var BundleTracker = require('webpack-bundle-tracker');
 
 module.exports = {
@@ -46,12 +47,7 @@ module.exports = {
               NODE_ENV: JSON.stringify('development'),
               BASE_URL: JSON.stringify('http://0.0.0.0:8000/'),
             }
-        }),
-        new webpack.ProvidePlugin({
-          "$":"jquery",
-          "jQuery":"jquery",
-          "window.jQuery":"jquery"
-        }),
+        })
     ],
     resolve : {
         alias: {
