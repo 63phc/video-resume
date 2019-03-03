@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block head %}
+  <title>{% trans 'HR dashboard' %}</title>
+{% endblock %}
+
+{% block menu %}
+  {% include 'components/navbar.html' %}
+  {% include 'dashboard_hr/parts/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+  <div>
+    {% trans 'Last vacancies' %}
+      <ul>
+        {% for vacancy in vacancies %}
+        <il>{{ vacancy.title }}</il>
+      </ul>
+  </div>
+
+{% endblock %}
