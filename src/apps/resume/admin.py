@@ -5,14 +5,12 @@ from .models import Education, Skill, Job, Resume
 @admin.register(Resume)
 class ResumeAdmin(admin.ModelAdmin):
     list_display = [
-        'pk',
-        'other_skills',
-        'hobbies',
-        'about',
-        'get_educations',
-        'get_skills',
-        'get_jobs'
+        'title', 'other_skills', 'hobbies',
+        'about', 'educations', 'skills',
+        'jobs', 'slug', 'created_at',
+        'updated_at'
     ]
+    prepopulated_fields = {'slug': ('title',)}
 
 
 @admin.register(Job)

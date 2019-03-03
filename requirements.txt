@@ -36,4 +36,5 @@ tinify==1.5.1
 unidecode==1.0.23
 uritemplate==3.0.0
 urllib3==1.24.1
+Unidecode==1.0.23
 gunicorn==19.9.0
