@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+{% block content %}
+<main role="main" class="inner cover">
+    {% trans 'Vacancy' %} {{ object.title }}:<br><br>
+    {% trans 'Description' %}:<br>
+    {{ object.description }}
+</main>
+{% endblock %}
