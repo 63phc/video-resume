@@ -1,9 +1,14 @@
 from django.urls import reverse_lazy
-from django.views.generic.base import ContextMixin
+from django.views.generic.base import ContextMixin, TemplateResponseMixin
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse, Http404
+from django.contrib.auth import get_user_model
 
 from src.apps.resume.models import Resume
+from src.apps.account_worker.models import AccountWorker
+from django.contrib.auth.mixins import AccessMixin
+
+User = get_user_model()
 
 
 class EduSkillJobSuccessUrlMixin:
@@ -78,3 +83,16 @@ class EduSkillJobAjaxMixin:
             resume.job.add(obj)
         resume.save()
         return super(EduSkillJobAjaxMixin, self).form_valid(form)
+
+
+class CheckAccess(AccessMixin, TemplateResponseMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return self.handle_no_permission()
+        user = get_object_or_404(User, username=self.request.user)
+        if self.kwargs.get('worker_pk'):
+            pk = self.kwargs.get('worker_pk')
+        else:
+            pk = self.kwargs.get('pk')
+        account = get_object_or_404(AccountWorker, pk=pk, worker=user)
+        return super().dispatch(request, *args, **kwargs)

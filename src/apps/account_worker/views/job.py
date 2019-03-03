@@ -4,7 +4,7 @@ from src.apps.resume.models import Job
 from ..forms import JobForm
 from .mixins import (
     EduSkillJobSuccessUrlMixin, ResumeEduSkillJobContextMixin,
-    EduSkillJobAjaxMixin)
+    EduSkillJobAjaxMixin, CheckAccess)
 
 
 class JobCreateView(
@@ -17,7 +17,7 @@ class JobCreateView(
 
 
 class JobUpdateView(
-    ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin,
+    CheckAccess, ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin,
     UpdateView
 ):
     form_class = JobForm
@@ -26,7 +26,8 @@ class JobUpdateView(
 
 
 class JobDeleteView(
-    ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, DeleteView
+    CheckAccess, ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin,
+    DeleteView
 ):
     model = Job
     template_name = 'dashboard_worker/job/delete.html'

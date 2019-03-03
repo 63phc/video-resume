@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 from src.apps.account_worker.models import AccountWorker
 from src.apps.resume.models import Resume
 from src.apps.account_worker.forms import ResumeMainForm, ResumeForm
-from .mixins import ResumeEduSkillJobContextMixin
+from .mixins import ResumeEduSkillJobContextMixin, CheckAccess
 
 User = get_user_model()
 
@@ -22,13 +22,9 @@ class ResumeSuccessUrlMixin:
         )
 
 
-class AccountWorkerView(DetailView):
+class AccountWorkerView(CheckAccess, DetailView):
     model = AccountWorker
-
-    def get_template_names(self):
-        user = get_object_or_404(User, username=self.request.user)
-        return [
-            'dashboard_worker/index.html']
+    template_name = 'dashboard_worker/index.html'
 
     def get_context_data(self, *args, **kwargs):
         context = super(AccountWorkerView, self).get_context_data(**kwargs)
@@ -36,7 +32,7 @@ class AccountWorkerView(DetailView):
         return context
 
 
-class ResumeListView(ListView):
+class ResumeListView(CheckAccess, ListView):
     model = AccountWorker
     template_name = 'dashboard_worker/resume/list.html'
 
@@ -50,7 +46,7 @@ class ResumeListView(ListView):
         return context
 
 
-class ResumeCreateView(ResumeSuccessUrlMixin, CreateView):
+class ResumeCreateView(CheckAccess, ResumeSuccessUrlMixin, CreateView):
     model = Resume
     form_class = ResumeMainForm
     template_name = 'dashboard_worker/resume/create.html'
@@ -85,7 +81,8 @@ class ResumeCreateView(ResumeSuccessUrlMixin, CreateView):
 
 
 class ResumeUpdateView(
-    ResumeEduSkillJobContextMixin, ResumeSuccessUrlMixin, UpdateView
+    CheckAccess, ResumeEduSkillJobContextMixin, ResumeSuccessUrlMixin,
+    UpdateView
 ):
     form_class = ResumeMainForm
     model = Resume
@@ -93,7 +90,8 @@ class ResumeUpdateView(
 
 
 class ResumeDeleteView(
-    ResumeEduSkillJobContextMixin, ResumeSuccessUrlMixin, DeleteView
+    CheckAccess, ResumeEduSkillJobContextMixin, ResumeSuccessUrlMixin,
+    DeleteView
 ):
     model = Resume
     template_name = 'dashboard_worker/resume/delete.html'

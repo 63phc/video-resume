@@ -4,11 +4,12 @@ from src.apps.resume.models import Skill
 from ..forms import SkillForm
 from .mixins import (
     EduSkillJobSuccessUrlMixin, ResumeEduSkillJobContextMixin,
-    EduSkillJobAjaxMixin)
+    EduSkillJobAjaxMixin, CheckAccess)
 
 
 class SkillUpdateView(
-    ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, UpdateView
+    CheckAccess, ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin,
+    UpdateView
 ):
     form_class = SkillForm
     model = Skill
@@ -16,7 +17,8 @@ class SkillUpdateView(
 
 
 class SkillDeleteView(
-    ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin, DeleteView
+    CheckAccess, ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin,
+    DeleteView
 ):
     model = Skill
     template_name = 'dashboard_worker/skill/delete.html'
