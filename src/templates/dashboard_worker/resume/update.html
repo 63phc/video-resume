@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block head %}
+{% endblock %}
+{% block content %}
+  <div class="py-5 border-0" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="nav nav-pills">
+            <li class="nav-item"> <a href="{% url 'dashboard_worker:dashboard_worker_resume' pk=worker_pk %}" class="nav-link">{% trans 'My resume' %}</a> </li>
+            <li class="nav-item"> <a class="nav-link active" href="">{{ title }}</a> </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <div class="row" id="update_resume">
+            <input id="worker_pk" type="hidden" value="{{ worker_pk }}">
+            <input id="resume_pk" type="hidden" value="{{ resume_pk }}">
+            <div class="mx-auto p-4 col-lg-7">
+              <h1 class="mb-4">{{ title }}</h1>
+              <form method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="form-group">
+                  <label for="id_title">{% trans 'Title:' %}</label>
+                  {{ form.title }}
+                  {{ form.title.errors }}
+                </div>
+                <div class="form-group">
+                  <label for="id_other_skills">{% trans 'Other skills:' %}</label>
+                  {{ form.other_skills }}
+                  {{ form.other_skills.errors }}
+                </div>
+                <div class="form-group">
+                  <label for="id_hobbies">{% trans 'Hobbies:' %}</label>
+                  {{ form.hobbies }}
+                  {{ form.hobbies.errors }}
+                </div>
+                <div class="form-group">
+                  <label for="id_about">{% trans 'About:' %}</label>
+                  {{ form.about }}
+                  {{ form.about.errors }}
+                </div>
+                <div class="form-group">
+                  <label>{% trans 'Education:' %}</label>
+                  <div class="form-group">
+                    <button type="button" class="btn btn-primary edu-add-update">{% trans 'Add education' %}</button>
+                  </div>
+                  {% for item in form.education %}
+                    <div class="form-row ml-3">
+                      <li>{{ item }}</li>
+                    </div>
+                    <div class="form-row ml-1">
+                      <div class="form-group">
+                        <button type="button" class="btn btn-primary edu-update">{% trans 'Update' %}</button>
+                      </div>
+                      <div class="form-group ml-2">
+                        <button type="button" class="btn btn-primary edu-delete">{% trans 'Delete' %}</button>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  {{ form.education.errors }}
+                </div>
+                <div class="form-group">
+                  <label>{% trans 'Skills:' %}</label>
+                  <div class="form-group">
+                    <button type="button" class="btn btn-primary skill-add-update">{% trans 'Add skill' %}</button>
+                  </div>
+                  {% for item in form.skill %}
+                    <div class="form-row ml-3">
+                      <li>{{ item }}</li>
+                    </div>
+                    <div class="form-row ml-1">
+                      <div class="form-group">
+                        <button type="button" class="btn btn-primary skill-update">{% trans 'Update' %}</button>
+                      </div>
+                      <div class="form-group ml-2">
+                        <button type="button" class="btn btn-primary skill-delete">{% trans 'Delete' %}</button>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  {{ form.skill.errors }}
+                </div>
+                <div class="form-group">
+                  <label>{% trans 'Jobs:' %}</label>
+                  <div class="form-group">
+                    <button type="button" class="btn btn-primary job-add-update">{% trans 'Add job' %}</button>
+                  </div>
+                  {% for item in form.job %}
+                    <div class="form-row ml-3">
+                      <li>{{ item }}</li>
+                    </div>
+                    <div class="form-row ml-1">
+                      <div class="form-group">
+                        <button type="button" class="btn btn-primary job-update">{% trans 'Update' %}</button>
+                      </div>
+                      <div class="form-group ml-2">
+                        <button type="button" class="btn btn-primary job-delete">{% trans 'Delete' %}</button>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  {{ form.job.errors }}
+                </div>
+                <hr>
+                <button type="submit" class="btn btn-primary">{% trans 'Update resume' %}</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,12 +1,18 @@
+from unidecode import unidecode
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.utils.text import slugify
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 
 
 class Education(models.Model):
     """ class education for resume(MTM) """
 
     period_edu = models.CharField(_('Period education'), max_length=50)
-    name_institution = models.CharField(_('Name of institution'), max_length=100)
+    name_institution = models.CharField(
+        _('Name of institution'), max_length=100)
     faculty = models.CharField(_('Faculty'), max_length=100)
     form_study = models.CharField(_('Form of study'), max_length=30)
 
@@ -49,27 +55,63 @@ class Job(models.Model):
 class Resume(models.Model):
     """ class resume for worker(MTM) """
 
-    other_skills = models.CharField(_('Other skills'), max_length=200)
-    hobbies = models.CharField(_('Hobbies'), max_length=200)
-    about = models.CharField(_('About'), max_length=400)
-    education = models.ManyToManyField(Education, related_name='educations', verbose_name=_('Education'))
-    skill = models.ManyToManyField(Skill, related_name='skills', verbose_name=_('Skills'))
-    job = models.ManyToManyField(Job, related_name='jobs', verbose_name=_('Jobs'))
+    title = models.CharField(_('Title'), max_length=100, default='')
+    other_skills = models.CharField(
+        _('Other skills'), max_length=200, default='')
+    hobbies = models.CharField(_('Hobbies'), max_length=200, default='')
+    about = models.CharField(_('About'), max_length=400, default='')
+    education = models.ManyToManyField(
+        Education,
+        related_name='educations',
+        verbose_name=_('Education'),
+    )
+    skill = models.ManyToManyField(
+        Skill,
+        related_name='skills',
+        verbose_name=_('Skills'),
+    )
+    job = models.ManyToManyField(
+        Job,
+        related_name='jobs',
+        verbose_name=_('Jobs'),
+    )
+    slug = models.SlugField(_('Slug'), max_length=100, allow_unicode=True)
+    created_at = models.DateTimeField(
+        verbose_name=_('Created at'), auto_now_add=True)
+    updated_at = models.DateTimeField(
+        verbose_name=_('Updated_at'), auto_now=True)
 
     class Meta:
         verbose_name = _('resume')
         verbose_name_plural = _('resumes')
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(unidecode(self.title))
+        super(Resume, self).save(*args, **kwargs)
+
     def __str__(self):
-        return str(self.pk)
+        return self.title
 
-    def get_educations(self):
-        return ", ".join([str(row.name_institution) for row in self.education.all()])
+    @property
+    def educations(self):
+        return ", ".join(
+            [row.name_institution for row in self.education.all()]
+        )
 
-    def get_skills(self):
-        return ", ".join([str(row.name) for row in self.skill.all()])
+    @property
+    def skills(self):
+        return ", ".join([row.name for row in self.skill.all()])
 
-    def get_jobs(self):
-        return ", ".join([str(row.name_company) for row in self.job.all()])
+    @property
+    def jobs(self):
+        return ", ".join([row.name_company for row in self.job.all()])
 
 
+@receiver(pre_delete, sender=Resume)
+def pre_delete_story(sender, instance, **kwargs):
+    for edu in instance.education.all():
+        edu.delete()
+    for skill in instance.skill.all():
+        skill.delete()
+    for job in instance.job.all():
+        job.delete()

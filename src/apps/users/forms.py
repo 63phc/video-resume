@@ -1,9 +1,9 @@
-from django.contrib.auth import get_user_model, authenticate, password_validation
-from django.utils.translation import gettext, gettext_lazy as _
+from django.contrib.auth import get_user_model, password_validation
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from django.forms import Select, DateInput, TextInput, SelectDateWidget
 from django.core.validators import EmailValidator
+
 from src.apps.users.models import Profile
 
 User = get_user_model()
@@ -42,11 +42,8 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = (
-            'username',
-            'email',
-            'password1',
-            'password2',
-            'account'
+            'username', 'email', 'password1',
+            'password2', 'account'
         )
 
 
@@ -55,22 +52,17 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = (
-            'first_name',
-            'second_name',
-            'birth',
-            'city',
-            'family_status',
-            'phone'
+            'first_name', 'second_name', 'birth',
+            'city', 'family_status', 'phone'
         )
         widgets = {
-            'first_name': TextInput(attrs={'class': 'form-control'}),
-            'second_name': TextInput(attrs={'class': 'form-control'}),
-            'birth': SelectDateWidget(
-                years=range(1950, 2031),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'second_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'birth': forms.SelectDateWidget(
+                years=range(1940, 2100),
                 attrs={'class': 'form-control'},
             ),
-            'city': TextInput(attrs={'class': 'form-control'}),
-            'family_status': Select(attrs={'class': 'form-control'}),
-            'phone': TextInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'family_status': forms.Select(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
         }
-
