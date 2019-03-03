@@ -1,11 +1,25 @@
+{% load i18n %}
+
 {% load render_bundle from webpack_loader %}
 <!doctype html>
 <html lang="en">
 <head>
 {% block head %}{% endblock %}
+    <title>{% trans 'Video-resume service index page' %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
-<body>
-    {% block content %}{% endblock %}
+<body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        {% block menu %}
+            {% include 'components/navbar.html' %}
+        {% endblock %}
+        {% block content %}{% endblock %}
+        {% block footer %}
+            {% include 'components/footer1.html' %}
+        {% endblock %}
+    </div>
 </body>
 {% render_bundle 'main' 'js' %}
+
 </html>

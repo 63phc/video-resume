@@ -43,16 +43,20 @@ module.exports = {
         new BundleTracker({ filename: '../static/webpack.stats.json' }),
 
         new webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: JSON.stringify('development'),
-          BASE_URL: JSON.stringify('http://0.0.0.0:8000/'),
-        }
-        }),
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery"
+            'process.env': {
+              NODE_ENV: JSON.stringify('development'),
+              BASE_URL: JSON.stringify('http://0.0.0.0:8000/'),
+            }
         })
-    ]
+    ],
+    resolve : {
+        alias: {
+            // bind version of jquery-ui
+            "jquery-ui": "jquery-ui/jquery-ui.js",
+            // bind to modules;
+            modules: path.join(__dirname, "node_modules"),
+        }
+    }
 };
 
 // config.plugins = [

@@ -13,10 +13,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
     'src.apps.users',
     'src.apps.account_worker',
     'src.apps.account_hr',
     'src.apps.resume',
+    'src.apps.question',
     'webpack_loader',
 ]
 
@@ -28,6 +31,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -104,3 +108,6 @@ WEBPACK_LOADER = {
 #         'BUNDLE_DIR_NAME': 'build/',
 #         'STATS_FILE': os.path.join(BASE_DIR, './static/webpack.stats.json')
 #     })
+
+# it's need for flatepages
+SITE_ID = 1
