@@ -8,10 +8,10 @@
       <div class="row">
         <div class="col-md-12">
           <ul class="nav nav-pills">
-            <li class="nav-item"> <a href="{% url 'dashboard_worker:dashboard_worker_main' pk=object.pk %}" class="active nav-link">{% trans 'Main' %}</a> </li>
-            <li class="nav-item"> <a class="nav-link" href="#">{% trans 'Responses' %}</a> </li>
-            <li class="nav-item"> <a href="{% url 'dashboard_worker:dashboard_worker_resume' pk=object.pk %}" class="nav-link">{% trans 'Resume' %}</a> </li>
-            <li class="nav-item"><a class="nav-link" href="#">{% trans 'Favourites' %}</a></li>
+            <li class="nav-item"> <a href="#" class="active nav-link">{% trans 'Main' %}</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="#">{% trans 'Vacancies' %}</a> </li>
+            <li class="nav-item"> <a href="#" class="nav-link">{% trans 'Responses' %}</a> </li>
+            <li class="nav-item"><a class="nav-link" href="#">{% trans 'Canditates' %}</a></li>
           </ul>
         </div>
       </div>
@@ -26,7 +26,7 @@
                     <blockquote class="blockquote mb-0">
                       <h4 class="">{{ object.resume.last.title }}</h4>
                       <p>{{ object.resume.last.about }}</p>
-                    </blockquote><a href="{% url 'dashboard_worker:dashboard_worker_resume_update' pk=object.resume.last.pk w_pk=object.pk %}" class="btn btn-primary">{% trans 'Update' %}</a>
+                    </blockquote><a href="#" class="btn btn-primary">{% trans 'Update' %}</a>
                   {% else %}
                     <blockquote class="blockquote mb-0">
                         <p>{% trans 'Resume was not created' %}</p>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="card-body">
                       <div class="tab-content mt-2">
-                        <a href="{% url 'dashboard_worker:dashboard_worker_resume_create' w_pk=pk %}" class="btn btn-primary">{% trans 'Add resume' %}</a>
+                        <a href="#" class="btn btn-primary">{% trans 'Add resume' %}</a>
                       </div>
                     </div>
                   {% endif %}
@@ -110,7 +110,4 @@
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 {% endblock %}
