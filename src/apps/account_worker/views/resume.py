@@ -61,9 +61,9 @@ class ResumeCreateView(ResumeSuccessUrlMixin, CreateView):
         return context
 
     def form_invalid(self, form, **kwargs):
-        form = ResumeForm(self.request.POST)
-        if form.is_valid():
-            obj = form.save()
+        form_fix = ResumeForm(self.request.POST)
+        if form_fix.is_valid():
+            obj = form_fix.save()
             account = get_object_or_404(
                 AccountWorker, pk=self.kwargs.get('worker_pk')
             )
@@ -71,7 +71,7 @@ class ResumeCreateView(ResumeSuccessUrlMixin, CreateView):
             account.save()
             return HttpResponseRedirect(self.get_success_url())
         return super(
-            ResumeCreateView, self).form_invalid(form, **kwargs)
+            ResumeCreateView, self).form_invalid(form)
 
     def form_valid(self, form, **kwargs):
         response = super(ResumeCreateView, self).form_valid(form)
