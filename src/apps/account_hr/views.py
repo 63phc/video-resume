@@ -10,5 +10,6 @@ class HRDashboardView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(HRDashboardView, self).get_context_data(**kwargs)
-        context['vacancies'] = Vacancy.objects.filter(account_hr)
+        context['vacancies'] = [{'title': 'Vacancy Number 1', }, ]
+        # Vacancy.objects.filter(account_hr)
         return context
