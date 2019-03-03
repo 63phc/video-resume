@@ -14,7 +14,10 @@ urlpatterns = [
          name='registration-user'),
     path('accounts/register/hr/', RegistrationView.as_view(),
          name='registration-hr'),
-    path('accounts/register/profile/', ProfileView.as_view(), name='registration-profile'),
+    path('role_choice/', TemplateView.as_view(
+        template_name='registration/role_choice.html'), name='sign_in'),
+    path('accounts/register/profile/', ProfileView.as_view(),
+         name='registration-profile'),
     path('dashboard/worker/', TemplateView.as_view(
         template_name='dashboard_worker/dashboard_worker.html'
     ),
@@ -26,6 +29,7 @@ urlpatterns = [
          name='dashboard_hr'
     ),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('pages/', include('django.contrib.flatpages.urls')),
 
 ]
 

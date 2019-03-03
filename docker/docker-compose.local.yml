@@ -5,31 +5,31 @@ services:
   nginx:
     container_name: phc_vr_nginx
     image: nginx:1.15.8-alpine
-    restart: always
     depends_on:
       - backend
     volumes:
-      - ./media:/media
-      - ./static:/static
-      - ./conf.nginx:/etc/nginx/conf.d/default.conf
+      - ../media:/media
+      - ../static:/static
+      - ./dev/conf.nginx:/etc/nginx/conf.d/default.conf
     ports:
       - "9163:80"
 
   postgresql:
-    container_name: phc_vr_postgres
     image: postgres:11.1-alpine
-    restart: always
-    env_file: .env
+    container_name: phc_vr_postgres
+    env_file: ./dev/.env
     volumes:
       - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
   backend:
+    build: {context: ../, dockerfile: docker/dev/backend/Dockerfile}
     container_name: phc_vr_backend
-    image: 63phc/video-resume:latest
-    restart: always
     volumes:
-      - ./media:/media
-      - ./static:/static
-    env_file: .env
+      - ../media:/media
+      - ../static:/static
+    env_file:
+      - ./dev/.env
     depends_on:
       - postgresql
