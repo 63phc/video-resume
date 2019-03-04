@@ -7,7 +7,8 @@ function toggleActiveClass(className) {
 }
 
 const ActiveLink = (() => {
-    const currentMenu = menuLinks.find(
+    const currenUrl = location.pathname;
+    const currentMenu = currenUrl == '/' ? 'main_page' : menuLinks.find(
         link => location.pathname.indexOf(link) == FOUNDED);
     toggleActiveClass(currentMenu);
 })();
