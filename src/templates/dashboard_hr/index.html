@@ -11,12 +11,41 @@
 {% endblock %}
 
 {% block content %}
-  <div>
+  <div class="container">
     {% trans 'Last vacancies' %}
-      <ul>
-        {% for vacancy in vacancies %}
-        <il>{{ vacancy.title }}</il>
-      </ul>
+    <div class="justify-content-md-center">
+      <table class="table-bordered">
+        <div class="row">
+        <tr>
+          <td class="col-sm">Title</td>
+          <td class="col-sm">Description</td>
+        </tr>
+        <!--{% for vacancy in vacancies %}-->
+          <!--<tr>-->
+            <!--<td>{{ vacancy.title }}</td>-->
+            <!--<td>{{ vacancy.description }}<td/>-->
+          <!--</tr>-->
+        <!--{% endfor %}-->
+        </div>
+      </table>
+    </div>
   </div>
-
+<div class="container">
+  <div class="row">
+    <table class="table-bordered">
+      <tr>
+        <td class="col">
+          One of three columns
+        </td>
+        <td class="col">
+          One of three columns
+        </td>
+        <td class="col">
+          One of three columns
+        </td>
+`      </tr>
+    </table>
+  </div>
+</div>
 {% endblock %}
+`
