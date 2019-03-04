@@ -92,13 +92,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-project_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(project_dir, 'src/static/'),)
+STATICFILES_DIRS = (os.path.join(os.path.dirname(BASE_DIR), 'src/static/'),)
 STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), "static/")
 
 WEBPACK_LOADER = {
