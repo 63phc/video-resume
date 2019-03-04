@@ -6,7 +6,7 @@ SECRET_KEY = '3il&cnpn#sb$h6mj5psrhp&fy2%d*08nf)8bopor#ludxfx6f-'
 DEBUG = True
 ALLOWED_HOSTS = []
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -15,14 +15,22 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
+]
+
+VENDOR_APPS = [
+    'webpack_loader',
+]
+
+PROJECT_APPS = [
     'src.apps.users',
     'src.apps.account_worker',
     'src.apps.account_hr',
     'src.apps.resume',
     'src.apps.vacancy',
     'src.apps.question',
-    'webpack_loader',
 ]
+
+INSTALLED_APPS = DJANGO_APPS + VENDOR_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -42,7 +50,7 @@ ROOT_URLCONF = 'src.core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['src/templates/', ],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -99,16 +107,8 @@ WEBPACK_LOADER = {
         'BUNDLE_DIR_NAME': 'build/', # must end with slash
         'STATS_FILE': os.path.join(BASE_DIR, './static/webpack.stats.json'),
         'POLL_INTERVAL': 0.1,
-        # 'TIMEOUT': None,
-        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
     }
 }
 
-# if not DEBUG:
-#     WEBPACK_LOADER.update({
-#         'BUNDLE_DIR_NAME': 'build/',
-#         'STATS_FILE': os.path.join(BASE_DIR, './static/webpack.stats.json')
-#     })
-
-# it's need for flatepages
 SITE_ID = 1

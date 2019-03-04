@@ -1,9 +1,10 @@
-from split_settings.tools import optional, include
 from os import environ
+from split_settings.tools import optional, include
+
 
 ENV = environ.get('DJANGO_ENV') or 'development'
 
-base_settings = [
+BASE_SETTINGS = [
     'components/common.py',  # standard django settings
     'components/database.py',  # sqlite
 
@@ -17,5 +18,4 @@ base_settings = [
     optional('environments/local.py'),
 ]
 
-# Include settings:
-include(*base_settings)
+include(*BASE_SETTINGS)
