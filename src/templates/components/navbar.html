@@ -5,9 +5,12 @@
     <h3 class="masthead-brand">{% trans 'Video Resume' %}</h3>
     <nav class="nav nav-masthead justify-content-center">
       <a class="nav-link role_choice" href="{% url 'sign_in' %}">{% trans 'Sign in' %}</a>
-      <a class="nav-link accounts" href="#">{% trans 'Login' %}</a>
+      {% if not request.user %}
+        <a class="nav-link accounts" href="#">{% trans 'Login' %}</a>
+      {% endif %}
       <a class="nav-link features" href="#">{% trans 'Features' %}</a>
       <a class="nav-link contacts" href="#">{% trans 'Contact' %}</a>
+      {% if request.user %}<a class="nav-link" title="User profile" href="#">{{ request.user.username }}'s {% trans 'profile' %}</a>{% endif %}
     </nav>
   </div>
 </header>
