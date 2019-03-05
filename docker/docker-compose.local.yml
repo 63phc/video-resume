@@ -17,7 +17,7 @@ services:
   postgresql:
     image: postgres:11.1-alpine
     container_name: phc_vr_postgres
-    env_file: ./dev/.env
+    env_file: ./dev/.env_file
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     ports:
@@ -30,6 +30,8 @@ services:
       - ../media:/media
       - ../static:/static
     env_file:
-      - ./dev/.env
+      - ./dev/.env_file
     depends_on:
       - postgresql
+    ports:
+      - "5432:5432"
