@@ -6,13 +6,17 @@ function toggleActiveClass(className) {
     document.querySelector(`.${className}`).classList.add('active');
 }
 
-const ActiveLink = (() => {
+function getCurrentMenu() {
     const currenUrl = location.pathname;
     let currentMenu = '';
     if (currenUrl == '/') currentMenu = 'main_page';
     else currentMenu = menuLinks.find(
         link => currenUrl.indexOf(link) == FOUNDED);
-    toggleActiveClass(currentMenu);
+    return currentMenu;
+}
+
+const ActiveLink = (() => {
+    toggleActiveClass(getCurrentMenu());
 })();
 
 export default ActiveLink;
