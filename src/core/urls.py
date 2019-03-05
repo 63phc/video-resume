@@ -8,7 +8,7 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='index.html'), name='main'),
+    path('', TemplateView.as_view(template_name='index.html'), name='index'),
     path('dashboard/worker/',
          include('src.apps.account_worker.urls'),
          name='dashboard_worker'),
