@@ -33,5 +33,4 @@ services:
       - ./dev/.env_file
     depends_on:
       - postgresql
-    ports:
-      - "5432:5432"
+

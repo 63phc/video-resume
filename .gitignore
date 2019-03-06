@@ -124,6 +124,9 @@ venv.bak/
 out
 gen
 
-frontend/node_modules
+src/assets/node_modules/
+src/static/
 
-db.sqlite3
+*/**/db.sqlite3
+
+

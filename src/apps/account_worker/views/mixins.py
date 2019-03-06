@@ -94,5 +94,5 @@ class CheckAccess(AccessMixin, TemplateResponseMixin):
             pk = self.kwargs.get('worker_pk')
         else:
             pk = self.kwargs.get('pk')
-        account = get_object_or_404(AccountWorker, pk=pk, worker=user)
+        account = get_object_or_404(AccountWorker, pk=pk, user=user)
         return super().dispatch(request, *args, **kwargs)
