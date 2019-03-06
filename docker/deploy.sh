@@ -13,7 +13,7 @@ echo ">>>>>>> copying a nginx conf file <<<<<<<"
 scp -o "StrictHostKeyChecking no" docker/${PROJECT_PROFILE}/conf.nginx \
     ${REMOTE_USER}@${REMOTE_HOST}:${PROJECT_DIR}/${PROJECT_PROFILE}/conf.nginx
 
-COMPOSE_OPTS="-f ./docker-compose.yml -p LKS_${PROJECT_PROFILE}"
+COMPOSE_OPTS="-f ./docker-compose.yml -p VR_${PROJECT_PROFILE}"
 
 #    docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
 #    echo $DOCKER_PASSWORD | docker login registry.gitlab.com --username=$DOCKER_LOGIN --password-stdin

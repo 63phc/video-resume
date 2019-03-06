@@ -4,7 +4,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '3il&cnpn#sb$h6mj5psrhp&fy2%d*08nf)8bopor#ludxfx6f-'
 
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'src.apps.account_worker',
     'src.apps.account_hr',
     'src.apps.resume',
+    'src.apps.vacancy',
     'src.apps.question',
     'webpack_loader',
 ]
