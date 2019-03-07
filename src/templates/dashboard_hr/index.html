@@ -36,7 +36,7 @@
           <div class="card">
             <div class="card-header">{% trans 'Last vacancies' %}</div>
             {% if vacancies.last %}
-              <ul class="list-inline">
+              <ul class="list-group">
                 {% for vacancy in vacancies.all %}
                   <li class="list-inline-item">
                     <a class="" href="#">{{ vacancy.title }}</a>
