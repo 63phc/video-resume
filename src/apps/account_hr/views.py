@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
+from django.views.generic.base import View
 
 from .models import AccountHr
 
@@ -10,10 +11,7 @@ class HRDashboardView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(HRDashboardView, self).get_context_data(**kwargs)
-        context['vacancies'] = [
-            {'title': 'Vacancy Number 1', 'description': 'descr for vac #1'},
-            {'title': 'Vacancy Number 2', 'description': 'descr for vac #2'},
-            {'title': 'Vacancy Number 3', 'description': 'descr for vac #3'},
-        ]
+        context['vacancies'] = AccountHr.objects.get(id=self.request.user.id)\
+            .vacancies
         # Vacancy.objects.filter(account_hr)
         return context
