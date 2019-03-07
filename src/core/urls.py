@@ -5,13 +5,10 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.urls import path
 
-from src.apps.users.views import RegistrationView, ProfileView
-from django.views.generic import TemplateView
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='index.html')),
+    path('', TemplateView.as_view(template_name='index.html'), name='index'),
     path('dashboard/worker/',
          include('src.apps.account_worker.urls'),
          name='dashboard_worker'),
