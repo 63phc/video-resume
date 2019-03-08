@@ -18,7 +18,8 @@ urlpatterns = [
          namespace='dashboard_hr')),
     path('accounts/', include('src.apps.users.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),
-    path('vacancies/', include('src.apps.vacancy.urls'), name='vacancies'),
+    path('vacancies/',
+         include('src.apps.vacancy.urls', namespace='vacancies')),
 ]
 
 if settings.DEBUG:
