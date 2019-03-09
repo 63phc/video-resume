@@ -7,10 +7,3 @@ const Account = (() => {
 })();
 
 export default Account;
-
-window.addEventListener('load', () => {
-    if (document.querySelector('#account_type')) {
-        const accountId = document.querySelector('#account_type');
-        Account.setAttribute(accountId, document.location.pathname);
-    }
-})

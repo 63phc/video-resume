@@ -1,6 +1,6 @@
-const WorkerActiveLink = (() => {
+const WorkerSwitch = (() => {
     return {
-        DisableElement: (parent_elem) => {
+        disableElement: (parent_elem) => {
             let disable_panel = document.querySelectorAll('.worker-search-title');
             disable_panel.forEach((elem) => {
               elem.classList.remove('active');
@@ -10,21 +10,16 @@ const WorkerActiveLink = (() => {
             parent_elem.classList.add('active');
             let target_panel = parent_elem.getAttribute('data-target');
             document.querySelector(target_panel).classList.add('show', 'active');
+        },
+        clickOn: (titles, method) => {
+            titles.forEach((elem) => {
+                elem.onclick = (e) => {
+                    e.preventDefault();
+                    method(elem);
+                }
+            })
         }
     }
 })();
 
-export default WorkerLink;
-
-document.addEventListener('load', () => {
-  console.log('qwerty')
-  const titles = document.querySelectorAll('.worker-search-title');
-  if (document.querySelector('.worker-search-title')) {
-    titles.forEach((elem) => {
-      elem.onclick = (e) => {
-          e.preventDefault;
-          WorkerActiveLink.DisableElement(elem);
-      }
-    })
-  }
-})
+export default WorkerSwitch;

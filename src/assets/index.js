@@ -4,4 +4,23 @@ import Account from './components/Account';
 import CreateResume from './components/CreateResume';
 import UpdateResume from './components/UpdateResume';
 import ActiveLink from './components/ActiveLink';
-import WorkerActiveLink from './components/WorkerActiveLink';
+import WorkerSwitch from './components/WorkerSwitch';
+
+
+window.addEventListener('load', () => {
+    // Account
+    if (document.querySelector('#account_type')) {
+        const accountId = document.querySelector('#account_type');
+        Account.setAttribute(accountId, document.location.pathname);
+    }
+    // ActiveLink
+    const class_name = ActiveLink.getCurrentMenu(document.location.pathname)
+    if (class_name) {
+        ActiveLink.toggleActiveClass(class_name[0]);
+    }
+    // WorkerSwitch
+    if (document.querySelector('.worker-search-title')) {
+        const titles = document.querySelectorAll('.worker-search-title');
+        WorkerSwitch.clickOn(titles, WorkerSwitch.disableElement);
+    }
+})

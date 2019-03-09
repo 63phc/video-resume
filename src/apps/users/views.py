@@ -68,9 +68,7 @@ class LoginView(LoginViewMixin):
     def get_success_url(self):
         user = get_object_or_404(User, username=self.request.user)
         worker = user.workers_related.all().first()
-        print(worker)
         hr = user.hrs_related.all().first()
-        print(hr)
         if worker:
 
             return worker.get_absolute_url()
