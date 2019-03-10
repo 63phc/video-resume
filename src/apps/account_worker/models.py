@@ -30,6 +30,7 @@ class AccountWorker(models.Model):
     def __str__(self):
         return f'{self.user.username} - {self.type_account}'
 
+    @property
     def get_absolute_url(self):
         return reverse_lazy(
             'dashboard_worker:dashboard_worker_main', kwargs={'pk': self.pk})

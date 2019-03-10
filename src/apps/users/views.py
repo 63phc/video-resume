@@ -53,9 +53,9 @@ class ProfileView(FormView):
         worker = user.workers_related.all().first()
         hr = user.hrs_related.all().first()
         if hr:
-            return hr.get_absolute_url()
+            return hr.get_absolute_url
         else:
-            return worker.get_absolute_url()
+            return worker.get_absolute_url
 
 
 class LoginView(LoginViewMixin):
@@ -68,6 +68,6 @@ class LoginView(LoginViewMixin):
         hr = user.hrs_related.all().first()
         if worker:
 
-            return worker.get_absolute_url()
+            return worker.get_absolute_url
         else:
-            return hr.get_absolute_url()
+            return hr.get_absolute_url
