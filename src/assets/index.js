@@ -4,7 +4,7 @@ import Account from './components/Account';
 import CreateResume from './components/CreateResume';
 import UpdateResume from './components/UpdateResume';
 import ActiveLink from './components/ActiveLink';
-import WorkerSwitch from './components/WorkerSwitch';
+import WorkerSwitchLink from './components/WorkerSwitchLink';
 
 
 window.addEventListener('load', () => {
@@ -16,11 +16,11 @@ window.addEventListener('load', () => {
     // ActiveLink
     const class_name = ActiveLink.getCurrentMenu(document.location.pathname)
     if (class_name) {
-        ActiveLink.toggleActiveClass(class_name[0]);
+        ActiveLink.toggleActiveClass(class_name);
     }
-    // WorkerSwitch
+    // WorkerSwitchLink
     if (document.querySelector('.worker-search-title')) {
         const titles = document.querySelectorAll('.worker-search-title');
-        WorkerSwitch.clickOn(titles, WorkerSwitch.disableElement);
+        WorkerSwitchLink.clickOn(titles, WorkerSwitchLink.disableElement);
     }
 })

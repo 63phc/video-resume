@@ -1,14 +1,17 @@
-const WorkerSwitch = (() => {
+const WorkerSwitchLink = (() => {
     return {
-        disableElement: (parent_elem) => {
-            let disable_panel = document.querySelectorAll('.worker-search-title');
-            disable_panel.forEach((elem) => {
+        disableElement: (parent) => {
+            let panels = document.querySelectorAll('.worker-search-title');
+
+            panels.forEach((elem) => {
               elem.classList.remove('active');
               let target = elem.getAttribute('data-target');
               document.querySelector(target).classList.remove('show', 'active');
             });
-            parent_elem.classList.add('active');
-            let target_panel = parent_elem.getAttribute('data-target');
+
+            parent.classList.add('active');
+
+            let target_panel = parent.getAttribute('data-target');
             document.querySelector(target_panel).classList.add('show', 'active');
         },
         clickOn: (titles, method) => {
@@ -22,4 +25,4 @@ const WorkerSwitch = (() => {
     }
 })();
 
-export default WorkerSwitch;
+export default WorkerSwitchLink;

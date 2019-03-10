@@ -1,10 +1,8 @@
-const menuLinks = ['role_choice', 'features', 'contacts', 'login', 'dashboard', 'register'];
-
-Array.prototype.diff = function(a) {
-    return this.filter(function(i){return a.includes(i);});
-};
-
 const ActiveLink = (() => {
+    const menuLinks = ['role_choice', 'features', 'contacts', 'login', 'dashboard', 'register'];
+    function union_field(arr1, arr2) {
+        return arr1.filter(function(i){return arr2.includes(i);});
+    };
     return {
         toggleActiveClass: (className) => {
             document.querySelector('.nav-link').classList.remove('active');
@@ -14,7 +12,7 @@ const ActiveLink = (() => {
             if (currenUrl == '/')
                 return ['main_page'];
             let link_for = currenUrl.split('/')
-            let value = link_for.diff(menuLinks);
+            let value = union_field(link_for, menuLinks)[0];
             if (value == 'register')
                 return ['role_choice']
             return value
