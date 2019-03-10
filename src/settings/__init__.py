@@ -5,8 +5,6 @@ ENV = environ.get('DJANGO_ENV') or 'development'
 
 base_settings = [
     'components/common.py',  # standard django settings
-    'components/database.py',  # sqlite
-
 
     # You can even use glob:
     # 'components/*.py'
