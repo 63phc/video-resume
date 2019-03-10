@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from django.urls import path
 
 from src.apps.account_hr.views import AccountHrCreateView
+from src.apps.vacancy.views import tag_create_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,6 +23,7 @@ urlpatterns = [
     path('vacancies/',
          include('src.apps.vacancy.urls', namespace='vacancies')),
     path('create_account/', AccountHrCreateView.as_view(), name='create_account'),
+    path('add/tags/',tag_create_view, name='tag_create'),
 ]
 
 if settings.DEBUG:

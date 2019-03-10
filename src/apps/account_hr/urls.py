@@ -4,6 +4,6 @@ from .views import HRDashboardView, AccountHrCreateView
 
 app_name = 'account_hr'
 urlpatterns = [
-    path('<pk>/', HRDashboardView.as_view(), name='dashboard_hr_main'),
+    path('<pk>/', HRDashboardView.as_view(), name='main'),
 
 ]

@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
-{% load i18n %}
-
-
+{% load i18n static %}
+{% block head %}
+    <script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+{% endblock %}
 {% block content %}
 <main role="main" class="inner cover">
     {% trans 'Creating a new vacancy' %}:<br><br>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form }}
         <button type="submit" class="btn btn-primary">{% trans 'Create vacation' %}</button>
     </form>
 </main>
