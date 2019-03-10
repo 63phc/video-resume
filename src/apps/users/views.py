@@ -29,7 +29,7 @@ class RegistrationView(FormView):
         elif form.cleaned_data['account'] == 'hr':
             account = AccountHr.objects.create(
                 type_account=AccountTypeChoices.BASIC,
-                id_user=new_user
+                user=new_user
             )
         account.save()
         new_user.save()
@@ -51,7 +51,7 @@ class ProfileView(FormView):
 
     def get_success_url(self):
         user = get_object_or_404(User, username=self.request.user)
-        if AccountHr.objects.filter(id_user=user).exists():
+        if AccountHr.objects.filter(user=user).exists():
             dashboard_url = reverse_lazy('dashboard_hr')
         elif AccountWorker.objects.filter(worker=user).exists():
             worker = AccountWorker.objects.get(worker=user)

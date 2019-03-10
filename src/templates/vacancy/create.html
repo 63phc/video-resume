@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+{% block content %}
+<main role="main" class="inner cover">
+    {% trans 'Creating a new vacancy' %}:<br><br>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">{% trans 'Create vacation' %}</button>
+    </form>
+</main>
+<script language="javascript" type="text/javascript">
+    function showAddAnotherPopup(url) {
+        newwindow=window.open(url,'Add new HR','height=600,width=600');
+        if (window.focus) {
+            newwindow.focus()
+        }
+        return false;
+    }
+</script>
+{% endblock %}
+

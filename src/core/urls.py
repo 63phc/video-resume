@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.urls import path
 
+from src.apps.account_hr.views import AccountHrCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -20,6 +21,7 @@ urlpatterns = [
     path('pages/', include('django.contrib.flatpages.urls')),
     path('vacancies/',
          include('src.apps.vacancy.urls', namespace='vacancies')),
+    path('create_account/', AccountHrCreateView.as_view(), name='create_account'),
 ]
 
 if settings.DEBUG:
