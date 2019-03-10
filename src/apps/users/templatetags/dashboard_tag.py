@@ -10,11 +10,11 @@ register = template.Library()
 def url_dashboard(context):
     user = User.objects.filter(username=context['user']).first()
     if not user:
-
         return context
     worker = user.workers_related.all().first()
 
     if worker and not context.get('worker_pk'):
+
         context['worker_pk'] = worker.pk
 
     return context

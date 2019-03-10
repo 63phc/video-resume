@@ -13,7 +13,7 @@ class AccountHr(models.Model):
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
-        verbose_name=_('HR'), related_name='hrs_related')
+        verbose_name=_('HRs'), related_name='hrs_related')
 
     class Meta:
         verbose_name = _('Account hr')

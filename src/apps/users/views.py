@@ -1,7 +1,7 @@
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model, login
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.views import LoginView as LoginViewMixin
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -25,18 +25,16 @@ class RegistrationView(FormView):
 
     def form_valid(self, form):
         new_user = form.save()
-        if form.cleaned_data['account'] == 'user':
-            account = AccountWorker.objects.create(
-                type_account=AccountTypeChoices.BASIC,
-                user=new_user
-            )
-        elif form.cleaned_data['account'] == 'hr':
-            account = AccountHr.objects.create(
-                type_account=AccountTypeChoices.BASIC,
-                user=new_user
-            )
-        account.save()
-        new_user.save()
+        ACCOUNT_MAP = {
+            'user': AccountWorker,
+            'hr': AccountHr,
+        }
+        account_model = ACCOUNT_MAP.get(form.cleaned_data['account'])
+        if not account_model:
+            raise Http404
+        account_model.objects.create(
+            type_account=AccountTypeChoices.BASIC,
+            user=new_user)
         login(self.request, new_user)
         return super().form_valid(form)
 
@@ -55,7 +53,6 @@ class ProfileView(FormView):
         worker = user.workers_related.all().first()
         hr = user.hrs_related.all().first()
         if hr:
-
             return hr.get_absolute_url()
         else:
             return worker.get_absolute_url()

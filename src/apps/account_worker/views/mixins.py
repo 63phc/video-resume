@@ -5,7 +5,6 @@ from django.http import JsonResponse, Http404
 from django.contrib.auth import get_user_model
 
 from src.apps.resume.models import Resume
-from src.apps.account_worker.models import AccountWorker
 from django.contrib.auth.mixins import AccessMixin
 
 User = get_user_model()
@@ -90,9 +89,7 @@ class CheckAccess(AccessMixin, TemplateResponseMixin):
         if not self.request.user.is_authenticated:
             return self.handle_no_permission()
         user = get_object_or_404(User, username=self.request.user)
-        if self.kwargs.get('worker_pk'):
-            pk = self.kwargs.get('worker_pk')
-        else:
-            pk = self.kwargs.get('pk')
-        account = get_object_or_404(AccountWorker, pk=pk, user=user)
+        if not user.workers_related.all().first():
+            raise Http404
+
         return super().dispatch(request, *args, **kwargs)
