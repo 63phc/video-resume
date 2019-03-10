@@ -112,3 +112,8 @@ WEBPACK_LOADER = {
 
 # it's need for flatepages
 SITE_ID = 1
+
+try:
+    from src.settings.environments.local import *
+except ImportError as e:
+    pass

@@ -10,9 +10,7 @@ base_settings = [
     # 'components/*.py'
 
     # Select the right env:
-    'environments/%s.py' % ENV,
-    # Optionally override some settings:
-    optional('environments/local.py'),
+    # 'environments/%s.py' % ENV,
 ]
 
 # Include settings:
