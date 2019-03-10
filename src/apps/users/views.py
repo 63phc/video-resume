@@ -2,7 +2,7 @@ from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model, login
 from django.http import HttpResponseRedirect, Http404
-from django.contrib.auth.views import LoginView as LoginViewMixin
+from django.contrib.auth.views import LoginView as ParentLoginView
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -26,12 +26,13 @@ class RegistrationView(FormView):
     def form_valid(self, form):
         new_user = form.save()
         ACCOUNT_MAP = {
-            'user': AccountWorker,
+            'worker': AccountWorker,
             'hr': AccountHr,
         }
         account_model = ACCOUNT_MAP.get(form.cleaned_data['account'])
         if not account_model:
             raise Http404
+
         account_model.objects.create(
             type_account=AccountTypeChoices.BASIC,
             user=new_user)
@@ -50,22 +51,22 @@ class ProfileView(FormView):
 
     def get_success_url(self):
         user = get_object_or_404(User, username=self.request.user)
-        worker = user.workers_related.all().first()
-        hr = user.hrs_related.all().first()
+        worker = user.workers_related.is_created()
+        hr = user.hrs_related.is_created()
         if hr:
             return hr.get_absolute_url
         else:
             return worker.get_absolute_url
 
 
-class LoginView(LoginViewMixin):
+class LoginView(ParentLoginView):
     form_class = LoginForm
     template_name = 'registration/login.html'
 
     def get_success_url(self):
         user = get_object_or_404(User, username=self.request.user)
-        worker = user.workers_related.all().first()
-        hr = user.hrs_related.all().first()
+        worker = user.workers_related.is_created()
+        hr = user.hrs_related.is_created()
         if worker:
 
             return worker.get_absolute_url

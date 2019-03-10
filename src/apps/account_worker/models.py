@@ -7,6 +7,11 @@ from src.core.utils.choices import AccountTypeChoices
 from src.apps.resume.models import Resume
 
 
+class WorkerCheckingQuerySet(models.QuerySet):
+    def is_created(self):
+        return self.all().first()
+
+
 class AccountWorker(models.Model):
     """ Class model for workers """
 
@@ -15,13 +20,14 @@ class AccountWorker(models.Model):
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
-        verbose_name=_('Workers'), related_name='workers_related')
+        verbose_name=_('workers'), related_name='workers_related')
     resume = models.ManyToManyField(
         Resume,
         related_name='resumes',
         verbose_name=_('Resume'),
         blank=True
     )
+    objects = WorkerCheckingQuerySet.as_manager()
 
     class Meta:
         verbose_name = _('Account worker')

@@ -5,7 +5,7 @@ from src.apps.users.views import RegistrationView, ProfileView, LoginView
 
 
 urlpatterns = [
-    path('register/user/', RegistrationView.as_view(),
+    path('register/worker/', RegistrationView.as_view(),
          name='registration-user'),
     path('register/hr/', RegistrationView.as_view(),
          name='registration-hr'),

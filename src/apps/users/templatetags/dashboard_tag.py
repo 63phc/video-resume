@@ -8,13 +8,14 @@ register = template.Library()
 
 @register.simple_tag(name='dashboard_tag', takes_context=True)
 def url_dashboard(context):
-    user = User.objects.filter(username=context['user']).first()
+    user = User.checking.is_exist(username=context['user'])
+
     if not user:
         return context
-    worker = user.workers_related.all().first()
+
+    worker = user.workers_related.is_created()
 
     if worker and not context.get('worker_pk'):
-
         context['worker_pk'] = worker.pk
 
     return context

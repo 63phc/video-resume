@@ -5,6 +5,11 @@ from django.conf import settings
 from django.urls import reverse_lazy
 
 
+class HrCheckingQuerySet(models.QuerySet):
+    def is_created(self):
+        return self.all().first()
+
+
 class AccountHr(models.Model):
     """ Class model for hr """
 
@@ -13,7 +18,8 @@ class AccountHr(models.Model):
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
-        verbose_name=_('HRs'), related_name='hrs_related')
+        verbose_name=_('hrs'), related_name='hrs_related')
+    objects = HrCheckingQuerySet.as_manager()
 
     class Meta:
         verbose_name = _('Account hr')

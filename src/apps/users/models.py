@@ -7,6 +7,12 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils.translation import gettext_lazy as _
 
 
+class UserCheckingFirstQueryset(models.QuerySet):
+    def is_exist(self, **kwargs):
+        value = kwargs.get('username')
+        return self.filter(username=value).first()
+
+
 class User(AbstractBaseUser, PermissionsMixin):
     """ Class model custom User """
 
@@ -37,6 +43,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['email', ]
 
     objects = UserManager()
+    checking = UserCheckingFirstQueryset.as_manager()
 
     class Meta:
         verbose_name = _('user')
