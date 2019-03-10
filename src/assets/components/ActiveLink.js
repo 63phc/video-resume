@@ -14,7 +14,7 @@ const ActiveLink = (() => {
             let link_for = currenUrl.split('/')
             let value = union_field(link_for, menuLinks)[0];
             if (value == 'register')
-                return ['role_choice']
+                return 'role_choice'
             return value
         }
     }

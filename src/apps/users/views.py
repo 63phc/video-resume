@@ -1,10 +1,10 @@
 from django.views.generic.edit import FormView
-from django.urls import reverse_lazy
-from django.contrib.auth import get_user_model, login
-from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.views import LoginView as ParentLoginView
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model, login
+from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect, Http404
+from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 
 from src.core.utils.choices import AccountTypeChoices
@@ -51,8 +51,8 @@ class ProfileView(FormView):
 
     def get_success_url(self):
         user = get_object_or_404(User, username=self.request.user)
-        worker = user.workers_related.is_created()
-        hr = user.hrs_related.is_created()
+        worker = user.workers.is_created()
+        hr = user.hrs.is_created()
         if hr:
             return hr.get_absolute_url
         else:
@@ -65,8 +65,8 @@ class LoginView(ParentLoginView):
 
     def get_success_url(self):
         user = get_object_or_404(User, username=self.request.user)
-        worker = user.workers_related.is_created()
-        hr = user.hrs_related.is_created()
+        worker = user.workers.is_created()
+        hr = user.hrs.is_created()
         if worker:
 
             return worker.get_absolute_url

@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('type_account', models.CharField(choices=[('BASIC', 'Basic'), ('PRO', 'Professional'), ('ENTERPRISE', 'Enterprise')], max_length=63, verbose_name='Type user')),
                 ('resume', models.ManyToManyField(blank=True, related_name='resumes', to='resume.Resume', verbose_name='Resume')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='workers_related', to=settings.AUTH_USER_MODEL, verbose_name='Worker')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='workers', to=settings.AUTH_USER_MODEL, verbose_name='Worker')),
             ],
             options={
                 'verbose_name': 'Account worker',

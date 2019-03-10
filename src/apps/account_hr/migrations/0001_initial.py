@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('type_account', models.CharField(choices=[('BASIC', 'Basic'), ('PRO', 'Professional'), ('ENTERPRISE', 'Enterprise')], max_length=63, verbose_name='Type user')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='hrs_related', to=settings.AUTH_USER_MODEL, verbose_name='HR')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='hrs', to=settings.AUTH_USER_MODEL, verbose_name='HR')),
             ],
             options={
                 'verbose_name': 'Account hr',

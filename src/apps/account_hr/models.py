@@ -18,7 +18,7 @@ class AccountHr(models.Model):
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
-        verbose_name=_('hrs'), related_name='hrs_related')
+        verbose_name=_('hrs'), related_name='hrs')
     objects = HrCheckingQuerySet.as_manager()
 
     class Meta:

@@ -9,8 +9,7 @@ from django.utils.translation import gettext_lazy as _
 
 class UserCheckingFirstQueryset(models.QuerySet):
     def is_exist(self, **kwargs):
-        value = kwargs.get('username')
-        return self.filter(username=value).first()
+        return self.filter(username=kwargs.get('username')).first()
 
 
 class User(AbstractBaseUser, PermissionsMixin):

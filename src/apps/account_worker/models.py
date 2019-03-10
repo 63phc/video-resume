@@ -20,7 +20,7 @@ class AccountWorker(models.Model):
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
-        verbose_name=_('workers'), related_name='workers_related')
+        verbose_name=_('workers'), related_name='workers')
     resume = models.ManyToManyField(
         Resume,
         related_name='resumes',
