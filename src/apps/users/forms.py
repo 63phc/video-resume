@@ -40,6 +40,8 @@ class RegistrationForm(UserCreationForm):
             attrs={'id': 'account_type'}), required=False
         )
 
+    agreeded_confidentiality = forms.BooleanField(initial=True)
+
     class Meta:
         model = User
         fields = (
