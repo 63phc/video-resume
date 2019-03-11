@@ -11,7 +11,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('role_choice/', TemplateView.as_view(
         template_name='registration/role_choice.html'), name='sign_up'),
-    path('', TemplateView.as_view(template_name='index.html')),
+    path('', TemplateView.as_view(template_name='index.html'), name='index'),
     path('accounts/register/user/', RegistrationView.as_view(),
          name='registration-user'),
     path('accounts/register/hr/', RegistrationView.as_view(),

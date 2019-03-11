@@ -9,9 +9,9 @@ class ResumeAdmin(admin.ModelAdmin):
         'other_skills',
         'hobbies',
         'about',
-        'get_educations',
-        'get_skills',
-        'get_jobs'
+        'educations',
+        'skills',
+        'jobs'
     ]
     prepopulated_fields = {'slug': ('title',)}
 
