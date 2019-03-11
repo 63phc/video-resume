@@ -7,6 +7,7 @@
     <h3 class="masthead-brand">{% trans 'Video Resume' %}</h3>
     <nav class="justify-content-center">
       <div class="nav nav-masthead login-block">
+      <div class="login-block">
         {% if request.user.is_authenticated %}
           <a class="nav-link" title="User profile" href="#">{% trans 'Profile' %}</a>
           <a class="nav-link" href="{% url 'logout' %}">{% trans 'Logout' %}</a>
@@ -22,6 +23,7 @@
         {% endif %}
         <a class="nav-link features" href="#">{% trans 'Features' %}</a>
         <a class="nav-link contacts" href="#">{% trans 'Contact' %}</a>
+      </div>
       </div>
     </nav>
   </div>
