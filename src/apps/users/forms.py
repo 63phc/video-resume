@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.core.validators import EmailValidator
+from django.contrib.auth.forms import AuthenticationForm
 
 from src.apps.users.models import Profile
 
@@ -66,3 +67,10 @@ class ProfileForm(forms.ModelForm):
             'family_status': forms.Select(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}))

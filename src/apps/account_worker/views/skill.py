@@ -1,29 +1,33 @@
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from src.apps.resume.models import Skill
 from ..forms import SkillForm
 from .mixins import (
     EduSkillJobSuccessUrlMixin, ResumeEduSkillJobContextMixin,
-    EduSkillJobAjaxMixin, CheckAccess)
+    EduSkillJobAjaxMixin, worker_access)
 
 
-class SkillUpdateView(
-    CheckAccess, ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin,
-    UpdateView
-):
+@method_decorator(worker_access, name='dispatch')
+@method_decorator(login_required, name='dispatch')
+class SkillUpdateView(ResumeEduSkillJobContextMixin,
+                      EduSkillJobSuccessUrlMixin, UpdateView):
     form_class = SkillForm
     model = Skill
     template_name = 'dashboard_worker/skill/update.html'
 
 
-class SkillDeleteView(
-    CheckAccess, ResumeEduSkillJobContextMixin, EduSkillJobSuccessUrlMixin,
-    DeleteView
-):
+@method_decorator(worker_access, name='dispatch')
+@method_decorator(login_required, name='dispatch')
+class SkillDeleteView(ResumeEduSkillJobContextMixin,
+                      EduSkillJobSuccessUrlMixin, DeleteView):
     model = Skill
     template_name = 'dashboard_worker/skill/delete.html'
 
 
+@method_decorator(worker_access, name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class SkillCreateView(
     EduSkillJobAjaxMixin, ResumeEduSkillJobContextMixin,
     EduSkillJobSuccessUrlMixin, CreateView

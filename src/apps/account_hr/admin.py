@@ -5,5 +5,5 @@ from .models import AccountHr
 @admin.register(AccountHr)
 class AccountHrAdmin(admin.ModelAdmin):
     list_display = [
-        'type_account', 'id_user'
+        'type_account', 'user'
     ]
