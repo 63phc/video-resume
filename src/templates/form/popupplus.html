@@ -1,8 +1,10 @@
 {% load static %}
+<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
 <a
   href="/add/{{ field }}"
   class="add-another"
-  id="add_id_{{ field }}"
+  id="add_id_{{ field.html_name }}"
   onclick="return showAddAnotherPopup(this);">
   <img src="/static/admin/img/icon-addlink.svg" width="10" height="10" alt="Add Another"/>
 </a>
+
