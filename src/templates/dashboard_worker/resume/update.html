@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
   <div class="py-5 border-0" style="">
-    <div class="container">
+    <div class="container text-left">
       <div class="row">
         <div class="col-md-12">
           <ul class="nav nav-pills">
@@ -18,7 +18,7 @@
           <div class="row" id="update_resume">
             <input id="worker_pk" type="hidden" value="{{ worker_pk }}">
             <input id="resume_pk" type="hidden" value="{{ resume_pk }}">
-            <div class="mx-auto p-4 col-lg-7">
+            <div class="mx-auto p-4 col-lg-10">
               <h1 class="mb-4">{{ title }}</h1>
               <form method="post">
                 {% csrf_token %}

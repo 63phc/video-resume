@@ -5,11 +5,13 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from src.apps.account_worker.models import AccountWorker
 from src.apps.resume.models import Resume
 from src.apps.account_worker.forms import ResumeMainForm, ResumeForm
-from .mixins import ResumeEduSkillJobContextMixin, CheckAccess
+from .mixins import ResumeEduSkillJobContextMixin, worker_access
 
 User = get_user_model()
 
@@ -22,7 +24,9 @@ class ResumeSuccessUrlMixin:
         )
 
 
-class AccountWorkerView(CheckAccess, DetailView):
+@method_decorator(worker_access, name='dispatch')
+@method_decorator(login_required, name='dispatch')
+class AccountWorkerView(DetailView):
     model = AccountWorker
     template_name = 'dashboard_worker/index.html'
 
@@ -32,7 +36,9 @@ class AccountWorkerView(CheckAccess, DetailView):
         return context
 
 
-class ResumeListView(CheckAccess, ListView):
+@method_decorator(worker_access, name='dispatch')
+@method_decorator(login_required, name='dispatch')
+class ResumeListView(ListView):
     model = AccountWorker
     template_name = 'dashboard_worker/resume/list.html'
 
@@ -46,7 +52,9 @@ class ResumeListView(CheckAccess, ListView):
         return context
 
 
-class ResumeCreateView(CheckAccess, ResumeSuccessUrlMixin, CreateView):
+@method_decorator(worker_access, name='dispatch')
+@method_decorator(login_required, name='dispatch')
+class ResumeCreateView(ResumeSuccessUrlMixin, CreateView):
     model = Resume
     form_class = ResumeMainForm
     template_name = 'dashboard_worker/resume/create.html'
@@ -80,18 +88,18 @@ class ResumeCreateView(CheckAccess, ResumeSuccessUrlMixin, CreateView):
         return response
 
 
-class ResumeUpdateView(
-    CheckAccess, ResumeEduSkillJobContextMixin, ResumeSuccessUrlMixin,
-    UpdateView
-):
+@method_decorator(worker_access, name='dispatch')
+@method_decorator(login_required, name='dispatch')
+class ResumeUpdateView(ResumeEduSkillJobContextMixin,
+                       ResumeSuccessUrlMixin, UpdateView):
     form_class = ResumeMainForm
     model = Resume
     template_name = 'dashboard_worker/resume/update.html'
 
 
-class ResumeDeleteView(
-    CheckAccess, ResumeEduSkillJobContextMixin, ResumeSuccessUrlMixin,
-    DeleteView
-):
+@method_decorator(worker_access, name='dispatch')
+@method_decorator(login_required, name='dispatch')
+class ResumeDeleteView(ResumeEduSkillJobContextMixin,
+                       ResumeSuccessUrlMixin, DeleteView):
     model = Resume
     template_name = 'dashboard_worker/resume/delete.html'
