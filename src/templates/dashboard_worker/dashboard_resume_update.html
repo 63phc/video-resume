@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block head %}
+{% endblock %}
+{% block content %}
+  <div class="py-5 border-0" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="nav nav-pills">
+            <li class="nav-item"> <a href="{% url 'dashboard_worker:dashboard_worker_resume' pk=w_pk %}" class="nav-link">{% trans 'My resume' %}</a> </li>
+            <li class="nav-item"> <a class="nav-link active" href="">{{ title }}</a> </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="mx-auto p-4 col-lg-7">
+              <h1 class="mb-4">{{ title }}</h1>
+              <form method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="form-group">
+                  <label for="id_title">{% trans 'Title:' %}</label>
+                  {{ form.title }}
+                  {{ form.title.errors }}
+                </div>
+                <div class="form-group">
+                  <label for="id_other_skills">{% trans 'Other skills:' %}</label>
+                  {{ form.other_skills }}
+                  {{ form.other_skills.errors }}
+                </div>
+                <div class="form-group">
+                  <label for="id_hobbies">{% trans 'Hobbies:' %}</label>
+                  {{ form.hobbies }}
+                  {{ form.hobbies.errors }}
+                </div>
+                <div class="form-group">
+                  <label for="id_about">{% trans 'About:' %}</label>
+                  {{ form.about }}
+                  {{ form.about.errors }}
+                </div>
+                <div class="form-group">
+                  <label for="id_education">{% trans 'Education:' %}</label>
+                  <div class="form-group">
+                    <button type="button" class="btn btn-primary edu-add">{% trans 'Add education' %}</button>
+                  </div>
+                  {% for edu in form.education %}
+                    <div class="form-row ml-3">
+                      <li>{{ edu }}</li>
+                    </div>
+                    <div class="form-row ml-1">
+                      <div class="form-group">
+                        <button type="button" class="btn btn-primary edu-update">{% trans 'Update' %}</button>
+                      </div>
+                      <div class="form-group ml-2">
+                        <button type="button" class="btn btn-primary edu-delete">{% trans 'Delete' %}</button>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  {{ form.education.errors }}
+                </div>
+                <div class="form-group">
+                  <label for="id_skill">{% trans 'Skills:' %}</label>
+                  <div class="form-group">
+                    <button type="button" class="btn btn-primary skill-add">{% trans 'Add skill' %}</button>
+                  </div>
+                  {% for one_skill in form.skill %}
+                    <div class="form-row ml-3">
+                      <li>{{ one_skill }}</li>
+                    </div>
+                    <div class="form-row ml-1">
+                      <div class="form-group">
+                        <button type="button" class="btn btn-primary skill-update">{% trans 'Update' %}</button>
+                      </div>
+                      <div class="form-group ml-2">
+                        <button type="button" class="btn btn-primary skill-delete">{% trans 'Delete' %}</button>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  {{ form.skill.errors }}
+                </div>
+                <div class="form-group">
+                  <label for="id_job">{% trans 'Jobs:' %}</label>
+                  <div class="form-group">
+                    <button type="button" class="btn btn-primary job-add">{% trans 'Add job' %}</button>
+                  </div>
+                  {% for one_job in form.job %}
+                    <div class="form-row ml-3">
+                      <li>{{ one_job }}</li>
+                    </div>
+                    <div class="form-row ml-1">
+                      <div class="form-group">
+                        <button type="button" class="btn btn-primary job-update">{% trans 'Update' %}</button>
+                      </div>
+                      <div class="form-group ml-2">
+                        <button type="button" class="btn btn-primary job-delete">{% trans 'Delete' %}</button>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  {{ form.job.errors }}
+                </div>
+                <hr>
+                <button type="submit" class="btn btn-primary">{% trans 'Update resume' %}</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+      var host = $(location).attr('host');
+      var educations_pk = $("[name = education]");
+      var button_edu_update = $(".edu-update");
+      var button_edu_add = $(".edu-add");
+      var button_edu_delete = $(".edu-delete");
+      var skills_pk = $("[name = skill]");
+      var button_skill_update = $(".skill-update");
+      var button_skill_add = $(".skill-add");
+      var button_skill_delete = $(".skill-delete");
+      var jobs_pk = $("[name = job]");
+      var button_job_update = $(".job-update");
+      var button_job_add = $(".job-add");
+      var button_job_delete = $(".job-delete");
+      $.each(educations_pk,function(index, element) {
+        var edu_pk = element.value;
+        $(button_edu_update[index]).addClass("edu-update" + edu_pk).click(() => {
+          document.location.href = 'http://' + host + '/dashboard/worker/education/update/' + edu_pk + '/' + "{{ pk }}" + '/' + "{{ w_pk }}"
+        })
+      })
+      $(button_edu_add).click(() => {
+         document.location.href = 'http://' + host + '/dashboard/worker/education/create/' + "{{ pk }}" + '/' + "{{ w_pk }}"
+       })
+      $.each(educations_pk,function(index, element) {
+      var edu_pk = element.value;
+        $(button_edu_delete[index]).addClass("edu-delete" + edu_pk).click(() => {
+          document.location.href = 'http://' + host + '/dashboard/worker/education/delete/' + edu_pk + '/' + "{{ pk }}" + '/' + "{{ w_pk }}"
+        })
+      })
+      $.each(skills_pk,function(index, element) {
+        var sk_pk = element.value;
+        $(button_skill_update[index]).addClass("skill-update" + sk_pk).click(() => {
+          document.location.href = 'http://' + host + '/dashboard/worker/skill/update/' + sk_pk + '/' + "{{ pk }}" + '/' + "{{ w_pk }}"
+        })
+      })
+      $(button_skill_add).click(() => {
+         document.location.href = 'http://' + host + '/dashboard/worker/skill/create/' + "{{ pk }}" + '/' + "{{ w_pk }}"
+       })
+      $.each(skills_pk,function(index, element) {
+      var sk_pk = element.value;
+        $(button_skill_delete[index]).addClass("skill-delete" + sk_pk).click(() => {
+          document.location.href = 'http://' + host + '/dashboard/worker/skill/delete/' + sk_pk + '/' + "{{ pk }}" + '/' + "{{ w_pk }}"
+        })
+      })
+      $.each(jobs_pk,function(index, element) {
+        var jo_pk = element.value;
+        $(button_job_update[index]).addClass("job-update" + jo_pk).click(() => {
+          document.location.href = 'http://' + host + '/dashboard/worker/job/update/' + jo_pk + '/' + "{{ pk }}" + '/' + "{{ w_pk }}"
+        })
+      })
+      $(button_job_add).click(() => {
+         document.location.href = 'http://' + host + '/dashboard/worker/job/create/' + "{{ pk }}" + '/' + "{{ w_pk }}"
+       })
+      $.each(jobs_pk,function(index, element) {
+      var jo_pk = element.value;
+        $(button_job_delete[index]).addClass("job-delete" + jo_pk).click(() => {
+          document.location.href = 'http://' + host + '/dashboard/worker/job/delete/' + jo_pk + '/' + "{{ pk }}" + '/' + "{{ w_pk }}"
+        })
+      })
+    })
+</script>
+{% endblock %}
