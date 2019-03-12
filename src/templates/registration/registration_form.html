@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
-  <div class="row justify-content-center mt-3 mb-3 text-left">
-    <div class="col-md-6">
+<div class="container" id="content">
+  <div class="row justify-content-center mt-8 mb-8 text-left">
+    <div class="col-md-8">
         <div class="card">
           <div class="card-body">
             <p><strong>{% trans "Fill in the following fields to register a new user:" %}</strong></p>
@@ -28,10 +29,17 @@
                                 {% if field.label == "hidden_field" %}
                                     {{ field }}
                                 {% else %}
-                                    <label class="col-form-label">{{ field.label }}</label>
-                                    <div class="controls">
-                                      {{ field }}
+                                    {% if field.label == 'Agreeded confidentiality' %}
+                                    <div class="row">
+                                        <div class="col-1">{{ field }}</div>
+                                        <div class="col-10"><label>{% trans 'Accept ' %}<a href="#">{% trans 'Terms of use' %}</a>{% trans ' and ' %}<a href="#">{% trans 'privacy Policy.' %}</a></label></div>
                                     </div>
+                                    {% else %}
+                                        <label class="col-form-label">{{ field.label }}</label>
+                                        <div class="controls">
+                                          {{ field }}
+                                        </div>
+                                    {% endif %}
                                 {% endif %}
                             </div>
                         {% endif %}

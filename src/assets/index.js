@@ -1,6 +1,6 @@
 import './scss/main.scss';
 
-import Account from './components/Account';
+// import Account from './components/Account';
 import CreateResume from './components/CreateResume';
 import UpdateResume from './components/UpdateResume';
 import ActiveLink from './components/ActiveLink';
@@ -14,7 +14,7 @@ window.addEventListener('load', () => {
         Account.setAttribute(accountId, document.location.pathname);
     }
     // ActiveLink
-    const class_name = ActiveLink.getCurrentMenu(document.location.pathname)
+    const class_name = ActiveLink.getCurrentMenu(document.location.pathname);
     if (class_name) {
         ActiveLink.toggleActiveClass(class_name);
     }
@@ -23,4 +23,4 @@ window.addEventListener('load', () => {
         const titles = document.querySelectorAll('.worker-search-title');
         WorkerSwitchLink.clickOn(titles, WorkerSwitchLink.disableElement);
     }
-})
+});
