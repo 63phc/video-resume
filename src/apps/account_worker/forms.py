@@ -1,6 +1,7 @@
 from django import forms
 
 from src.apps.resume.models import Resume, Education, Skill, Job
+from src.apps.question.models import Answer
 
 
 class ResumeForm(forms.ModelForm):
@@ -119,4 +120,17 @@ class JobForm(forms.ModelForm):
             'name_company': forms.Textarea(
                 attrs={'class': 'form-control', 'rows': '5'}
             )
+        }
+
+
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = (
+            'answer',
+        )
+        widgets = {
+            'answer': forms.Textarea(
+                attrs={'class': 'form-control'}
+            ),
         }

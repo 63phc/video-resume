@@ -5,11 +5,17 @@ from django.conf import settings
 
 from src.core.utils.choices import AccountTypeChoices
 from src.apps.resume.models import Resume
+from src.apps.question.models import Answer
 
 
 class WorkerCheckingQuerySet(models.QuerySet):
     def is_created(self):
         return self.all().first()
+
+
+class CheckingAnswer(models.QuerySet):
+    def check_answer(self, **kwargs):
+        return self.filter(answer=kwargs.get('answer')).first()
 
 
 class AccountWorker(models.Model):
@@ -27,6 +33,8 @@ class AccountWorker(models.Model):
         verbose_name=_('Resume'),
         blank=True
     )
+    answer = models.ManyToManyField(
+        Answer, related_name='answers', verbose_name=_('Answers'))
     objects = WorkerCheckingQuerySet.as_manager()
 
     class Meta:

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block head %}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+{% endblock %}
+{% block content %}
+    <div class="container text-left">
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="nav nav-pills">
+            <li class="nav-item"> <a href="{% url 'dashboard_worker:dashboard_worker_main' pk=worker_pk %}" class="nav-link">{% trans 'Main' %}</a> </li>
+              <li class="nav-item"> <a class="active nav-link" href="{% url 'dashboard_worker:dashboard_worker_question' worker_pk=worker_pk %}">{% trans 'Questions' %}</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="#">{% trans 'Responses' %}</a> </li>
+            <li class="nav-item"> <a href="{% url 'dashboard_worker:dashboard_worker_resume' pk=worker_pk %}" class="nav-link">{% trans 'Resume' %}</a> </li>
+            <li class="nav-item"><a class="nav-link" href="#">{% trans 'Favourites' %}</a></li>
+          </ul>
+        </div>
+      </div>
+        <div class="row justify-content-center">
+          <div class="col-lg-10 col-md-12 col-10 border py-3 px-3 my-3 mx-auto">
+            <h3>{{ object.title }}</h3>
+            <hr>
+            <p class="mb-3">{{ object.answer }}</p>
+            <hr>
+            {% if worker_answer %}
+              <h5>{% trans 'Your answer' %}</h5>
+              <div class="answer-block">
+                <p class="mb-3">{{ worker_answer }}</p>
+              </div>
+            {% endif %}
+            <div class="row add-answer">
+              <div class="col">
+                {% csrf_token %}
+                <div class="clear-answer-button">
+                  <input type="hidden" class="id_answer" value="{{ object.pk }}">
+                  <button type="button" class="btn btn-primary add-answer-button">{% trans 'Add answer' %}</button>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3"></div>
+            <div class="div-answer-form">
+            </div>
+          </div>
+        </div>
+    </div>
+  <div class="row">
+  </div>
+{% endblock %}

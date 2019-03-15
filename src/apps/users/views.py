@@ -46,7 +46,10 @@ class ProfileView(FormView):
     template_name = 'registration/registration_profile.html'
 
     def form_valid(self, form):
-        form.save()
+        profile = form.save()
+        user = get_object_or_404(User, username=self.request.user)
+        user.profile = profile
+        user.save()
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
