@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block head %}
+{% endblock %}
+{% block content %}
+  <div class="py-5 border-0" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="nav nav-pills">
+            <li class="nav-item"> <a href="{% url 'dashboard_worker:dashboard_worker_main' pk=pk %}" class="nav-link">{% trans 'Main' %}</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="#">{% trans 'Responses' %}</a> </li>
+            <li class="nav-item"> <a href="#" class="active nav-link">{% trans 'Resume' %}</a> </li>
+            <li class="nav-item"><a class="nav-link" href="#">{% trans 'Favourites' %}</a></li>
+          </ul>
+        </div>
+      </div>
+      <a href="{% url 'dashboard_worker:dashboard_worker_resume_create' w_pk=pk %}">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-12 col-10 border py-3 px-3 my-3 mx-auto mt-4">
+              <h2>{% trans 'Add new resume' %}</h2>
+            </div>
+        </div>
+      </a>
+      {% for object in object_list %}
+        <div class="row justify-content-center">
+          <div class="col-lg-10 col-md-12 col-10 border py-3 px-3 my-3 mx-auto">
+            <h1>{{ object.title }}</h1>
+            <p class="mb-3">{{ object.about }}</p>
+            <div class="row">
+              <div class="col">
+                <a class="btn btn-primary" href="{% url 'dashboard_worker:dashboard_worker_resume_update' pk=object.pk w_pk=pk %}">{% trans 'Update' %}</a>
+                <a class="btn btn-primary ml-2" href="{% url 'dashboard_worker:dashboard_worker_resume_delete' pk=object.pk w_pk=pk %}">{% trans 'Delete' %}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="row">
+  </div>
+{% endblock %}

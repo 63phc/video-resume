@@ -105,4 +105,4 @@ class Migration(migrations.Migration):
                 related_name='skills', to='resume.Skill',
                 verbose_name='Skills'),
         ),
-    ]
+]
