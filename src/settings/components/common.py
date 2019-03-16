@@ -1,5 +1,8 @@
 import os
 
+from django.urls import reverse_lazy
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '3il&cnpn#sb$h6mj5psrhp&fy2%d*08nf)8bopor#ludxfx6f-'
 
@@ -39,6 +42,8 @@ MIDDLEWARE = [
 AUTH_USER_MODEL = 'users.User'
 
 ROOT_URLCONF = 'src.core.urls'
+
+LOGOUT_REDIRECT_URL = reverse_lazy('index')
 
 TEMPLATES = [
     {
@@ -113,3 +118,8 @@ WEBPACK_LOADER = {
 
 # it's need for flatepages
 SITE_ID = 1
+
+try:
+    from src.settings.environments.local import *
+except ImportError as e:
+    pass

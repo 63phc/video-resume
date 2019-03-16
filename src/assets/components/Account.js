@@ -1,8 +1,10 @@
-import $ from 'jquery';
-
-const Account = ((accountID = $('#account_type')) => {
-    const pathname = $(location).attr('pathname').split('/').reverse();
-    const account = $("#account_type").val(pathname[1]);
+const Account = (() => {
+    return {
+        setAttribute: (accountId, path) => {
+            accountId.setAttribute('value', path.split('/').reverse()[1]);
+        }
+    }
 })();
 
 export default Account;
+

@@ -5,8 +5,8 @@ from django.http import JsonResponse, Http404
 from django.contrib.auth import get_user_model
 
 from src.apps.resume.models import Resume
-from src.apps.account_worker.models import AccountWorker
 from django.contrib.auth.mixins import AccessMixin
+
 
 User = get_user_model()
 
@@ -85,14 +85,17 @@ class EduSkillJobAjaxMixin:
         return super(EduSkillJobAjaxMixin, self).form_valid(form)
 
 
-class CheckAccess(AccessMixin, TemplateResponseMixin):
-    def dispatch(self, request, *args, **kwargs):
-        if not self.request.user.is_authenticated:
-            return self.handle_no_permission()
-        user = get_object_or_404(User, username=self.request.user)
-        if self.kwargs.get('worker_pk'):
-            pk = self.kwargs.get('worker_pk')
-        else:
-            pk = self.kwargs.get('pk')
-        account = get_object_or_404(AccountWorker, pk=pk, worker=user)
-        return super().dispatch(request, *args, **kwargs)
+def worker_access(function):
+    def wrapper(request, *args, **kwargs):
+        if request.is_ajax():
+            return function(request, *args, **kwargs)
+
+        user = get_object_or_404(User, username=request.user)
+        worker = user.workers.is_created()
+        pk = kwargs.get('worker_pk') or kwargs.get('pk')
+        if worker.pk != int(pk):
+            raise Http404
+
+        return function(request, *args, **kwargs)
+
+    return wrapper
