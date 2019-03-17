@@ -9,13 +9,8 @@ from src.apps.question.models import Answer
 
 
 class WorkerCheckingQuerySet(models.QuerySet):
-    def is_created(self):
-        return self.all().first()
-
-
-class CheckingAnswer(models.QuerySet):
-    def check_answer(self, **kwargs):
-        return self.filter(answer=kwargs.get('answer')).first()
+    def is_created(self, user):
+        return self.filter(user=user).first()
 
 
 class AccountWorker(models.Model):

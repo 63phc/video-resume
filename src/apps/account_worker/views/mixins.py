@@ -3,10 +3,10 @@ from django.views.generic.base import ContextMixin
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse, Http404
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 
 from src.apps.resume.models import Resume
 from src.apps.question.models import Question
-from src.apps.account_worker.models import AccountWorker
 
 
 User = get_user_model()
@@ -38,6 +38,37 @@ class ResumeEduSkillJobContextMixin(ContextMixin):
         return context
 
 
+# class AjaxableResponseMixin:
+#     """
+#     Mixin to add AJAX support to a form.
+#     Must be used with an object-based FormView (e.g. CreateView)
+#     """
+#     def form_invalid(self, form):
+#         response = super().form_invalid(form)
+#         if self.request.is_ajax():
+#             if self.request.POST['tag'] == 'create':
+#                 form = self.form_class()
+#                 response_dict = {'response': str(form)}
+#                 return JsonResponse(response_dict)
+#             raise Http404
+#         else:
+#             return response
+#
+#     def form_valid(self, form):
+#         # We make sure to call the parent's form_valid() method because
+#         # it might do some processing (in the case of CreateView, it will
+#         # call form.save() for example).
+#         print(form)
+#         response = super().form_valid(form)
+#         if self.request.is_ajax():
+#             data = {
+#                 'pk': self.object.pk,
+#             }
+#             return JsonResponse(data)
+#         else:
+#             return response
+
+
 class EduSkillJobAjaxMixin:
     def form_invalid(self, form):
         if self.request.is_ajax():
@@ -59,11 +90,11 @@ class EduSkillJobAjaxMixin:
                         form.instance.question = get_object_or_404(Question, pk=self.request.POST['question_id'])
                         form.save()
                         user = get_object_or_404(User, pk=self.request.user.pk)
-                        if user.workers.is_created().answer.filter(question=form.instance.question.pk).first():
-                            answer = user.workers.is_created().answer.get(question=form.instance.question.pk)
-                            user.workers.is_created().answer.remove(answer)
+                        if user.workers.is_created(user=user).answer.filter(question=form.instance.question.pk).first():
+                            answer = user.workers.is_created(user=user).answer.get(question=form.instance.question.pk)
+                            user.workers.is_created(user=user).answer.remove(answer)
                             answer.delete()
-                        user.workers.is_created().answer.add(form.instance)
+                        user.workers.is_created(user=user).answer.add(form.instance)
                         response_dict = {'response': form.instance.answer}
                     form.save()
                     if self.form_class.__name__ == 'EducationForm':
@@ -83,9 +114,11 @@ class EduSkillJobAjaxMixin:
                         }
                     form.save()
                     return JsonResponse(response_dict)
+
             if self.request.POST['tag'] == 'create':
                 form = self.form_class()
                 response_dict = {'response': str(form)}
+
                 return JsonResponse(response_dict)
 
             else:
@@ -109,7 +142,7 @@ def worker_access(function):
             return function(request, *args, **kwargs)
 
         user = get_object_or_404(User, username=request.user)
-        worker = user.workers.is_created()
+        worker = user.workers.is_created(user=user)
         pk = kwargs.get('worker_pk') or kwargs.get('pk')
         if worker.pk != int(pk):
             raise Http404
@@ -117,6 +150,9 @@ def worker_access(function):
         return function(request, *args, **kwargs)
 
     return wrapper
+
+
+DECORATOR_METHODS = (login_required, worker_access)
 
 
 class QuestionContextMixin(ContextMixin):

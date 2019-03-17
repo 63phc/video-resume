@@ -6,8 +6,8 @@ from django.urls import reverse_lazy
 
 
 class HrCheckingQuerySet(models.QuerySet):
-    def is_created(self):
-        return self.all().first()
+    def is_created(self, user):
+        return self.filter(user=user).first()
 
 
 class AccountHr(models.Model):

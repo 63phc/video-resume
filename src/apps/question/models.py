@@ -5,7 +5,8 @@ from src.apps.account_hr.models import AccountHr
 
 
 class CheckWorkerQueryset(models.QuerySet):
-    def is_worker_do(self, question, worker_pk):
+    def is_worker_answered(self, question, worker_pk):
+
         return self.filter(question=question, answers__pk=worker_pk).first()
 
 
