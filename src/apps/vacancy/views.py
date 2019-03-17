@@ -45,8 +45,13 @@ class MultipleSelectWithPop(forms.SelectMultiple):
         return html+popupplus
 
 
-class VacancyDetail(generic.DetailView):
+class VacancyDetailView(generic.DetailView):
     template_name = 'vacancy/detail.html'
+    model = Vacancy
+
+
+class VacancyListView(generic.ListView):
+    template_name = 'vacancy/list.html'
     model = Vacancy
 
 

@@ -8,9 +8,9 @@
       <div class="row">
         <div class="col-md-12">
           <ul class="nav nav-pills">
-            <li class="nav-item"> <a href="{% url 'dashboard_hr:main' object.pk  %}" class="active nav-link">{% trans 'Main' %}</a> </li>
+            <li class="nav-item"> <a href="{% url 'dashboard_hr:main' object.pk %}" class="active nav-link">{% trans 'Main' %}</a> </li>
             <li class="nav-item"> <a class="nav-link" href="#">{% trans 'Questions' %}</a> </li>
-            <li class="nav-item"> <a href="#" class="nav-link">{% trans 'Vacancies' %}</a> </li>
+            <li class="nav-item"> <a href="{% url 'vacancies:list' %}" class="nav-link">{% trans 'Vacancies' %}</a> </li>
             <li class="nav-item"><a class="nav-link" href="#">{% trans 'Favourites' %}</a></li>
           </ul>
         </div>
@@ -39,7 +39,7 @@
               <ul class="list-group">
                 {% for vacancy in vacancies %}
                   <li class="list-inline-item">
-                    <a class="" href="{% url 'vacancies:vacancy_detail' vacancy.id %}">{{ vacancy.title }}</a>
+                    <a class="" href="{% url 'vacancies:detail' vacancy.id %}">{{ vacancy.title }}</a>
                   </li>
                 {% endfor %}
               </ul>
@@ -50,7 +50,7 @@
             {% endif %}
           </div>
           <div class="tab-content mt-2">
-            <a href="{% url 'vacancies:vacancy_create' %}" class="btn btn-primary">{% trans 'Add vacancy' %}</a>
+            <a href="{% url 'vacancies:create' %}" class="btn btn-outline-info">{% trans 'Add vacancy' %}</a>
           </div>
         </div>
       </div>
