@@ -1,9 +1,11 @@
 from django.urls import path
 
-from .views import HRDashboardView, AccountHrCreateView
+from .views import DashboardView, AccountHrCreateView
+
 
 app_name = 'account_hr'
+
 urlpatterns = [
-    path('<pk>/', HRDashboardView.as_view(), name='main'),
+    path('<pk>/', DashboardView.as_view(), name='main'),
 
 ]

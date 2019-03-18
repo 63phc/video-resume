@@ -1,16 +1,13 @@
 from django import forms
-from django.conf import settings
-from django.forms import widgets
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
-from django.urls import reverse, reverse_lazy
-from django.utils.safestring import mark_safe
+from django.utils.html import escape
+from django.urls import reverse_lazy
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
 
 from src.apps.account_hr.models import AccountHr
-from src.apps.account_hr.views import HRDashboardView
 from .models import Vacancy, Tag
 
 
@@ -42,6 +39,7 @@ class MultipleSelectWithPop(forms.SelectMultiple):
     def render(self, name, *args, **kwargs):
         html = super(MultipleSelectWithPop, self).render(name, *args, **kwargs)
         popupplus = render_to_string("form/popupplus.html", {'field': name})
+
         return html+popupplus
 
 
@@ -94,7 +92,6 @@ class TagForm(forms.ModelForm):
         fields = ['title', ]
 
 
-from django.utils.html import escape
 def handlePopAdd(request, addForm, field):
     if request.method == "POST":
         form = addForm(request.POST)
@@ -112,6 +109,5 @@ def handlePopAdd(request, addForm, field):
     return render_to_response("vacancy/add_popup.html", pageContext)
 
 
-@csrf_exempt
 def tag_create_view(request):
     return handlePopAdd(request, TagForm, 'tags')

@@ -11,12 +11,12 @@ from src.apps.vacancy.models import Vacancy
 from .models import AccountHr
 
 
-class HRDashboardView(LoginRequiredMixin, DetailView):
+class DashboardView(LoginRequiredMixin, DetailView):
     model = AccountHr
     template_name = 'dashboard_hr/index.html'
 
     def get_context_data(self, *args, **kwargs):
-        context = super(HRDashboardView, self).get_context_data(**kwargs)
+        context = super(DashboardView, self).get_context_data(**kwargs)
         context['vacancies'] = Vacancy.objects.filter(
             account_hr=self.object.id
         )[:5]
