@@ -2,15 +2,16 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 
 from src.apps.question.models import Question, Answer
 from ..forms import AnswerForm
 from .mixins import (
-    DECORATOR_METHODS, QuestionContextMixin, EduSkillJobAjaxMixin)
+    worker_access, QuestionContextMixin, EduSkillJobAjaxMixin)
 
 
-@method_decorator(DECORATOR_METHODS, name='dispatch')
+@method_decorator((login_required, worker_access), name='dispatch')
 class QuestionsListView(QuestionContextMixin, ListView):
     model = Question
     template_name = 'dashboard_worker/question/list.html'
@@ -24,7 +25,7 @@ class QuestionsListView(QuestionContextMixin, ListView):
         return questions
 
 
-@method_decorator(DECORATOR_METHODS, name='dispatch')
+@method_decorator((login_required, worker_access), name='dispatch')
 class QuestionDetailView(QuestionContextMixin, DetailView):
     model = Question
     template_name = 'dashboard_worker/question/detail.html'
@@ -39,7 +40,7 @@ class QuestionDetailView(QuestionContextMixin, DetailView):
         return context
 
 
-@method_decorator(DECORATOR_METHODS, name='dispatch')
+@method_decorator((login_required, worker_access), name='dispatch')
 class AnswerAddSubmitForm(EduSkillJobAjaxMixin, CreateView):
     form_class = AnswerForm
     model = Answer

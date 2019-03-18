@@ -3,7 +3,6 @@ from django.views.generic.base import ContextMixin
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse, Http404
 from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required
 
 from src.apps.resume.models import Resume
 from src.apps.question.models import Question
@@ -36,37 +35,6 @@ class ResumeEduSkillJobContextMixin(ContextMixin):
         context['title'] = resume.title
         context['worker_pk'] = self.kwargs.get('worker_pk')
         return context
-
-
-# class AjaxableResponseMixin:
-#     """
-#     Mixin to add AJAX support to a form.
-#     Must be used with an object-based FormView (e.g. CreateView)
-#     """
-#     def form_invalid(self, form):
-#         response = super().form_invalid(form)
-#         if self.request.is_ajax():
-#             if self.request.POST['tag'] == 'create':
-#                 form = self.form_class()
-#                 response_dict = {'response': str(form)}
-#                 return JsonResponse(response_dict)
-#             raise Http404
-#         else:
-#             return response
-#
-#     def form_valid(self, form):
-#         # We make sure to call the parent's form_valid() method because
-#         # it might do some processing (in the case of CreateView, it will
-#         # call form.save() for example).
-#         print(form)
-#         response = super().form_valid(form)
-#         if self.request.is_ajax():
-#             data = {
-#                 'pk': self.object.pk,
-#             }
-#             return JsonResponse(data)
-#         else:
-#             return response
 
 
 class EduSkillJobAjaxMixin:
@@ -150,9 +118,6 @@ def worker_access(function):
         return function(request, *args, **kwargs)
 
     return wrapper
-
-
-DECORATOR_METHODS = (login_required, worker_access)
 
 
 class QuestionContextMixin(ContextMixin):
