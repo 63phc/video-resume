@@ -5,7 +5,7 @@ from django.conf import settings
 
 from src.core.utils.choices import AccountTypeChoices
 from src.apps.resume.models import Resume
-from src.apps.question.models import Answer
+from src.apps.question.models import Answer, Question
 
 
 class WorkerCheckingQuerySet(models.QuerySet):

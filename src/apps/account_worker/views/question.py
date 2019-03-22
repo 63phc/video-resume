@@ -17,11 +17,7 @@ class QuestionsListView(QuestionContextMixin, ListView):
     template_name = 'dashboard_worker/question/list.html'
 
     def get_queryset(self, **kwargs):
-        questions = Question.objects.all()
-        for item in questions:
-            if Answer.objects.is_worker_answered(question=item, worker_pk=self.kwargs.get('worker_pk')):
-                item.is_answered = True
-
+        questions = Question.answered.set_answer(worker_pk=self.kwargs.get('worker_pk'))
         return questions
 
 
