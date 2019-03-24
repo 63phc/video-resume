@@ -126,7 +126,7 @@ class JobForm(forms.ModelForm):
 class AnswerForm(forms.ModelForm):
     class Meta:
         model = Answer
-        fields = ['answer', ]
+        fields = ['answer', 'question']
         widgets = {
             'answer': forms.Textarea(
                 attrs={'class': 'form-control'}

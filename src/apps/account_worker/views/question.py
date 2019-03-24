@@ -17,8 +17,15 @@ class QuestionsListView(QuestionContextMixin, ListView):
     template_name = 'dashboard_worker/question/list.html'
 
     def get_queryset(self, **kwargs):
-        questions = Question.answered.set_answer(worker_pk=self.kwargs.get('worker_pk'))
+        questions = Question.objects.exclude(
+            answered_questions__worker__pk=self.kwargs.get('worker_pk'))
         return questions
+
+    def get_context_data(self, **kwargs):
+        context = super(QuestionsListView, self).get_context_data()
+        context['answered'] = Question.objects.filter(
+            answered_questions__worker__pk=self.kwargs.get('worker_pk'))
+        return context
 
 
 @method_decorator((login_required, worker_access), name='dispatch')
@@ -29,7 +36,8 @@ class QuestionDetailView(QuestionContextMixin, DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super(QuestionDetailView, self).get_context_data()
         question = get_object_or_404(Question, pk=self.kwargs.get('pk'))
-        answer = Answer.objects.is_worker_answered(question=question, worker_pk=self.kwargs.get('worker_pk'))
+        answer = Answer.objects.is_worker_answered(
+            question=question, worker_pk=self.kwargs.get('worker_pk'))
         if answer:
             context['worker_answer'] = answer.answer
 

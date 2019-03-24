@@ -23,11 +23,11 @@ const WorkerAnswer = (() => {
             get_func(div_form)
         })
         .catch(function (error) {
-            console.log(error) // delete
+            console.log(error) // TODO: delete
             console.log('А response is not received');
         });
     };
-    function viewForm(response, div_form) {
+    function viewForm(div_form) {
         let sub_form = document.createElement('form');
         sub_form.className = 'answer-form'
         sub_form.name = 'answer-form'
@@ -47,9 +47,8 @@ const WorkerAnswer = (() => {
             add_button.onclick = (e) => {
                 if (div_form.children.length == 0) {
                     e.preventDefault();
-                    let params = new URLSearchParams();
-                    params.append('tag', 'create');
-                    sendRequest(params, viewForm, div_form, get_func)
+                    viewForm(div_form)
+                    get_func(div_form)
                 } else {
                     let div_temp = document.querySelector('.answer-form');
                     div_form.removeChild(div_temp);
@@ -66,7 +65,8 @@ const WorkerAnswer = (() => {
                 }
                 let params_send = new URLSearchParams();
                 const answer_pk = document.querySelector('.id_answer')
-                params_send.append('question_id', answer_pk.value);
+                const form = document.querySelector('.answer-form')
+                params_send.append('question', answer_pk.value);
                 params_send.append('answer', text.value);
                 params_send.append('tag', 'add');
                 sendRequest(params_send, viewAnswer, div_form, (div_form) => {})

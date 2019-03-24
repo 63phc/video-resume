@@ -40,6 +40,7 @@ class ResumeEduSkillJobContextMixin(ContextMixin):
 class EduSkillJobAjaxMixin:
     def form_invalid(self, form):
         if self.request.is_ajax():
+            print('asdfasdfasdfasd')
             if self.request.POST['tag'] == 'create':
                 form = self.form_class()
                 response_dict = {'response': str(form)}
@@ -55,7 +56,7 @@ class EduSkillJobAjaxMixin:
                 if form.is_valid():
                     if self.form_class.__name__ == 'AnswerForm':
                         form.save(commit=False)
-                        form.instance.question = get_object_or_404(Question, pk=self.request.POST['question_id'])
+                        form.instance.question = get_object_or_404(Question, pk=self.request.POST['question'])
                         form.save()
                         user = get_object_or_404(User, pk=self.request.user.pk)
                         if user.workers.is_created(user=user).answer.filter(question=form.instance.question.pk).first():
@@ -82,13 +83,6 @@ class EduSkillJobAjaxMixin:
                         }
                     form.save()
                     return JsonResponse(response_dict)
-
-            if self.request.POST['tag'] == 'create':
-                form = self.form_class()
-                response_dict = {'response': str(form)}
-
-                return JsonResponse(response_dict)
-
             else:
                 raise Http404
         obj = form.save(commit=False)

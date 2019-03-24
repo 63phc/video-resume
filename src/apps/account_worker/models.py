@@ -43,3 +43,15 @@ class AccountWorker(models.Model):
     def get_absolute_url(self):
         return reverse_lazy(
             'dashboard_worker:dashboard_worker_main', kwargs={'pk': self.pk})
+
+
+class WorkerAnswered(models.Model):
+    question = models.ForeignKey(
+        Question, on_delete=models.PROTECT, verbose_name=_('Questions'),
+        related_name='answered_questions')
+    answer = models.ForeignKey(
+        Answer, on_delete=models.PROTECT, related_name='answered_answers',
+        verbose_name=_('Answers'))
+    worker = models.ForeignKey(
+        AccountWorker, on_delete=models.PROTECT, related_name='answered_worker',
+        verbose_name=_('Workers'))
