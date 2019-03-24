@@ -16,10 +16,17 @@
           </ul>
         </div>
       </div>
+      {% for object in answered %}
+        <div class="row justify-content-center">
+          <div class="col-lg-10 col-md-12 col-10 border py-2 px-3 my-1 mx-auto">
+            <a href="{% url 'dashboard_worker:dashboard_worker_question_detail' pk=object.pk worker_pk=worker_pk %}"><h5>{{ object.title }} <i class="fas fa-check" style="color: green;"></i></h5></a>
+          </div>
+        </div>
+      {% endfor %}
       {% for object in object_list %}
         <div class="row justify-content-center">
           <div class="col-lg-10 col-md-12 col-10 border py-2 px-3 my-1 mx-auto">
-            <a href="{% url 'dashboard_worker:dashboard_worker_question_detail' pk=object.pk worker_pk=worker_pk %}"><h5>{{ object.title }} {% if object.is_answered %}<i class="fas fa-check" style="color: green;"></i>{% endif %}</h5></a>
+            <a href="{% url 'dashboard_worker:dashboard_worker_question_detail' pk=object.pk worker_pk=worker_pk %}"><h5>{{ object.title }}</h5></a>
           </div>
         </div>
       {% endfor %}

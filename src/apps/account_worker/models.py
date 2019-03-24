@@ -47,11 +47,11 @@ class AccountWorker(models.Model):
 
 class WorkerAnswered(models.Model):
     question = models.ForeignKey(
-        Question, on_delete=models.PROTECT, verbose_name=_('Questions'),
+        Question, on_delete=models.CASCADE, verbose_name=_('Questions'),
         related_name='answered_questions')
     answer = models.ForeignKey(
-        Answer, on_delete=models.PROTECT, related_name='answered_answers',
+        Answer, on_delete=models.CASCADE, related_name='answered_answers',
         verbose_name=_('Answers'))
     worker = models.ForeignKey(
-        AccountWorker, on_delete=models.PROTECT, related_name='answered_worker',
+        AccountWorker, on_delete=models.CASCADE, related_name='answered_worker',
         verbose_name=_('Workers'))
