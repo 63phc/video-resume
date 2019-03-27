@@ -46,14 +46,18 @@ class ProfileView(FormView):
     template_name = 'registration/registration_profile.html'
 
     def form_valid(self, form):
-        form.save()
+        profile = form.save()
+        user = get_object_or_404(User, username=self.request.user)
+        user.profile = profile
+        user.save()
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         user = get_object_or_404(User, username=self.request.user)
-        worker = user.workers.is_created()
-        hr = user.hrs.is_created()
+        worker = user.workers.is_created(user=user)
+        hr = user.hrs.is_created(user=user)
         if hr:
+
             return hr.get_absolute_url
         else:
             return worker.get_absolute_url
@@ -65,8 +69,8 @@ class LoginView(ParentLoginView):
 
     def get_success_url(self):
         user = get_object_or_404(User, username=self.request.user)
-        worker = user.workers.is_created()
-        hr = user.hrs.is_created()
+        worker = user.workers.is_created(user=user)
+        hr = user.hrs.is_created(user=user)
         if worker:
 
             return worker.get_absolute_url

@@ -13,7 +13,7 @@ def url_dashboard(context):
     if not user:
         return context
 
-    worker = user.workers.is_created()
+    worker = user.workers.is_created(user=user)
 
     if worker and not context.get('worker_pk'):
         context['worker_pk'] = worker.pk
