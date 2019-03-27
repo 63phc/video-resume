@@ -364,7 +364,7 @@ mark,
 .list-inline-item {
   display: inline-block; }
   .list-inline-item:not(:last-child) {
-    margin-right: 0.5rem; }
+    margin-right: 0; }
 
 .initialism {
   font-size: 90%;
@@ -7458,3 +7458,12 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
+.vert-align {
+  margin: 5px 5px 5px 5px;
+}
+
+//li {
+//  margin-top: 5px;
+//  margin-right: 20px;
+//  align-content: flex-start;
+//}
