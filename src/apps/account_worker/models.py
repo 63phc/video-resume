@@ -5,11 +5,12 @@ from django.conf import settings
 
 from src.core.utils.choices import AccountTypeChoices
 from src.apps.resume.models import Resume
+from src.apps.question.models import Answer, Question
 
 
 class WorkerCheckingQuerySet(models.QuerySet):
-    def is_created(self):
-        return self.all().first()
+    def is_created(self, user):
+        return self.filter(user=user).first()
 
 
 class AccountWorker(models.Model):
@@ -27,6 +28,8 @@ class AccountWorker(models.Model):
         verbose_name=_('Resume'),
         blank=True
     )
+    answer = models.ManyToManyField(
+        Answer, related_name='answers', verbose_name=_('Answers'))
     objects = WorkerCheckingQuerySet.as_manager()
 
     class Meta:
@@ -40,3 +43,15 @@ class AccountWorker(models.Model):
     def get_absolute_url(self):
         return reverse_lazy(
             'dashboard_worker:dashboard_worker_main', kwargs={'pk': self.pk})
+
+
+class WorkerAnswered(models.Model):
+    question = models.ForeignKey(
+        Question, on_delete=models.CASCADE, verbose_name=_('Questions'),
+        related_name='answered_questions')
+    answer = models.ForeignKey(
+        Answer, on_delete=models.CASCADE, related_name='answered_answers',
+        verbose_name=_('Answers'))
+    worker = models.ForeignKey(
+        AccountWorker, on_delete=models.CASCADE, related_name='answered_worker',
+        verbose_name=_('Workers'))

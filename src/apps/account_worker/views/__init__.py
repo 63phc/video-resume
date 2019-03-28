@@ -7,3 +7,5 @@ from .resume import (
     AccountWorkerView, ResumeListView, ResumeCreateView,
     ResumeUpdateView, ResumeDeleteView
 )
+from .question import (
+    QuestionsListView, QuestionDetailView, AnswerAddSubmitForm)

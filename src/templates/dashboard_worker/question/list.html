@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block head %}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+{% endblock %}
+{% block content %}
+    <div class="container text-left">
+      <div class="row mb-2">
+        <div class="col-md-12">
+          <ul class="nav nav-pills">
+            <li class="nav-item"> <a href="{% url 'dashboard_worker:dashboard_worker_main' pk=worker_pk %}" class="nav-link">{% trans 'Main' %}</a> </li>
+              <li class="nav-item"> <a class="active nav-link" href="{% url 'dashboard_worker:dashboard_worker_question' worker_pk=worker_pk %}">{% trans 'Questions' %}</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="#">{% trans 'Responses' %}</a> </li>
+            <li class="nav-item"> <a href="{% url 'dashboard_worker:dashboard_worker_resume' pk=worker_pk %}" class="nav-link">{% trans 'Resume' %}</a> </li>
+            <li class="nav-item"><a class="nav-link" href="#">{% trans 'Favourites' %}</a></li>
+          </ul>
+        </div>
+      </div>
+      {% for object in answered %}
+        <div class="row justify-content-center">
+          <div class="col-lg-10 col-md-12 col-10 border py-2 px-3 my-1 mx-auto">
+            <a href="{% url 'dashboard_worker:dashboard_worker_question_detail' pk=object.pk worker_pk=worker_pk %}"><h5>{{ object.title }} <i class="fas fa-check" style="color: green;"></i></h5></a>
+          </div>
+        </div>
+      {% endfor %}
+      {% for object in object_list %}
+        <div class="row justify-content-center">
+          <div class="col-lg-10 col-md-12 col-10 border py-2 px-3 my-1 mx-auto">
+            <a href="{% url 'dashboard_worker:dashboard_worker_question_detail' pk=object.pk worker_pk=worker_pk %}"><h5>{{ object.title }}</h5></a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  <div class="row">
+  </div>
+{% endblock %}

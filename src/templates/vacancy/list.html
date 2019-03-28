@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+{% block content %}
+<main role="main" class="inner cover">
+    {% trans 'Vacancy list' %}:<br><br>
+    <table class="table table-striped table-bordered">
+        <th style="width: 30%;">{% trans 'Title' %}</th>
+        <th>{% trans 'Description' %}</th>
+        {% for vacancy in  object_list %}
+            <tr>
+                <td><a href="{% url 'vacancies:detail' vacancy.id %}">{{vacancy.title}}</a></td>
+                <td>{{vacancy.description|truncatechars:150}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <a href="javascript:history.back()">{% trans '&#8592; Go Back' %}</a>
+</main>
+{% endblock %}

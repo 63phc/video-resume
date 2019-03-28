@@ -18,7 +18,7 @@ class SlugMixin(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         self.slug = slugify(unidecode(self.title), allow_unicode=True)
-        super(SlugMixin, self).save(self, using=None, update_fields=None)
+        super(SlugMixin, self).save(force_insert, using, update_fields)
 
 
 class Tag(SlugMixin, models.Model):
@@ -47,6 +47,7 @@ class Vacancy(SlugMixin, models.Model):
     class Meta:
         verbose_name = _('Vacancy')
         verbose_name_plural = _('Vacancies')
+        ordering = ['-created_at']
 
     def __str__(self):
         return self.title

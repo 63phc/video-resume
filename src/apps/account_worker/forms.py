@@ -1,16 +1,17 @@
 from django import forms
 
 from src.apps.resume.models import Resume, Education, Skill, Job
+from src.apps.question.models import Answer
 
 
 class ResumeForm(forms.ModelForm):
     class Meta:
         model = Resume
-        fields = (
+        fields = [
             'title', 'other_skills', 'hobbies',
             'about', 'education', 'skill',
             'job'
-        )
+        ]
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'other_skills': forms.Textarea(
@@ -43,11 +44,11 @@ class ResumeMainForm(forms.ModelForm):
 
     class Meta:
         model = Resume
-        fields = (
+        fields = [
             'title', 'other_skills', 'hobbies',
             'about', 'education', 'skill',
             'job'
-        )
+        ]
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'other_skills': forms.Textarea(
@@ -68,10 +69,10 @@ class ResumeMainForm(forms.ModelForm):
 class EducationForm(forms.ModelForm):
     class Meta:
         model = Education
-        fields = (
+        fields = [
             'period_edu', 'name_institution', 'faculty',
             'form_study'
-        )
+        ]
         widgets = {
             'period_edu': forms.TextInput(
                 attrs={'class': 'form-control', 'required': 'required'}
@@ -95,7 +96,7 @@ class EducationForm(forms.ModelForm):
 class SkillForm(forms.ModelForm):
     class Meta:
         model = Skill
-        fields = ('name',)
+        fields = ['name', ]
         widgets = {
             'name': forms.TextInput(
                 attrs={'class': 'form-control', 'required': 'required'}
@@ -106,9 +107,9 @@ class SkillForm(forms.ModelForm):
 class JobForm(forms.ModelForm):
     class Meta:
         model = Job
-        fields = (
+        fields = [
             'period_work', 'position', 'name_company'
-        )
+        ]
         widgets = {
             'period_work': forms.TextInput(
                 attrs={'class': 'form-control'}
@@ -119,4 +120,15 @@ class JobForm(forms.ModelForm):
             'name_company': forms.Textarea(
                 attrs={'class': 'form-control', 'rows': '5'}
             )
+        }
+
+
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = ['answer', 'question']
+        widgets = {
+            'answer': forms.Textarea(
+                attrs={'class': 'form-control'}
+            ),
         }

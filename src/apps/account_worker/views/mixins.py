@@ -1,11 +1,12 @@
 from django.urls import reverse_lazy
-from django.views.generic.base import ContextMixin, TemplateResponseMixin
+from django.views.generic.base import ContextMixin
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse, Http404
 from django.contrib.auth import get_user_model
 
 from src.apps.resume.models import Resume
-from django.contrib.auth.mixins import AccessMixin
+from src.apps.question.models import Question
+from ..models import WorkerAnswered
 
 
 User = get_user_model()
@@ -53,6 +54,25 @@ class EduSkillJobAjaxMixin:
             if self.request.POST['tag'] == 'add':
                 form = self.form_class(self.request.POST)
                 if form.is_valid():
+                    if self.form_class.__name__ == 'AnswerForm':
+                        form.save(commit=False)
+                        form.instance.question = get_object_or_404(Question, pk=self.request.POST['question'])
+                        form.save()
+                        user = get_object_or_404(User, pk=self.request.user.pk)
+                        worker = user.workers.is_created(user=user)
+                        if user.workers.is_created(user=user).answer.filter(
+                                question=form.instance.question.pk).first():
+                            answer = user.workers.is_created(user=user).answer.get(
+                                question=form.instance.question.pk)
+                            user.workers.is_created(user=user).answer.remove(answer)
+                            answer.delete()
+                        user.workers.is_created(user=user).answer.add(form.instance)
+                        form.save()
+                        answered = WorkerAnswered.objects.create(
+                            worker=worker, question=form.instance.question,
+                            answer=form.instance)
+                        answered.save()
+                        response_dict = {'response': form.instance.answer}
                     form.save()
                     if self.form_class.__name__ == 'EducationForm':
                         response_dict = {
@@ -91,7 +111,7 @@ def worker_access(function):
             return function(request, *args, **kwargs)
 
         user = get_object_or_404(User, username=request.user)
-        worker = user.workers.is_created()
+        worker = user.workers.is_created(user=user)
         pk = kwargs.get('worker_pk') or kwargs.get('pk')
         if worker.pk != int(pk):
             raise Http404
@@ -99,3 +119,11 @@ def worker_access(function):
         return function(request, *args, **kwargs)
 
     return wrapper
+
+
+class QuestionContextMixin(ContextMixin):
+    def get_context_data(self, *args, **kwargs):
+        context = super(
+            QuestionContextMixin, self).get_context_data(**kwargs)
+        context['worker_pk'] = self.kwargs.get('worker_pk')
+        return context

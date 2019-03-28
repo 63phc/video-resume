@@ -8,6 +8,7 @@
         <div class="col-md-12">
           <ul class="nav nav-pills">
             <li class="nav-item"> <a href="{% url 'dashboard_worker:dashboard_worker_main' pk=pk %}" class="nav-link">{% trans 'Main' %}</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="{% url 'dashboard_worker:dashboard_worker_question' worker_pk=pk %}">{% trans 'Questions' %}</a> </li>
             <li class="nav-item"> <a class="nav-link" href="#">{% trans 'Responses' %}</a> </li>
             <li class="nav-item"> <a href="#" class="active nav-link">{% trans 'Resume' %}</a> </li>
             <li class="nav-item"><a class="nav-link" href="#">{% trans 'Favourites' %}</a></li>

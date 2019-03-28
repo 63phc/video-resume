@@ -44,20 +44,20 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = (
+        fields = [
             'username', 'email', 'password1',
             'password2', 'account'
-        )
+        ]
 
 
 class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = (
+        fields = [
             'first_name', 'second_name', 'birth',
             'city', 'family_status', 'phone'
-        )
+        ]
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'second_name': forms.TextInput(attrs={'class': 'form-control'}),
