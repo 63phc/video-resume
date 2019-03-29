@@ -6,7 +6,7 @@ from .models import Question, Answer
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     list_display = [
-        'title', 'slug', 'answer']
+        'title', 'slug', ]
     prepopulated_fields = {'slug': ('title',)}
 
 
