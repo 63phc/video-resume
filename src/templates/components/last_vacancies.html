@@ -1,5 +1,18 @@
-<ul>
+<div class="my-slider">
   {% for vacancy in vacancies %}
-      <li> {{ vacancy.title }} </li>
+      <div> {{ vacancy.title }} </div>
   {% endfor %}
-</ul>
+</div>
+
+<script type="module">
+  var slider = tns({
+    container: '.my-slider',
+    items: 1,
+    slideBy: 'page',
+    autoplay: false,
+    controls: true,
+    controlsText: ['<', '>'],
+    controlsPosition: 'bottom',
+      nav: false,
+  });
+</script>

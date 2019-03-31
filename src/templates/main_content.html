@@ -1,4 +1,4 @@
-{% load i18n static staticfiles last_vacancies %}
+{% load i18n static staticfiles last_vacancies last_resumes %}
 
 <main role="main" class="inner cover">
     <h1 class="cover-heading">{% trans 'Video resume gives you new opportunities.' %}</h1>
@@ -14,4 +14,6 @@
     </p>
     <hr></hr>
     {% last_vacancies %}
+    <hr></hr>
+    {% last_resumes %}
 </main>

@@ -6,7 +6,7 @@ import UpdateResume from './components/UpdateResume';
 import ActiveLink from './components/ActiveLink';
 import WorkerSwitchLink from './components/WorkerSwitchLink';
 import WorkerAnswer from './components/WorkerAnswer';
-
+import { tns } from "./node_modules/tiny-slider/src/tiny-slider"
 
 window.addEventListener('load', () => {
     // Account
