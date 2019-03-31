@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 {% block head %}
 {% endblock %}
 {% block content %}
@@ -20,6 +21,7 @@
             <h3>{{ object.title }}</h3>
             <hr>
             <p class="mb-3">{{ object.answer }}</p>
+            <input type="hidden" value="{{ LANGUAGE_CODE }}" class="language">
             <hr>
             {% if worker_answer %}
               <h5>{% trans 'Your answer' %}</h5>

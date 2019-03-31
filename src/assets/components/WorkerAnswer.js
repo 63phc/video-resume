@@ -23,7 +23,6 @@ const WorkerAnswer = (() => {
             get_func(div_form)
         })
         .catch(function (error) {
-            console.log(error) // TODO: delete
             console.log('А response is not received');
         });
     };
@@ -31,7 +30,14 @@ const WorkerAnswer = (() => {
         let sub_form = document.createElement('form');
         sub_form.className = 'answer-form'
         sub_form.name = 'answer-form'
-        sub_form.innerHTML = '<tr><th><label for="id_answer">Answer:</label></th><td><textarea name="answer" cols="40" rows="10" class="form-control" id="id_answer"></textarea></td></tr><button type="button" class="btn btn-primary answer-create-add mt-2">Add this answer</button><div id="error"></div>'
+        let lang = document.querySelector('.language')
+        let title_button
+        if (lang.value == 'ru') {
+            title_button = 'Добавить этот ответ'
+        } else {
+            title_button = 'Add this answer'
+        }
+        sub_form.innerHTML = '<tr><th><label for="id_answer">Answer:</label></th><td><textarea name="answer" cols="40" rows="10" class="form-control" id="id_answer"></textarea></td></tr><button type="button" class="btn btn-primary answer-create-add mt-2">' + title_button + '</button><div id="error"></div>'
         div_form.appendChild(sub_form);
     };
     function viewAnswer(response, div_form) {
