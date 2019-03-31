@@ -109,5 +109,6 @@ def handlePopAdd(request, addForm, field):
     return render_to_response("vacancy/add_popup.html", pageContext)
 
 
+@csrf_exempt
 def tag_create_view(request):
     return handlePopAdd(request, TagForm, 'tags')
