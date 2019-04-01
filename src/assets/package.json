@@ -12,6 +12,7 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
+    "@glidejs/glide": "https://github.com/glidejs/glide",
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "babel-loader": "7",
