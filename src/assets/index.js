@@ -6,7 +6,27 @@ import UpdateResume from './components/UpdateResume';
 import ActiveLink from './components/ActiveLink';
 import WorkerSwitchLink from './components/WorkerSwitchLink';
 import WorkerAnswer from './components/WorkerAnswer';
-
+import { tns } from "tiny-slider/src/tiny-slider"
+var slider = tns({
+    container: '.my-slider',
+    items: 2,
+    slideBy: 'page',
+    autoplay: false,
+    controls: true,
+    controlsText: ['<', '>'],
+    controlsPosition: 'bottom',
+    nav: false,
+  });
+var vacancy_slider = tns({
+    container: '.vacancy-slider',
+    items: 2,
+    slideBy: 'page',
+    autoplay: false,
+    controls: true,
+    controlsText: ['<', '>'],
+    controlsPosition: 'bottom',
+    nav: false,
+  });
 
 window.addEventListener('load', () => {
     // Account

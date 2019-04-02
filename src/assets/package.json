@@ -12,6 +12,7 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
+    "@glidejs/glide": "https://github.com/glidejs/glide",
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "babel-loader": "7",
@@ -20,6 +21,7 @@
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "tiny-slider": "^2.9.1",
     "webpack-bundle-tracker": "^0.3.0"
   }
 }
