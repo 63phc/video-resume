@@ -11,6 +11,11 @@ const CreateResume = ((createID =document.getElementById('#create_resume')) => {
             const form_ed = document.querySelector('.edu-form');
             const form_sk = document.querySelector('.skill-form');
             const form_jo = document.querySelector('.job-form');
+            const select_lang_ru = {
+                'education': 'Добавить это образование',
+                'skill': 'Добавить этот навык',
+                'job': 'Добавить эту работу'
+            }
 
             function getUrl(destination) {
                 return 'http://' + host + '/dashboard/worker/' + destination + '/create/' + '0' + '/' + '0'
@@ -89,8 +94,15 @@ const CreateResume = ((createID =document.getElementById('#create_resume')) => {
                         .then(function (response) {
                             let create_form = document.querySelector('.' + destination + '-form-create')
                             let sub_form = document.createElement('form');
+                            let lang = document.querySelector('.language')
+                            let title_button
+                            if (lang.value == 'ru') {
+                                title_button = select_lang_ru[destination]
+                            } else {
+                                title_button = 'Add this ' + destination
+                            }
                             sub_form.className = destination + '-form-create-second'
-                            sub_form.innerHTML = '<hr>' + response['data']['response'] + '<button type="button" class="btn btn-primary ' + destination + '-create-add mt-2">Add this ' + destination + '</button><hr>'
+                            sub_form.innerHTML = '<hr>' + response['data']['response'] + '<button type="button" class="btn btn-primary ' + destination + '-create-add mt-2">' + title_button + '</button><hr>'
                             create_form.appendChild(sub_form);
                             get_func(div, form, sub_form, destination)
                           })

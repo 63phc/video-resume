@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 {% block head %}
 {% endblock %}
 {% block content %}
@@ -90,6 +91,7 @@
                   {{ form.job.errors }}
                 </div>
                 <hr>
+                <input type="hidden" value="{{ LANGUAGE_CODE }}" class="language">
                 <button type="submit" class="btn btn-primary">{% trans 'Add resume' %}</button>
               </form>
             </div>
