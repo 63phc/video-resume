@@ -1,7 +1,6 @@
 from django.urls import path
 
-from .views import VacancyDetailView, VacancyCreateView, tag_create_view, \
-    VacancyListView
+from .views import VacancyDetailView, VacancyCreateView, VacancyListView
 
 app_name = 'vacancy'
 

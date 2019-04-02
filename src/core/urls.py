@@ -30,6 +30,8 @@ urlpatterns = [
     path('pages/', include('django.contrib.flatpages.urls')),
     path('vacancies/',
          include('src.apps.vacancy.urls', namespace='vacancies')),
+    path('resumes/',
+         include('src.apps.resume.urls', namespace='resumes')),
     path('create_account/', AccountHrCreateView.as_view(), name='create_account'),
     path('add/tags/',tag_create_view, name='tag_create'),
 ]

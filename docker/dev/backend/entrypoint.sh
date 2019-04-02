@@ -16,6 +16,7 @@ fi
 
 echo "Starting backend ..."
 
+python manage.py compilemessages
 python manage.py collectstatic --noinput
 python manage.py migrate --noinput
 gunicorn -b 0:8000 src.core.wsgi:application

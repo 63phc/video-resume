@@ -7,4 +7,6 @@ register = template.Library()
 
 @register.inclusion_tag('components/last_vacancies.html')
 def last_vacancies():
-    return {'vacancies': list(Vacancy.objects.values('title', 'description'))}
+    return {'vacancies': list(Vacancy.objects.values(
+        'id', 'title', 'description'
+    ))}
