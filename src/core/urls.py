@@ -27,9 +27,6 @@ urlpatterns = [
     path('accounts/register/hr/', RegistrationView.as_view(),
          name='registration-hr'),
     path('accounts/register/profile/', ProfileView.as_view(), name='registration-profile'),
-    path('dashboard/worker/', include('src.apps.account_worker.urls'),
-         name='dashboard_worker'
-    ),
     path('dashboard/hr/', TemplateView.as_view(
         template_name='dashboard_hr/dashboard_hr.html'),
          name='dashboard_hr'),
