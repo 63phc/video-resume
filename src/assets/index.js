@@ -7,26 +7,7 @@ import ActiveLink from './components/ActiveLink';
 import WorkerSwitchLink from './components/WorkerSwitchLink';
 import WorkerAnswer from './components/WorkerAnswer';
 import { tns } from "tiny-slider/src/tiny-slider"
-var slider = tns({
-    container: '.my-slider',
-    items: 2,
-    slideBy: 'page',
-    autoplay: false,
-    controls: true,
-    controlsText: ['<', '>'],
-    controlsPosition: 'bottom',
-    nav: false,
-  });
-var vacancy_slider = tns({
-    container: '.vacancy-slider',
-    items: 2,
-    slideBy: 'page',
-    autoplay: false,
-    controls: true,
-    controlsText: ['<', '>'],
-    controlsPosition: 'bottom',
-    nav: false,
-  });
+
 
 window.addEventListener('load', () => {
     // Account
@@ -35,6 +16,28 @@ window.addEventListener('load', () => {
         Account.setAttribute(accountId, document.location.pathname);
     }
     // ActiveLink
+    if (document.location.pathname == '/') {
+        var slider = tns({
+            container: '.my-slider',
+            items: 2,
+            slideBy: 'page',
+            autoplay: false,
+            controls: true,
+            controlsText: ['<', '>'],
+            controlsPosition: 'bottom',
+            nav: false,
+        });
+        var vacancy_slider = tns({
+            container: '.vacancy-slider',
+            items: 2,
+            slideBy: 'page',
+            autoplay: false,
+            controls: true,
+            controlsText: ['<', '>'],
+            controlsPosition: 'bottom',
+            nav: false,
+        });
+    }
     const class_name = ActiveLink.getCurrentMenu(document.location.pathname);
     if (class_name) {
         ActiveLink.toggleActiveClass(class_name);
