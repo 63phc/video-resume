@@ -14,6 +14,10 @@ urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('role_choice/', TemplateView.as_view(
         template_name='registration/role_choice.html'), name='sign_up'),
+    path('features/', TemplateView.as_view(
+        template_name='components/features.html'), name='features'),
+    path('contacts/', TemplateView.as_view(
+        template_name='components/contacts.html'), name='contacts'),
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
     path('dashboard/worker/',
          include('src.apps.account_worker.urls'),

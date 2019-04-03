@@ -10,11 +10,11 @@ const ActiveLink = (() => {
         },
         getCurrentMenu: (currenUrl) => {
             if (currenUrl == '/')
-                return ['main_page'];
-            let link_for = currenUrl.split('/')
+                return 'main_page';
+            let link_for = currenUrl.split('/');
             let value = union_field(link_for, menuLinks)[0];
             if (value == 'register')
-                return 'role_choice'
+                return 'role_choice';
             return value
         }
     }
