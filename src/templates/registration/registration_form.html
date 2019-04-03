@@ -31,8 +31,8 @@
                                 {% else %}
                                     {% if field.label == 'Agreeded confidentiality' %}
                                     <div class="row">
-                                        <div class="col-1">{{ field }}</div>
-                                        <div class="col-10"><label>{% trans 'Accept ' %}<a href="#">{% trans 'Terms of use' %}</a>{% trans ' and ' %}<a href="#">{% trans 'privacy Policy.' %}</a></label></div>
+                                        <div class="col-2">{{ field }}</div>
+                                        <div class="col-9"><label>{% trans 'Accept ' %}<a href="{% url 'terms' %}">{% trans 'Terms of use' %}</a>{% trans ' and ' %}<a href="{% url 'privacy' %}">{% trans 'privacy Policy.' %}</a></label></div>
                                     </div>
                                     {% else %}
                                         <label class="col-form-label">{{ field.label }}</label>

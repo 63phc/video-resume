@@ -42,6 +42,10 @@ urlpatterns = [
          include('src.apps.resume.urls', namespace='resumes')),
     path('create_account/', AccountHrCreateView.as_view(), name='create_account'),
     path('add/tags/', tag_create_view, name='tag_create'),
+    path('terms/', TemplateView.as_view(
+        template_name='components/terms_of_use.html'), name='terms'),
+    path('privacy/', TemplateView.as_view(
+        template_name='components/privacy_policy.html'), name='privacy'),
 ]
 
 if settings.DEBUG:
