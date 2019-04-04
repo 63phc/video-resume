@@ -1,14 +1,17 @@
 {% load i18n static staticfiles %}
 
-<strong>{% trans 'Last resumes:' %}</strong>
-<br>
-<div class="resume-slider">
-  {% for resume in resumes %}
-      <div>
-        <a href="{% url 'resumes:detail' resume.id %}">
-          <h4>{{ resume.title }}</h4>
-          {{ resume.about }}
-        </a>
-      </div>
-  {% endfor %}
-</div>
+{% if resumes %}
+  <hr></hr>
+  <strong>{% trans 'Last resumes:' %}</strong>
+  <br>
+  <div class="my-slider">
+    {% for resume in resumes %}
+        <div>
+          <a href="{% url 'resumes:detail' resume.id %}">
+            <h4>{{ resume.title }}</h4>
+            {{ resume.about }}
+          </a>
+        </div>
+    {% endfor %}
+  </div>
+{% endif %}
