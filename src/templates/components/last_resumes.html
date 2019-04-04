@@ -1,4 +1,6 @@
-<strong>Last resumes:</strong>
+{% load i18n static staticfiles %}
+
+<strong>{% trans 'Last resumes:' %}</strong>
 <br>
 <div class="resume-slider">
   {% for resume in resumes %}
