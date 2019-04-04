@@ -1,6 +1,8 @@
+{% load i18n static staticfiles %}
+
 {% if vacancies %}
   <hr></hr>
-  <strong>Last vacancies:</strong>
+  <strong>{% trans 'Last vacancies:' %}</strong>
   <br>
   <div class="vacancy-slider">
     {% for vacancy in vacancies %}
