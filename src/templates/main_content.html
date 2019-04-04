@@ -8,9 +8,11 @@
             then write a regular one. This can be done in just a couple of minutes.
             Do not miss you chance to catch a good job with our help!
         {% endblocktrans %}
+        <br>
+        <a href="{% url 'features' %}">{% trans 'Learn more' %} &#8605;</a>
     </p>
     <p class="lead">
-      <a href="#" class="btn btn-lg btn-secondary">{% trans 'Learn more' %}</a>
+      <a href="#" class="btn btn-lg btn-secondary">{% trans 'Start recording a new perfect resume' %}</a>
     </p>
     {% last_vacancies %}
     {% last_resumes %}

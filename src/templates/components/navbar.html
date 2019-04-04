@@ -12,7 +12,7 @@
           <a class="nav-link" href="{% url 'logout' %}">{% trans 'Logout' %}</a>
         {% else %}
           <a class="nav-link role_choice" href="{% url 'sign_up' %}">{% trans 'Sign up' %}</a>
-          <a class="nav-link accounts" href="{% url 'login' %}">{% trans 'Login' %}</a>
+          <a class="nav-link login" href="{% url 'login' %}">{% trans 'Login' %}</a>
         {% endif %}
       </div>
       <div class="nav nav-masthead ">
@@ -20,8 +20,8 @@
         {% if worker_pk %}
           <a class="nav-link dashboard" href="{% url 'dashboard_worker:dashboard_worker_main' pk=worker_pk %}">{% trans 'Dashboard' %}</a>
         {% endif %}
-        <a class="nav-link features" href="#">{% trans 'Features' %}</a>
-        <a class="nav-link contacts" href="#">{% trans 'Contact' %}</a>
+        <a class="nav-link features" href="{% url 'features' %}">{% trans 'Features' %}</a>
+        <a class="nav-link contacts" href="{% url 'contacts' %}">{% trans 'Contacts' %}</a>
       </div>
         <div class="nav nav-masthead ">
             <form action="{% url 'set_language' %}" method="post">
