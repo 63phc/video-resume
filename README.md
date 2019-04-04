@@ -7,3 +7,11 @@ what settings you want to load - development or production:
 
 ```from src.settings.environments.development import *```   
 
+
+```
+# ALL Docker
+docker-compose -f docker/docker-compose.local.yml up 
+# ONLY db
+docker-compose -f docker/docker-compose.local.yml up postgresql
+python manage.py runserver
+```

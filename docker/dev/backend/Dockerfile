@@ -6,7 +6,7 @@ WORKDIR /backend
 
 RUN apk update && \
     apk add --virtual build-deps gcc python3-dev musl-dev && \
-    apk add postgresql-dev postgresql-client
+    apk add postgresql-dev postgresql-client gettext
 
 RUN apk add --no-cache jpeg-dev zlib-dev
 RUN apk add --update bash && rm -rf /var/cache/apk/*
