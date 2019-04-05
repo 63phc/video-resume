@@ -6,6 +6,7 @@ import UpdateResume from './components/UpdateResume';
 import ActiveLink from './components/ActiveLink';
 import WorkerSwitchLink from './components/WorkerSwitchLink';
 import WorkerAnswer from './components/WorkerAnswer';
+import SwitchLang from './components/SwitchLang';
 import { tns } from "tiny-slider/src/tiny-slider"
 
 
@@ -56,5 +57,11 @@ window.addEventListener('load', () => {
     if (document.querySelector('.add-answer')) {
         const add_button = document.querySelector('.add-answer-button');
         WorkerAnswer.getForm(add_button, WorkerAnswer.sendForm);
+    }
+    // SwitchLang
+    if (document.querySelector('.send-lang')) {
+        let lang = document.getElementById('select-lang');
+        const lang_form = document.querySelector('.send-lang');
+        SwitchLang.setLang(lang, lang_form)
     }
 });
