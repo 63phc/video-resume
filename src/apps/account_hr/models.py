@@ -30,4 +30,4 @@ class AccountHr(models.Model):
 
     @property
     def get_absolute_url(self):
-        return reverse_lazy('account_hr:main', kwargs={'pk': self.pk})
+        return reverse_lazy('account_hr:main')

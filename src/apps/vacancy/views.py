@@ -48,10 +48,7 @@ class VacancyCreateView(generic.CreateView):
     form_class = VacancyCreateForm
 
     def get_success_url(self):
-        return reverse_lazy(
-            'dashboard_hr:main',
-            kwargs={'pk': AccountHr.objects.get(user=self.request.user).id}
-        )
+        return reverse_lazy('dashboard_hr:main')
 
     def get_initial(self):
         return {'account_hr': AccountHr.objects.get(user=self.request.user),}
