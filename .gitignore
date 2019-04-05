@@ -21,7 +21,6 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
 dist/
 downloads/
@@ -125,7 +124,6 @@ out
 gen
 
 src/assets/node_modules/
-src/static/
 
 */**/db.sqlite3
 
