@@ -8,20 +8,23 @@
     <nav class="justify-content-center">
       <div class="nav nav-masthead login-block">
         {% if request.user.is_authenticated %}
-          <a class="nav-link" title="User profile" href="{% url 'registration-profile' %}">{% trans 'Profile' %}</a>
-          <a class="nav-link" href="{% url 'logout' %}">{% trans 'Logout' %}</a>
+          <a class="nav-link main-nav-link" title="User profile" href="{% url 'registration-profile' %}">{% trans 'Profile' %}</a>
+          <a class="nav-link main-nav-link" href="{% url 'logout' %}">{% trans 'Logout' %}</a>
         {% else %}
-          <a class="nav-link role_choice" href="{% url 'sign_up' %}">{% trans 'Sign up' %}</a>
-          <a class="nav-link login" href="{% url 'login' %}">{% trans 'Login' %}</a>
+          <a class="nav-link main-nav-link role_choice" href="{% url 'sign_up' %}">{% trans 'Sign up' %}</a>
+          <a class="nav-link main-nav-link login" href="{% url 'login' %}">{% trans 'Login' %}</a>
         {% endif %}
       </div>
       <div class="nav nav-masthead ">
-        <a class="nav-link main_page" href="{% url 'index' %}">{% trans 'Main' %}</a>
+        <a class="nav-link main-nav-link main_page" href="{% url 'index' %}">{% trans 'Main' %}</a>
         {% if worker_pk %}
-          <a class="nav-link dashboard" href="{% url 'dashboard_worker:dashboard_worker_main' pk=worker_pk %}">{% trans 'Dashboard' %}</a>
+          <a class="nav-link main-nav-link dashboard" href="{% url 'dashboard_worker:dashboard_worker_main' pk=worker_pk %}">{% trans 'Dashboard' %}</a>
         {% endif %}
-        <a class="nav-link features" href="{% url 'features' %}">{% trans 'Features' %}</a>
-        <a class="nav-link contacts" href="{% url 'contacts' %}">{% trans 'Contacts' %}</a>
+        {% if hr %}
+          <a class="nav-link main-nav-link dashboard" href="{% url 'dashboard_hr:main' %}">{% trans 'Dashboard' %}</a>
+        {% endif %}
+        <a class="nav-link main-nav-link features" href="{% url 'features' %}">{% trans 'Features' %}</a>
+        <a class="nav-link main-nav-link contacts" href="{% url 'contacts' %}">{% trans 'Contacts' %}</a>
       </div>
         <div class="nav nav-masthead ">
             <form action="{% url 'set_language' %}" method="post">

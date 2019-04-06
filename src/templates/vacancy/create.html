@@ -10,7 +10,11 @@
     <form method="post">
         {% csrf_token %}
         <fieldset>
-          <legend>{% trans 'Creating a new vacancy' %}:</legend>
+          {% if operation == 'update' %}
+            <legend>{% trans 'Fill up all fields' %}:</legend>
+          {% else %}
+            <legend>{% trans 'Create a new vacation' %}:</legend>
+          {% endif %}
             <table class="table table-primary">
               {% for field in form %}
                 <tr>
@@ -31,7 +35,11 @@
                 </tr>
               {% endfor %}
             </table>
-            <button type="submit" class="btn btn-primary">{% trans 'Create vacation' %}</button>
+            {% if operation == 'update' %}
+              <button type="submit" class="btn btn-primary">{% trans 'Update the vacation' %}</button>
+            {% else %}
+              <button type="submit" class="btn btn-primary">{% trans 'Create the vacation' %}</button>
+            {% endif %}
         </fieldset>
     </form>
 </main>

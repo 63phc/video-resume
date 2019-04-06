@@ -2,11 +2,15 @@ const ActiveLink = (() => {
     const menuLinks = ['role_choice', 'features', 'contacts', 'login', 'dashboard', 'register'];
     function union_field(arr1, arr2) {
         return arr1.filter(function(i){return arr2.includes(i);});
-    };
+    }
     return {
         toggleActiveClass: (className) => {
-            document.querySelector('.nav-link').classList.remove('active');
-            document.querySelector(`.${className}`).classList.add('active');
+            let menu = document.querySelector('.main-nav-link');
+            if (menu) {
+                document.querySelector('.main-nav-link').classList.remove('active');
+                document.querySelector(`.${className}`).classList.add('active');
+            }
+
         },
         getCurrentMenu: (currenUrl) => {
             if (currenUrl == '/')

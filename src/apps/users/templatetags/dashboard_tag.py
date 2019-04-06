@@ -14,8 +14,11 @@ def url_dashboard(context):
         return context
 
     worker = user.workers.is_created(user=user)
+    hrs = user.hrs.exists()
 
     if worker and not context.get('worker_pk'):
         context['worker_pk'] = worker.pk
+    elif hrs and not context.get('hr_pk'):
+        context['hr'] = hrs
 
     return context

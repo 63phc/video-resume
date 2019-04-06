@@ -1,0 +1,25 @@
+{% load i18n %}
+
+<main role="main" class="inner cover col-12">
+    <br>
+    {% trans 'Answer list' %}:
+    <br>
+    <table class="table table-striped table-bordered">
+        <th style="width: 30%;">{% trans 'Question' %}</th>
+        <th>{% trans 'Answer text' %}</th>
+        {% for answer in  object_list %}
+            <tr>
+                <td>
+                    <small>{{ answer.question.title }}</small><br>
+                    {{ answer.question.text }}
+                </td>
+                <td>
+                    {{ answer.text }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <a href="javascript:history.back()">{% trans '&#8592; Go Back' %}</a>
+</main>
+

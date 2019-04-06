@@ -4,6 +4,7 @@ import Account from './components/Account';
 import CreateResume from './components/CreateResume';
 import UpdateResume from './components/UpdateResume';
 import ActiveLink from './components/ActiveLink';
+import DashboardSetActiveMenu from './components/DashboardSetActiveMenu';
 import WorkerSwitchLink from './components/WorkerSwitchLink';
 import WorkerAnswer from './components/WorkerAnswer';
 import { tns } from "tiny-slider/src/tiny-slider"
@@ -45,6 +46,11 @@ window.addEventListener('load', () => {
     const class_name = ActiveLink.getCurrentMenu(document.location.pathname);
     if (class_name) {
         ActiveLink.toggleActiveClass(class_name);
+    }
+
+    // DashboardSetActiveMenu
+    if (document.querySelector('#sub_menu')) {
+         DashboardSetActiveMenu();
     }
 
     // WorkerSwitchLink
