@@ -4,15 +4,20 @@
 {% block sub_content %}
   <div class="col-md-6 card-body">
     <div class="card">
-      <div class="card-header">{% trans 'Last questions' %}</div>
-        {% if object.answer.last %}
-          <blockquote class="blockquote mb-0">
-            <h4>{{ object.question.last.title }}</h4>
-            <p>{{ object.question.last.about }}</p>
-          </blockquote>
-        <a href="#" class="btn btn-primary">{% trans 'Update' %}</a>
+      <div class="card-header">{% trans 'Last answers' %}</div>
+        {% if answers %}
+          <ul class="list-group">
+            {% for answer in answers %}
+              <li class="list-inline-item">
+                <p>
+                  {{ answer.text }}
+                  (<small>{% trans 'On the question' %} - {{ answer.question.title }}</small>)
+                </p>
+              </li>
+            {% endfor %}
+          </ul>
         {% else %}
-          <p class="vert-align">{% trans 'No questions' %}</p>
+          <p class="vert-align">{% trans 'No answers' %}</p>
         {% endif %}
     </div>
   </div>

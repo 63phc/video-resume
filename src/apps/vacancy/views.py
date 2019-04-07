@@ -53,6 +53,23 @@ class VacancyCreateView(generic.CreateView):
     def get_initial(self):
         return {'account_hr': AccountHr.objects.get(user=self.request.user),}
 
+
+class VacancyUpdateView(generic.UpdateView):
+    template_name = 'vacancy/create.html'
+    model = Vacancy
+    form_class = VacancyCreateForm
+
+    def get_context_data(self, **kwargs):
+        context = super(VacancyUpdateView, self).get_context_data(**kwargs)
+        context['operation'] = 'update'
+        return context
+
+
+class VacancyDeleteView(generic.DeleteView):
+    template_name = 'vacancy/delete.html'
+    model = Vacancy
+
+
 # class TagCreate(generic.CreateView):
 #     template_name = 'vacancy/create_tag.html'
 #     model = Tag
