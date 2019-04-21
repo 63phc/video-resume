@@ -2,15 +2,17 @@
 {% load i18n static staticfiles %}
 
 {% block content %}
-    <main role="main" class="inner cover">
-        <h1 class="cover-heading">{% trans 'Video resume is a new way to your success!' %}</h1>
-        <p class="lead">{% trans 'The Reasons are as follows:' %}<br><br>
-                {% trans 'First reason: more simplicity to create a summary' %} <br><br>
-                {% trans 'Second reason: video resume contains more information about your personality than a written one' %} <br><br>
-                {% trans 'Third reason: more chanсes to give a relevant response' %} <br><br>
-        </p>
-        <p class="lead">
-          <a href="#" class="btn btn-lg btn-secondary">{% trans 'Start recording a new perfect resume' %}</a>
-        </p>
-    </main>
+    <div class="row text-center mt-3">
+        <div class="col">
+            <h1 class="cover-heading">{% trans 'Video resume is a new way to your success!' %}</h1>
+            <p class="lead">{% trans 'The Reasons are as follows:' %}<br><br>
+                    {% trans 'First reason: more simplicity to create a summary' %} <br><br>
+                    {% trans 'Second reason: video resume contains more information about your personality than a written one' %} <br><br>
+                    {% trans 'Third reason: more chanсes to give a relevant response' %} <br><br>
+            </p>
+            <p class="lead">
+              <a href="#" class="btn btn-lg btn-secondary">{% trans 'Start recording a new perfect resume' %}</a>
+            </p>
+        </div>
+    </div>
 {% endblock %}
