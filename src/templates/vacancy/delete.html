@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block content %}
+  <main role="main" class="inner cover col-12">
+    <br>
+    <h4 class="mb-4">{% trans 'Do you realy want to delete the ' %}{{ object }}?</h4>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary">{% trans 'Delete vacation' %}</button>
+    </form>
+  </main>
+{% endblock %}

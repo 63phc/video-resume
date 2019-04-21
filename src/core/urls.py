@@ -21,8 +21,6 @@ urlpatterns = [
     path('dashboard/worker/',
          include('src.apps.account_worker.urls'),
          name='dashboard_worker'),
-    path('role_choice/', TemplateView.as_view(
-        template_name='registration/role_choice.html'), name='sign_in'),
     path('dashboard/hr/', include('src.apps.account_hr.urls',
          namespace='dashboard_hr')),
     path('accounts/register/user/', RegistrationView.as_view(),
@@ -34,6 +32,8 @@ urlpatterns = [
     path('pages/', include('django.contrib.flatpages.urls')),
     path('vacancies/',
          include('src.apps.vacancy.urls', namespace='vacancies')),
+    path('answers/',
+         include('src.apps.answer.urls', namespace='answers')),
     path('resumes/',
          include('src.apps.resume.urls', namespace='resumes')),
     path('add/tags/', tag_create_view, name='tag_create'),
