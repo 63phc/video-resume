@@ -1,26 +1,24 @@
 {% load i18n %}
 
 {% load render_bundle from webpack_loader %}
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-{% block head %}{% endblock %}
-    <title>{% trans 'Video-resume service index page' %}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    {% block head %}{% endblock %}
+    <title>Video-resume</title>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-
-<body>
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column text-center">
-        {% block menu %}
-            {% include 'components/navbar.html' %}
-        {% endblock %}
-        {% block content %}{% endblock %}
-        {% block footer %}
-            {% include 'components/footer1.html' %}
-        {% endblock %}
-    </div>
+<body style="padding-bottom: 70px;">
+    {% block menu %}
+        {% include 'components/navbar.html' %}
+    {% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}
+        {% include 'components/footer1.html' %}
+    {% endblock %}
     {% render_bundle 'main' 'js' %}
 </body>
-
 </html>
