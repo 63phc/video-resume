@@ -1,0 +1,29 @@
+{% load i18n %}
+
+{% load render_bundle from webpack_loader %}
+<!doctype html>
+<html lang="en">
+<head>
+{% block head %}{% endblock %}
+    <title>{% trans 'Video-resume service index page' %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.1/tiny-slider.css">-->
+    <!--&lt;!&ndash;[if (lt IE 9)]><script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.1/min/tiny-slider.helper.ie8.js"></script><![endif]&ndash;&gt;-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.1/min/tiny-slider.js"></script>-->
+</head>
+
+<body>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column text-center">
+        {% block menu %}
+            {% include 'components/navbar.html' %}
+        {% endblock %}
+        {% block content %}{% endblock %}
+        {% block footer %}
+            {% include 'components/footer1.html' %}
+        {% endblock %}
+    </div>
+    {% render_bundle 'main' 'js' %}
+</body>
+
+</html>

@@ -1,7 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 
-from src.apps.answer.models import Answer
+# from src.apps.answer.models import Answer
+from src.apps.question.models import Answer
 from src.apps.vacancy.models import Vacancy
 from .models import AccountHr
 
