@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     'src.apps.resume',
     'src.apps.vacancy',
     'src.apps.question',
-    'src.apps.answer',
     'webpack_loader',
 ]
 
