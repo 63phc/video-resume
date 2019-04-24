@@ -41,6 +41,8 @@ urlpatterns = [
         template_name='components/terms_of_use.html'), name='terms'),
     path('privacy/', TemplateView.as_view(
         template_name='components/privacy_policy.html'), name='privacy'),
+    path('questions/',
+         include('src.apps.question.urls', namespace='questions')),
 ]
 
 if settings.DEBUG:

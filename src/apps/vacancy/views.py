@@ -8,6 +8,7 @@ from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
 
 from src.apps.account_hr.models import AccountHr
+from src.apps.question.models import Question
 from .models import Vacancy, Tag
 
 
@@ -22,6 +23,13 @@ class MultipleSelectWithPop(forms.SelectMultiple):
 class VacancyDetailView(generic.DetailView):
     template_name = 'vacancy/detail.html'
     model = Vacancy
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(VacancyDetailView, self).get_context_data(**kwargs)
+        context['questions'] = Question.objects.filter(
+            account_hr__user_id=self.request.user.id
+        )
+        return context
 
 
 class VacancyListView(generic.ListView):
@@ -64,16 +72,16 @@ class VacancyUpdateView(generic.UpdateView):
         context['operation'] = 'update'
         return context
 
+    def get_success_url(self):
+        next_url = self.request.GET.get('next')
+        if next_url:
+            return next_url
+        return reverse_lazy('dashboard_hr:main')
+
 
 class VacancyDeleteView(generic.DeleteView):
     template_name = 'vacancy/delete.html'
     model = Vacancy
-
-
-# class TagCreate(generic.CreateView):
-#     template_name = 'vacancy/create_tag.html'
-#     model = Tag
-#     fields = ['title', ]
 
 
 class TagForm(forms.ModelForm):

@@ -1,0 +1,21 @@
+{% load i18n %}
+
+<main role="main" class="inner cover col-12">
+    <br>
+    {% trans 'Resume list' %}:
+    <br>
+    <table class="table table-striped table-bordered">
+        <th>{% trans 'Title' %}:</th>
+        <th>{% trans 'About me' %}:</th>
+        <th>{% trans 'Skills' %}:</th>
+        {% for resume in  object_list %}
+            <tr>
+                <td><a href="{% url 'dashboard_hr:resume' pk=resume.id %}">{{ resume.title }}</a></td>
+                <td>{{ resume.about }}</td>
+                <td>{{ resume.skill.all|join:", " }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <a href="javascript:history.back()">{% trans '&#8592; Go Back' %}</a>
+</main>

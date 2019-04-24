@@ -2,5 +2,25 @@
 {% load i18n %}
 
 {% block sub_content %}
-  {% include 'vacancy/list.html' %}
+  <main role="main" class="inner cover col-12">
+    <br>
+    {% trans 'Vacancy list' %}:
+    <br>
+    <table class="table table-striped table-bordered">
+        <th style="width: 30%;">{% trans 'Title' %}</th>
+        <th>{% trans 'Description' %}</th>
+        {% for vacancy in  vacancies %}
+            <tr>
+                <td><a href="{% url 'dashboard_hr:vacancy_detail' vacancy.id %}">{{ vacancy.title }}</a></td>
+                <td>
+                    {{vacancy.description|truncatechars:150}}
+                    <a href="{% url 'vacancies:update' vacancy.id %}?next={{ request.path }}"> &#9998;</a>
+                    <a href="{% url 'vacancies:delete' vacancy.id %}?next={{ request.path }}"> &#10008;</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <a href="javascript:history.back()">{% trans '&#8592; Go Back' %}</a>
+  </main>
 {% endblock %}

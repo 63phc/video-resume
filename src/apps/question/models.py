@@ -1,7 +1,10 @@
 from django.db import models
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
+from unidecode import unidecode
 
 from src.apps.account_hr.models import AccountHr
+from src.apps.vacancy.models import Vacancy
 
 
 class CheckWorkerQueryset(models.QuerySet):
@@ -15,6 +18,10 @@ class Question(models.Model):
     account_hr = models.ManyToManyField(AccountHr, related_name='questions',
         verbose_name=_('HR'), blank=True)
     text = models.TextField(_('Text'))
+    vacancy = models.ManyToManyField(
+        Vacancy, related_name='questions', verbose_name=_('Vacancies'),
+        blank=True
+    )
 
     class Meta:
         verbose_name = _('Question')
@@ -22,6 +29,10 @@ class Question(models.Model):
 
     def __str__(self):
         return f'{self.title} - {self.account_hr.name}'
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(unidecode(self.title))
+        super(Question, self).save(*args, **kwargs)
 
 
 class Answer(models.Model):
