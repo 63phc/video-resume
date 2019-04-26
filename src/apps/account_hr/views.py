@@ -11,7 +11,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     model = AccountHr
     template_name = 'dashboard_hr/index.html'
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
         context['vacancies'] = Vacancy.objects.filter(
             account_hr__user_id=self.request.user.id
@@ -26,7 +26,7 @@ class DashboardVacancyListView(LoginRequiredMixin, TemplateView):
     model = AccountHr
     template_name = 'dashboard_hr/vacancy/list.html'
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(DashboardVacancyListView, self).get_context_data(**kwargs)
         context['object_list'] = Vacancy.objects.filter(
             account_hr__user_id=self.request.user.id
@@ -38,7 +38,7 @@ class DashboardAnswerListView(LoginRequiredMixin, TemplateView):
     model = AccountHr
     template_name = 'dashboard_hr/answer/list.html'
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(DashboardAnswerListView, self).get_context_data(**kwargs)
         context['object_list'] = Answer.objects.filter(
             question__account_hr__user_id=self.request.user.id

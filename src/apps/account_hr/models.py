@@ -1,8 +1,9 @@
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from src.core.utils.choices import AccountTypeChoices
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse_lazy
+
+from src.core.utils.choices import AccountTypeChoices
 
 
 class HrCheckingQuerySet(models.QuerySet):
