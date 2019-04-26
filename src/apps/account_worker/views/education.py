@@ -19,7 +19,7 @@ class EducationUpdateView(ResumeEduSkillJobContextMixin,
 
 @method_decorator((login_required, worker_access), name='dispatch')
 class EducationCreateView(
-    EduSkillJobSuccessUrlMixin,  EduSkillJobAjaxMixin,
+    EduSkillJobSuccessUrlMixin, EduSkillJobAjaxMixin,
     ResumeEduSkillJobContextMixin, CreateView
 ):
     form_class = EducationForm

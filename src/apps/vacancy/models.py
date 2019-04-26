@@ -37,7 +37,7 @@ class Tag(SlugMixin, models.Model):
 class Vacancy(SlugMixin, models.Model):
     description = models.TextField(_('Description'))
     account_hr = models.ManyToManyField(AccountHr,
-        related_name='vacancies',verbose_name=_('HRs'))
+        related_name='vacancies', verbose_name=_('HRs'))
     tags = models.ManyToManyField(Tag, related_name='vacancies',
                                   verbose_name=_('Tags'))
     is_activated = models.BooleanField(_('Activated'), default=False)
