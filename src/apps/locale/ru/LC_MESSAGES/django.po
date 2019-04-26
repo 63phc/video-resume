@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 11:36+0000\n"
+"POT-Creation-Date: 2019-04-26 09:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,7 +41,7 @@ msgid "workers"
 msgstr "сотрудники"
 
 #: src/apps/account_worker/models.py:28
-#: src/templates/dashboard_worker/index.html:12
+#: src/templates/dashboard_worker/index.html:13
 #: src/templates/dashboard_worker/question/detail.html:14
 #: src/templates/dashboard_worker/question/list.html:14
 #: src/templates/dashboard_worker/resume/list.html:13
@@ -50,6 +50,7 @@ msgid "Resume"
 msgstr "Резюме"
 
 #: src/apps/account_worker/models.py:32 src/apps/account_worker/models.py:54
+#: src/templates/dashboard_hr/base.html:11
 msgid "Answers"
 msgstr "Ответы"
 
@@ -62,8 +63,7 @@ msgid "Account workers"
 msgstr "Аккуант сотрудника"
 
 #: src/apps/account_worker/models.py:50 src/apps/question/models.py:21
-#: src/templates/dashboard_hr/index.html:12
-#: src/templates/dashboard_worker/index.html:10
+#: src/templates/dashboard_worker/index.html:11
 #: src/templates/dashboard_worker/question/detail.html:12
 #: src/templates/dashboard_worker/question/list.html:12
 #: src/templates/dashboard_worker/resume/list.html:11
@@ -84,7 +84,7 @@ msgid "Text"
 msgstr "Текст"
 
 #: src/apps/question/models.py:13 src/apps/resume/models.py:58
-#: src/apps/vacancy/models.py:12 src/templates/vacancy/list.html:9
+#: src/apps/vacancy/models.py:12 src/templates/vacancy/list.html:8
 msgid "Title"
 msgstr "Заголовок"
 
@@ -97,7 +97,7 @@ msgstr "Слуг"
 msgid "HR"
 msgstr "Менеджер"
 
-#: src/apps/question/models.py:20
+#: src/apps/question/models.py:20 src/templates/answer/list.html:8
 msgid "Question"
 msgstr "Вопрос"
 
@@ -325,7 +325,7 @@ msgid "Tags"
 msgstr "Тэги"
 
 #: src/apps/vacancy/models.py:38 src/templates/vacancy/detail.html:8
-#: src/templates/vacancy/list.html:10
+#: src/templates/vacancy/list.html:9
 msgid "Description"
 msgstr "Описание"
 
@@ -337,7 +337,7 @@ msgstr "Менеджеры"
 msgid "Vacancy"
 msgstr "Вакансия"
 
-#: src/apps/vacancy/models.py:49 src/templates/dashboard_hr/index.html:13
+#: src/apps/vacancy/models.py:49 src/templates/dashboard_hr/base.html:12
 msgid "Vacancies"
 msgstr "Вакансии"
 
@@ -361,129 +361,165 @@ msgstr "Русский"
 msgid "English"
 msgstr "Английский"
 
-#: src/templates/base.html:8
+#: src/templates/answer/list.html:5
+#, fuzzy
+#| msgid "Answers"
+msgid "Answer list"
+msgstr "Ответы"
+
+#: src/templates/answer/list.html:9
+#, fuzzy
+#| msgid "Answer"
+msgid "Answer text"
+msgstr "Ответ"
+
+#: src/templates/answer/list.html:23 src/templates/resume/detail.html:14
+#: src/templates/vacancy/detail.html:11 src/templates/vacancy/list.html:22
+msgid "&#8592; Go Back"
+msgstr "&#8592; Назад"
+
+#: src/templates/base_old.html:8
 msgid "Video-resume service index page"
 msgstr "Главная страница сервиса видео-резюме"
 
-#: src/templates/components/contacts.html:6
-#: src/templates/components/navbar.html:24
+#: src/templates/components/contacts.html:7
+#: src/templates/components/contacts_old.html:6
+#: src/templates/components/navbar.html:16
+#: src/templates/components/navbar_old.html:25
 msgid "Contacts"
 msgstr "Контакты"
 
-#: src/templates/components/contacts.html:8
+#: src/templates/components/contacts.html:9
+#: src/templates/components/contacts_old.html:8
 msgid "Please, do not hesitate to ask us any question you have via email "
 msgstr "Пожалуйста, без сомнений задавайте любые вопрос по электронной почте"
 
-#: src/templates/components/features.html:6
+#: src/templates/components/features.html:7
+#: src/templates/components/features_old.html:6
 msgid "Video resume is a new way to your success!"
 msgstr "Видео резюме это новый путь к успеху."
 
-#: src/templates/components/features.html:7
+#: src/templates/components/features.html:8
+#: src/templates/components/features_old.html:7
 msgid "The Reasons are as follows:"
 msgstr "Причины:"
 
-#: src/templates/components/features.html:8
+#: src/templates/components/features.html:9
+#: src/templates/components/features_old.html:8
 msgid "First reason: more simplicity to create a summary"
 msgstr "первая: создать резюме по настоящему легко"
 
-#: src/templates/components/features.html:9
+#: src/templates/components/features.html:10
+#: src/templates/components/features_old.html:9
 msgid ""
 "Second reason: video resume contains more information about your personality "
 "than a written one"
 msgstr "вторая: видео резюме несёт больше информации о ваших личных качествах"
 
-#: src/templates/components/features.html:10
+#: src/templates/components/features.html:11
+#: src/templates/components/features_old.html:10
 msgid "Third reason: more chanсes to give a relevant response"
 msgstr "третья: шансы получить адекватный отклик намного выше"
 
-#: src/templates/components/features.html:13 src/templates/main_content.html:13
+#: src/templates/components/features.html:14
+#: src/templates/components/features_old.html:13
+#: src/templates/main_content.html:14 src/templates/main_content.html:16
+#: src/templates/main_content.html:24 src/templates/main_content_old.html:13
 msgid "Start recording a new perfect resume"
 msgstr "Записать новое удивительное резюме"
 
-#: src/templates/components/footer1.html:5
+#: src/templates/components/footer1.html:4
+#: src/templates/components/footer1_old.html:5
 msgid "All rights reserved. Designed by "
 msgstr "Все права защищены. Разработано в "
 
-#: src/templates/components/last_resumes.html:3
+#: src/templates/components/last_resumes.html:5
 msgid "Last resumes:"
 msgstr "Последние резюме"
 
-#: src/templates/components/last_vacancies.html:3
+#: src/templates/components/last_vacancies.html:5
 msgid "Last vacancies:"
 msgstr "Последние вакансии"
 
-#: src/templates/components/navbar.html:7
-msgid "Video Resume"
-msgstr "Видео резюме"
+#: src/templates/components/navbar.html:10
+msgid "Home"
+msgstr ""
 
-#: src/templates/components/navbar.html:11
+#: src/templates/components/navbar.html:13
+#: src/templates/components/navbar_old.html:24
+msgid "Features"
+msgstr "Возможности"
+
+#: src/templates/components/navbar.html:20
+#: src/templates/components/navbar_old.html:12
 msgid "Profile"
 msgstr "Профиль"
 
-#: src/templates/components/navbar.html:12
+#: src/templates/components/navbar.html:23
+#: src/templates/components/navbar_old.html:13
 #: venv/lib/python3.6/site-packages/rest_framework_swagger/templates/rest_framework_swagger/index.html:28
 msgid "Logout"
 msgstr "Выйти"
 
-#: src/templates/components/navbar.html:14
+#: src/templates/components/navbar.html:27
+#: src/templates/components/navbar_old.html:15
 msgid "Sign up"
 msgstr "Зарегистрироваться"
 
-#: src/templates/components/navbar.html:15
+#: src/templates/components/navbar.html:30
+#: src/templates/components/navbar_old.html:16
 msgid "Login"
 msgstr "Войти"
 
-#: src/templates/components/navbar.html:19
-#: src/templates/dashboard_hr/index.html:11
-#: src/templates/dashboard_worker/index.html:9
+#: src/templates/components/navbar.html:35
+#: src/templates/components/navbar_old.html:22
+msgid "Dashboard"
+msgstr "Личный кабинет"
+
+#: src/templates/components/navbar_old.html:8
+msgid "Video Resume"
+msgstr "Видео резюме"
+
+#: src/templates/components/navbar_old.html:20
+#: src/templates/dashboard_hr/base.html:10
+#: src/templates/dashboard_worker/index.html:10
 #: src/templates/dashboard_worker/question/detail.html:11
 #: src/templates/dashboard_worker/question/list.html:11
 #: src/templates/dashboard_worker/resume/list.html:10
 msgid "Main"
 msgstr "Главная"
 
-#: src/templates/components/navbar.html:21
-msgid "Dashboard"
-msgstr "Личный кабинет"
-
-#: src/templates/components/navbar.html:23
-msgid "Features"
-msgstr "Возможности"
-
-#: src/templates/dashboard_hr/index.html:14
-#: src/templates/dashboard_worker/index.html:13
+#: src/templates/dashboard_hr/base.html:13
+#: src/templates/dashboard_worker/index.html:14
 #: src/templates/dashboard_worker/question/detail.html:15
 #: src/templates/dashboard_worker/question/list.html:15
 #: src/templates/dashboard_worker/resume/list.html:14
 msgid "Favourites"
 msgstr "Избранное"
 
-#: src/templates/dashboard_hr/index.html:21
+#: src/templates/dashboard_hr/index.html:7
 msgid "Last answers"
 msgstr "Последние ответы"
 
-#: src/templates/dashboard_hr/index.html:28
-#: src/templates/dashboard_worker/index.html:28
-#: src/templates/dashboard_worker/resume/list.html:32
-#: src/templates/dashboard_worker/resume/update.html:57
-#: src/templates/dashboard_worker/resume/update.html:77
-#: src/templates/dashboard_worker/resume/update.html:97
-msgid "Update"
-msgstr "Обновить"
+#: src/templates/dashboard_hr/index.html:14
+#, fuzzy
+#| msgid "questions"
+msgid "On the question"
+msgstr "вопросы"
 
-#: src/templates/dashboard_hr/index.html:30
+#: src/templates/dashboard_hr/index.html:20
 msgid "No answers"
 msgstr "Нет ответов"
 
-#: src/templates/dashboard_hr/index.html:37
+#: src/templates/dashboard_hr/index.html:26
 msgid "Last vacancies"
 msgstr "Последние вакансии"
 
-#: src/templates/dashboard_hr/index.html:48
+#: src/templates/dashboard_hr/index.html:37
 msgid "Vacancy was not created"
 msgstr "Вакансия не создана"
 
-#: src/templates/dashboard_hr/index.html:53
+#: src/templates/dashboard_hr/index.html:42
 msgid "Add vacancy"
 msgstr "Добавить вакансию"
 
@@ -550,27 +586,35 @@ msgstr "Образование"
 msgid "Update education"
 msgstr "Обновить образование"
 
-#: src/templates/dashboard_worker/index.html:11
+#: src/templates/dashboard_worker/index.html:12
 #: src/templates/dashboard_worker/question/detail.html:13
 #: src/templates/dashboard_worker/question/list.html:13
 #: src/templates/dashboard_worker/resume/list.html:12
 msgid "Responses"
 msgstr "Отклики"
 
-#: src/templates/dashboard_worker/index.html:22
+#: src/templates/dashboard_worker/index.html:23
 msgid "Last resume"
 msgstr "Последннее резюме"
 
-#: src/templates/dashboard_worker/index.html:31
-#: src/templates/dashboard_worker/index.html:87
+#: src/templates/dashboard_worker/index.html:29
+#: src/templates/dashboard_worker/resume/list.html:32
+#: src/templates/dashboard_worker/resume/update.html:57
+#: src/templates/dashboard_worker/resume/update.html:77
+#: src/templates/dashboard_worker/resume/update.html:97
+msgid "Update"
+msgstr "Обновить"
+
+#: src/templates/dashboard_worker/index.html:32
+#: src/templates/dashboard_worker/index.html:88
 msgid "Resume was not created"
 msgstr "Резюме не создано"
 
-#: src/templates/dashboard_worker/index.html:42
+#: src/templates/dashboard_worker/index.html:43
 msgid "Found jobs suitable for your resume"
 msgstr "Подходящие вакансии для вашенго резюме"
 
-#: src/templates/dashboard_worker/index.html:92
+#: src/templates/dashboard_worker/index.html:93
 #: src/templates/dashboard_worker/resume/create.html:13
 #: src/templates/dashboard_worker/resume/create.html:95
 msgid "Add resume"
@@ -710,27 +754,45 @@ msgstr "Удалить навык"
 msgid "Update skill"
 msgstr "Обновить навык"
 
-#: src/templates/main_content.html:4
+#: src/templates/main_content.html:5 src/templates/main_content_old.html:4
 msgid "Video resume gives you new opportunities."
 msgstr "Видео резюме дает вам новые возможности."
 
-#: src/templates/main_content.html:5
+#: src/templates/main_content.html:6 src/templates/main_content_old.html:5
 msgid "Why Video Resume is so great?"
 msgstr "Почему видео резюме такое отличное?"
 
-#: src/templates/main_content.html:6
+#: src/templates/main_content.html:7
+msgid ""
+"With our service it is more simple to make a CV\n"
+"                then write a regular one. This can be done in just a couple "
+"of minutes.\n"
+"                Do not miss you chance to catch a good job with our help!"
+msgstr ""
+"С нашим сервисом очень просто сделать резюме. Всего за несколько минут.Не "
+"упустите свой шанс найти хорошую работу с нашим сервисом!"
+
+#: src/templates/main_content.html:11 src/templates/main_content_old.html:10
+msgid "Learn more"
+msgstr "Узнать больше"
+
+#: src/templates/main_content.html:33
+msgid "Cancel"
+msgstr "Отмена"
+
+#: src/templates/main_content.html:34
+msgid "Register and save"
+msgstr "Зарегистрироваться и сохранить"
+
+#: src/templates/main_content_old.html:6
 msgid ""
 "With our service it is more simple to make a CV\n"
 "            then write a regular one. This can be done in just a couple of "
 "minutes.\n"
 "            Do not miss you chance to catch a good job with our help!"
 msgstr ""
-"С нашим сервисом очень просто сделать резюме. Всего за несколько минут."
-"Не упустите свой шанс найти хорошую работу с нашим сервисом!"
-
-#: src/templates/main_content.html:10
-msgid "Learn more"
-msgstr "Узнать больше"
+"С нашим сервисом очень просто сделать резюме. Всего за несколько минут.Не "
+"упустите свой шанс найти хорошую работу с нашим сервисом!"
 
 #: src/templates/registration/login.html:9
 msgid "Sign in:"
@@ -788,20 +850,39 @@ msgstr "сотрудник?"
 msgid "a human resources manager?"
 msgstr "менеджер?"
 
-#: src/templates/resume/detail.html:14 src/templates/vacancy/detail.html:11
-#: src/templates/vacancy/list.html:19
-msgid "&#8592; Go Back"
-msgstr "&#8592; Назад"
+#: src/templates/vacancy/create.html:14
+msgid "Fill up all fields"
+msgstr "Заполните все поля"
 
-#: src/templates/vacancy/create.html:13
-msgid "Creating a new vacancy"
-msgstr "Добавить новую вакансию"
-
-#: src/templates/vacancy/create.html:34
-msgid "Create vacation"
+#: src/templates/vacancy/create.html:16
+#, fuzzy
+#| msgid "Create vacation"
+msgid "Create a new vacation"
 msgstr "Создать вакансию"
 
-#: src/templates/vacancy/list.html:7
+#: src/templates/vacancy/create.html:39
+#, fuzzy
+#| msgid "Update education"
+msgid "Update the vacation"
+msgstr "Обновить образование"
+
+#: src/templates/vacancy/create.html:41
+#, fuzzy
+#| msgid "Create vacation"
+msgid "Create the vacation"
+msgstr "Создать вакансию"
+
+#: src/templates/vacancy/delete.html:7
+msgid "Do you realy want to delete the "
+msgstr "Вы действительно хотите удалить "
+
+#: src/templates/vacancy/delete.html:10
+#, fuzzy
+#| msgid "Delete education"
+msgid "Delete vacation"
+msgstr "Удалить образование"
+
+#: src/templates/vacancy/list.html:5
 msgid "Vacancy list"
 msgstr "Список вакансий"
 
@@ -2193,6 +2274,9 @@ msgstr ""
 #: venv/lib/python3.6/site-packages/rest_framework_swagger/templates/rest_framework_swagger/index.html:55
 msgid "Powered by "
 msgstr ""
+
+#~ msgid "Creating a new vacancy"
+#~ msgstr "Добавить новую вакансию"
 
 #~ msgid "Contact"
 #~ msgstr "Контакты"
