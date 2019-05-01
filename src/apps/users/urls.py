@@ -13,5 +13,7 @@ urlpatterns = [
          name='registration-profile'),
     path('login/', LoginView.as_view(),
          name='login'),
+    # path('profile/update/<int:pk>/', ProfileView.as_view(), name='profile-update'),
     path('', include('django.contrib.auth.urls')),
+
 ]

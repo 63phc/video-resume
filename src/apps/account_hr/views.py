@@ -2,7 +2,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 
-# from src.apps.answer.models import Answer
 from src.apps.question.models import Answer, Question
 from src.apps.resume.models import Resume
 from src.apps.vacancy.models import Vacancy

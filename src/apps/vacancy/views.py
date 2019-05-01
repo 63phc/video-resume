@@ -21,15 +21,15 @@ class MultipleSelectWithPop(forms.SelectMultiple):
 
 
 class VacancyDetailView(generic.DetailView):
-    template_name = 'vacancy/detail.html'
+    template_name = 'vacancy/detail_nouser.html'
     model = Vacancy
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(VacancyDetailView, self).get_context_data(**kwargs)
-        context['questions'] = Question.objects.filter(
-            account_hr__user_id=self.request.user.id
-        )
-        return context
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super(VacancyDetailView, self).get_context_data(**kwargs)
+    #     context['questions'] = Question.objects.filter(
+    #         account_hr__user_id=self.request.user.id
+    #     )
+    #     return context
 
 
 class VacancyListView(generic.ListView):

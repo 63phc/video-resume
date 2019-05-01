@@ -11,7 +11,8 @@
               <li class="list-inline-item">
                 <p>
                   {{ answer.text }}
-                  (<small>{% trans 'On the question' %} - {{ answer.question.title }}</small>)
+                  (<small>{% trans 'Q' %}: {{ answer.question.title }}</small>)<br>
+                  {% trans 'A' %}: {{ answer.answer }}
                 </p>
               </li>
             {% endfor %}
