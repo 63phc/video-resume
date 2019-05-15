@@ -5,7 +5,8 @@ from django.urls import path
 from django.conf.urls import include
 from django.views.generic import TemplateView
 
-from src.apps.users.views import RegistrationView, ProfileView
+from src.apps.users.views import RegistrationView, ProfileView, \
+    ProfileUpdateView
 from src.apps.vacancy.views import tag_create_view
 
 urlpatterns = [
@@ -23,11 +24,6 @@ urlpatterns = [
          name='dashboard_worker'),
     path('dashboard/hr/', include('src.apps.account_hr.urls',
          namespace='dashboard_hr')),
-    path('accounts/register/user/', RegistrationView.as_view(),
-         name='registration-user'),
-    path('accounts/register/hr/', RegistrationView.as_view(),
-         name='registration-hr'),
-    path('accounts/register/profile/', ProfileView.as_view(), name='registration-profile'),
     path('accounts/', include('src.apps.users.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),
     path('vacancies/',
@@ -41,6 +37,9 @@ urlpatterns = [
         template_name='components/terms_of_use.html'), name='terms'),
     path('privacy/', TemplateView.as_view(
         template_name='components/privacy_policy.html'), name='privacy'),
+    path('questions/',
+         include('src.apps.question.urls', namespace='questions')),
+    path('profile_update/<int:pk>/', ProfileUpdateView.as_view(), name='profile_update')
 ]
 
 if settings.DEBUG:

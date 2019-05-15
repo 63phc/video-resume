@@ -1,0 +1,22 @@
+{% load i18n %}
+
+<main role="main" class="">
+
+    {% trans 'Question list' %}:
+
+    <table class="table table-striped table-bordered">
+        <th style="width: 30%;">{% trans 'Title' %}</th>
+        <th>{% trans 'Text' %}</th>
+        {% for question in  questions %}
+            <tr>
+                <td><a href="{% url 'questions:detail' question.id %}">{{ question.title }}</a></td>
+                <td>
+                    {{ question.text|truncatechars:150 }}
+                    <a href="{% url 'questions:update' question.id %}?next={{ request.path }}"> &#9998;</a>
+                    <a href="{% url 'questions:delete' question.id %}?next={{ request.path }}"> &#10008;</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</main>
+

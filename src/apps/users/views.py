@@ -1,3 +1,4 @@
+from django.views import generic
 from django.views.generic.edit import FormView
 from django.contrib.auth.views import LoginView as ParentLoginView
 from django.contrib.auth.decorators import login_required
@@ -13,7 +14,7 @@ from src.apps.account_hr.models import AccountHr
 from src.apps.account_worker.models import AccountWorker
 
 from .forms import RegistrationForm, ProfileForm, LoginForm
-
+from .models import Profile
 
 User = get_user_model()
 
@@ -76,3 +77,22 @@ class LoginView(ParentLoginView):
             return worker.get_absolute_url
         else:
             return hr.get_absolute_url
+
+
+class ProfileUpdateView(generic.UpdateView):
+    model = Profile
+    template_name = 'registration/registration_profile.html'
+    fields = [
+        'first_name', 'second_name', 'birth',
+        'city', 'family_status', 'phone'
+    ]
+
+    def get_success_url(self):
+        user = get_object_or_404(User, username=self.request.user)
+        worker = user.workers.is_created(user=user)
+        hr = user.hrs.is_created(user=user)
+        if hr:
+
+            return hr.get_absolute_url
+        else:
+            return worker.get_absolute_url

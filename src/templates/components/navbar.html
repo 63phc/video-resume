@@ -17,7 +17,7 @@
         </li>
         {% if request.user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" title="User profile" href="#">{% trans 'Profile' %}</a>
+              <a class="nav-link" title="User profile" href="{% url 'profile_update' request.user.profile.id %}">{% trans 'Profile' %}</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'logout' %}">{% trans 'Logout' %}</a>
@@ -33,6 +33,11 @@
         {% if worker_pk %}
             <li class="nav-item">
                 <a class="nav-link dashboard" href="{% url 'dashboard_worker:dashboard_worker_main' pk=worker_pk %}">{% trans 'Dashboard' %}</a>
+            </li>
+        {% endif %}
+        {% if hr %}
+            <li class="nav-item">
+                <a class="nav-link dashboard" href="{% url 'dashboard_hr:main' %}">{% trans 'Dashboard' %}</a>
             </li>
         {% endif %}
         <li class="nav-item">

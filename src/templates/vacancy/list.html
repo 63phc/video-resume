@@ -12,8 +12,8 @@
                 <td><a href="{% url 'vacancies:detail' vacancy.id %}">{{vacancy.title}}</a></td>
                 <td>
                     {{vacancy.description|truncatechars:150}}
-                    <a href="{% url 'vacancies:update' vacancy.id %}?next=javascript:history.back()"> &#9998;</a>
-                    <a href="{% url 'vacancies:delete' vacancy.id %}?next=javascript:history.back()"> &#10008;</a>
+                    <a href="{% url 'vacancies:update' vacancy.id %}?next={{ request.path }}"> &#9998;</a>
+                    <a href="{% url 'vacancies:delete' vacancy.id %}?next={{ request.path }}"> &#10008;</a>
                 </td>
             </tr>
         {% endfor %}

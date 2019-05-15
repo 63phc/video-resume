@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+{% block content %}
+<main role="main" class="inner cover">
+    <strong>{% trans 'Title' %}:</strong><br>{{ object.title }}<br><br>
+    <strong>{% trans 'Question' %}:</strong><br>{{ object.text }}<br><br>
+    <strong>{% trans 'Vacancies' %}:</strong><br>{{ object.vacancy.all|join:", " }}<br><br>
+    <br><br>
+
+    <a href="javascript:history.back()">{% trans '&#8592; Go Back' %}</a>
+</main>
+{% endblock %}

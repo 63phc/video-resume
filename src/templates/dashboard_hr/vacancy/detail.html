@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+  {% include 'vacancy/detail.html' %}
+
+  {% if questions %}
+    {% include 'question/list.html' %}
+  {% endif %}
+  <a href="{% url 'question:create' vacancy_id=object.id %}?next={{ request.path }}" class="btn btn-outline-info">
+    {% trans 'Add question' %}
+  </a>
+  <br>
+  <a href="javascript:history.back()">{% trans '&#8592; Go Back' %}</a>
+{% endblock %}

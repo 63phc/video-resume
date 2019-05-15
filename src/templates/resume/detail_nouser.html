@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <main role="main" class="inner cover">
+        <h4>{% trans 'Resume' %} {{ object.title }}:</h4><br><br>
+        {% trans 'About' %}: {{ object.about }}<br>
+        {% trans 'Skills' %}:{{ object.skill.all|join:", " }}<br>
+        {% trans 'Other skills' %}: {{ object.other_skills }}<br>
+
+        <br><br>
+        <a href="javascript:history.back()">{% trans '&#8592; Go Back' %}</a>
+    </main>
+{% endblock %}
