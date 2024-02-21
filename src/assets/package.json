@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@glidejs/glide": "https://github.com/glidejs/glide",
-    "axios": "^0.21.2",
+    "axios": "^0.28.0",
     "babel-core": "^6.26.3",
     "babel-loader": "7",
     "bootstrap": "^4.2.1",
